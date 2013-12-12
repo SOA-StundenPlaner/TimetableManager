@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.tomcat.denevell.org" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.tomcat.denevell.org" xmlns:intf="http://service.tomcat.denevell.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.tomcat.denevell.org" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="createComment">
+    <complexType>
+     <sequence>
+      <element name="author" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="c" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCommentResponse">
+    <complexType>
+     <sequence>
+      <element name="createCommentReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimetable">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="ttName" type="xsd:string"/>
+      <element name="tpName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimetableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAccount">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="createAccountReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCourse">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="shortname" type="xsd:string"/>
+      <element name="teacher" type="xsd:string"/>
+      <element name="description" type="xsd:string"/>
+      <element name="room" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="createCourseReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="tpName" type="xsd:string"/>
+      <element name="numberOfWeekdays" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimeprofileReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createVisitedCourse">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="tpName" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+      <element name="day" type="xsd:int"/>
+      <element name="hourIndex" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createVisitedCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="createVisitedCourseReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="createCourseRequest">
+
+      <wsdl:part element="impl:createCourse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimetableRequest">
+
+      <wsdl:part element="impl:createTimetable" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createAccountRequest">
+
+      <wsdl:part element="impl:createAccount" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createVisitedCourseResponse">
+
+      <wsdl:part element="impl:createVisitedCourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimeprofileRequest">
+
+      <wsdl:part element="impl:createTimeprofile" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createCommentResponse">
+
+      <wsdl:part element="impl:createCommentResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createAccountResponse">
+
+      <wsdl:part element="impl:createAccountResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createCommentRequest">
+
+      <wsdl:part element="impl:createComment" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createVisitedCourseRequest">
+
+      <wsdl:part element="impl:createVisitedCourse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimeprofileResponse">
+
+      <wsdl:part element="impl:createTimeprofileResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createCourseResponse">
+
+      <wsdl:part element="impl:createCourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimetableResponse">
+
+      <wsdl:part element="impl:createTimetableResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ServiceTimetable">
+
+      <wsdl:operation name="createComment">
+
+         <wsdl:input message="impl:createCommentRequest" name="createCommentRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createCommentResponse" name="createCommentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimetable">
+
+         <wsdl:input message="impl:createTimetableRequest" name="createTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimetableResponse" name="createTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createAccount">
+
+         <wsdl:input message="impl:createAccountRequest" name="createAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createAccountResponse" name="createAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createCourse">
+
+         <wsdl:input message="impl:createCourseRequest" name="createCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createCourseResponse" name="createCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdl:input message="impl:createTimeprofileRequest" name="createTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimeprofileResponse" name="createTimeprofileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createVisitedCourse">
+
+         <wsdl:input message="impl:createVisitedCourseRequest" name="createVisitedCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createVisitedCourseResponse" name="createVisitedCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ServiceTimetableSoapBinding" type="impl:ServiceTimetable">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="createComment">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createCommentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createCommentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimeprofileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createVisitedCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createVisitedCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createVisitedCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ServiceTimetableService">
+
+      <wsdl:port binding="impl:ServiceTimetableSoapBinding" name="ServiceTimetable">
+
+         <wsdlsoap:address location="http://localhost:8080/StundenPlaner/services/ServiceTimetable"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
