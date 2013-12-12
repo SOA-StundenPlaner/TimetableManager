@@ -15,10 +15,7 @@ public class Timetable {
 	private List<VisitedCourse> visitedCourses = new ArrayList<VisitedCourse>();
 	
 	/** Name des Stundenplans **/
-	private String name;
-
-	private String id;
-	
+	private String name;	
 	
 	/**
 	 * Getter, der ein Zeitprofil zurück gibt.
@@ -75,7 +72,7 @@ public class Timetable {
 	 * @return Gibt wahr zurück, wenn der Kurs erfolgreich gelöscht werden konnte. Gibt falsch zurück, wenn der Kurs nicht gefunden werden konnte.
 	 */
 	public boolean removeVisitedCourse(VisitedCourse vc){
-		if (visitedCourses.contain(vc)){
+		if (visitedCourses.contains(vc)){
 			visitedCourses.add(vc);
 			return true;
 		}else{
