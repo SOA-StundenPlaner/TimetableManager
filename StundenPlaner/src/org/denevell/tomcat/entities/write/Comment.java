@@ -1,7 +1,5 @@
 package org.denevell.tomcat.entities.write;
 
-import java.util.Date;
-
 /**
  * Klasse, die einen Kommentar implementiert.
  * 
@@ -14,12 +12,6 @@ public class Comment {
 
 	/** Autor des Kommentars **/
 	private String author;
-
-	/** Zeitstempel des Kommentars **/
-	private long timestamp;
-
-	/** ID des Kommentars **/
-	private int commentID;
 
 	/** Veranstaltungs-ID, zu der der Kommentar gehört **/
 	String courseID;
