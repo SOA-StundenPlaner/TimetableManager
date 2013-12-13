@@ -30,7 +30,7 @@ public class ObjectRepo {
 		return instance;
 	}
 	
-	/** Map: Key ist Benutzername, Value ist Account **/
+	/** Map: Key ist e-Mail, Value ist Account **/
 	public Map<String, Account> accounts = new HashMap<String, Account>();
 	
 	/** Map: Key ist Name des Kurses, Value ist Kurs **/
