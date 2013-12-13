@@ -29,6 +29,14 @@ public class Account {
 		this.email = email;
 	}
 	
+	/**
+	 * Getter, der das Passwort des Benutzers zurück gibt.
+	 * @return Passwort des Benutzers
+	 */
+	public String getPassword(){
+		return password;
+	}
+	
 	/** Map: Key ist der Name des Zeitprofils, Value ist das Zeitprofil **/
 	public Map<String, Timeprofile> timeprofiles = new HashMap<String, Timeprofile>();
 	

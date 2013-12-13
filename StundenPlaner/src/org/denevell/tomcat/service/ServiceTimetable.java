@@ -17,7 +17,7 @@ public class ServiceTimetable {
 	 * @return Gibt wahr zurück, wenn der Account erfolgreich erstellt werden konnte. Gibt falsch zurück, wenn der Benutzername bereits existiert.
 	 */
 	public boolean createAccount(String username, String password, String email){
-		if (ObjectRepo.getInstance().accounts.containsKey(username)){
+		if (ObjectRepo.getInstance().accounts.containsKey(email)){
 			return false;
 		}else{
 			Account account = new Account(username, password, email);
@@ -62,14 +62,21 @@ public class ServiceTimetable {
 	 */
 	public boolean createComment(String email, String author, String password, String c, String courseName){
 		if (ObjectRepo.getInstance().accounts.containsKey(email)){
-			if (ObjectRepo.getInstance().courses.containsKey(courseName)){
-				Comment comment = new Comment();
-				comment.setAuthor(author);
-				comment.setComment(c);
-				ObjectRepo.getInstance().courses.get(courseName).addComment(comment);
+			if (ObjectRepo.getInstance().accounts.get(email).getPassword().equals(password)){
+				if (ObjectRepo.getInstance().courses.containsKey(courseName)){
+					Comment comment = new Comment();
+					comment.setAuthor(author);
+					comment.setComment(c);
+					ObjectRepo.getInstance().courses.get(courseName).addComment(comment);
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				return false;
 			}
-			return true;
-		}else{
+		}
+		else{
 			return false;
 		}
 	}
@@ -82,7 +89,7 @@ public class ServiceTimetable {
 	 * @param password Passwort des Benutzers
 	 * @param ttName Name des Stundenplans
 	 * @param tpName Name des Zeitprofils
-	 * @return Gibt wahr zurück, wenn der Stundenplan erfolgreich erstellt werden konnte. Gibt falsch zurück, wenn entweder der Benutzer nicht existiert oder der Stundenplan bereits existiert.
+	 * @return Gibt wahr zurück, wenn der Stundenplan erfolgreich erstellt werden konnte. Gibt falsch zurück, wenn entweder der Benutzer nicht existiert, der Stundenplan bereits existiert oder die Passworteingabe falsch war.
 	 */
 	public boolean createTimetable(String email, String username, String password, String ttName, String tpName){
 		if(ObjectRepo.getInstance().accounts.containsKey(email)){
@@ -108,15 +115,19 @@ public class ServiceTimetable {
 	 * @param password Passwort des Benutzers
 	 * @param tpName Name des Zeitprofils
 	 * @param numberOfWeekdays Anzahhl der Wochentage
-	 * @return Gibt wahr zurück, wenn das Zeitprofil erfolgreich erstellt werden konnte. Gibt falsch zurück, wenn der Benutzer nicht existiert.
+	 * @return Gibt wahr zurück, wenn das Zeitprofil erfolgreich erstellt werden konnte. Gibt falsch zurück, wenn der Benutzer nicht existiert oder die Passworteingabe falsch war.
 	 */
 	public boolean createTimeprofile(String email, String username, String password, String tpName, int numberOfWeekdays){
 		if (ObjectRepo.getInstance().accounts.containsKey(email)){
-			Timeprofile tp = new Timeprofile();
-			tp.setHours(ObjectRepo.getInstance().accounts.get(email).timeprofiles.get(tpName).getHours());
-			tp.setName(email);
-			tp.setNumberOfWeekdays(numberOfWeekdays);
-			return true;	
+			if (ObjectRepo.getInstance().accounts.get(email).getPassword().equals(password)){
+				Timeprofile tp = new Timeprofile();
+				tp.setHours(ObjectRepo.getInstance().accounts.get(email).timeprofiles.get(tpName).getHours());
+				tp.setName(email);
+				tp.setNumberOfWeekdays(numberOfWeekdays);
+				return true;
+			}else{
+				return false;
+			}
 		}else{
 			return false;
 		}
@@ -132,11 +143,11 @@ public class ServiceTimetable {
 	 * @param courseName Name des Kurses
 	 * @param day Tag
 	 * @param hourIndex Stunde
-	 * @return Gibt wahr zurück, wenn der besuchte Kurs erfolgreich erstellt werden konnte. Gibt falsch zurück, wenn entweder der Kurs nicht existiert oder der Zeitplan nicht bereits existiert.
+	 * @return Gibt wahr zurück, wenn der besuchte Kurs erfolgreich erstellt werden konnte. Gibt falsch zurück, wenn entweder der Kurs nicht existiert, der Zeitplan nicht bereits existiert oder die Passworteingabe falsch war.
 	 */
 	public boolean createVisitedCourse(String email, String username, String password, String tpName, String courseName, int day, int hourIndex){
-		if (ObjectRepo.getInstance().courses.containsKey(courseName)){
-			if (ObjectRepo.getInstance().accounts.get(email).timeprofiles.containsKey(tpName)){
+		if (ObjectRepo.getInstance().accounts.get(email).timeprofiles.containsKey(tpName) && ObjectRepo.getInstance().accounts.get(email).equals(password)){
+			if (ObjectRepo.getInstance().courses.containsKey(courseName)){
 				Hour hour = ObjectRepo.getInstance().accounts.get(email).timeprofiles.get(tpName).getHours().get(hourIndex);
 				Course course = ObjectRepo.getInstance().courses.get(courseName);
 				VisitedCourse vc = new VisitedCourse();
