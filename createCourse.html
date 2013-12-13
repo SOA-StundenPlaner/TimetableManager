@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html><head>
+<title>Timetable Managing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>                                  
+<link rel="stylesheet" type="text/css" href="css/main.css" media="all" />                  
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />      
+<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+</head><body>
+	<header>
+		<div class="head">Stunden<span class="bluegreen">Planer</span></div>
+		<div class="menu">
+			<div class="menuul">
+				<ul>
+					<li class="menupart left"><a href="index.html"><img src="img/spreadsheet.png" alt="spreadsheet" class="leftbild"></a></li>
+					<li class="menupart mid"><a href="createTimetable.html">Neuer Stundenplan</a></li>
+					<li class="menupart mid menuactive"><a href="createCourse.html">Neuer Kurs</a></li>
+					<li class="menupart mid"><a href="account.html">Account</a></li>
+					<li class="menupart right"><a href="#"><img src="img/fragezeichen.png" alt="fragezeichen" class="rightbild"></a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<section >
+		<div class="wrapped">			
+			<div class="wrapper">
+				<div class="detailsabove">
+					
+					<span class="detailsheading">Kurs erstellen</span>
+					</br>
+					<form>
+						<ul class="create">
+							<p>F&uuml;r welchen Stundenplan soll der Kurs erstellt werden?</p>
+							<li><select>
+							<option>Stundenplan w&auml;hlen</option>
+							</select></li>
+							<p>W&auml;hle aus bereits erstellten Kursen: </p>
+							<li><select>
+							<option>Kurs w&auml;hlen</option>
+							</select></li>
+							<p>Oder erstelle einen neuen Kurs:</p>
+							<li><label>Name*:</label><input type="text" name="coursename"></li>
+							<li><label>Abkürzung*:</label><input type="text" name="courseshortname"></li>
+							<li><label>Institutionstyp*:</label><input type="text" name="institutetype"></li><!-- Schule / Uni -->
+							<li><label>Institutionsname*:</label><input type="text" name="institutename"></li>
+							<li><label>Raum*:</label><input type="text" name="courseroom"></li>
+							<li><label>Lehrender:</label><input type="text" name="courseteacher"></li>
+							<li><label>Beschreibung:</label><input type="textarea" name="coursedesc"></li>
+							</br>
+							<li><input type="submit" name="coursesub" value="Erstellen" onCLick="register();"></li>	
+					</form>
+				
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id="popup"></div>
+
+</body></html>
