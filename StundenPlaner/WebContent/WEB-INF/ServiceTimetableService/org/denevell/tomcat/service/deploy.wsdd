@@ -11,12 +11,14 @@
       <parameter name="wsdlPortType" value="ServiceTimetable"/>
       <parameter name="typeMappingVersion" value="1.2"/>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createComment" qname="operNS:createComment" returnQName="retNS:createCommentReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:author" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:c" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:courseName" type="tns:string"/>
       </operation>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createTimetable" qname="operNS:createTimetable" returnQName="retNS:createTimetableReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:ttName" type="tns:string"/>
@@ -25,6 +27,7 @@
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createAccount" qname="operNS:createAccount" returnQName="retNS:createAccountReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
       </operation>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createCourse" qname="operNS:createCourse" returnQName="retNS:createCourseReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:name" type="tns:string"/>
@@ -34,12 +37,14 @@
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:room" type="tns:string"/>
       </operation>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createTimeprofile" qname="operNS:createTimeprofile" returnQName="retNS:createTimeprofileReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:tpName" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:numberOfWeekdays" type="tns:int"/>
       </operation>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createVisitedCourse" qname="operNS:createVisitedCourse" returnQName="retNS:createVisitedCourseReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:tpName" type="tns:string"/>

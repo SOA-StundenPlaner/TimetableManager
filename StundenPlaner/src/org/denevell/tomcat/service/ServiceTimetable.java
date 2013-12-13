@@ -124,6 +124,7 @@ public class ServiceTimetable {
 				tp.setHours(ObjectRepo.getInstance().accounts.get(email).timeprofiles.get(tpName).getHours());
 				tp.setName(email);
 				tp.setNumberOfWeekdays(numberOfWeekdays);
+				ObjectRepo.getInstance().accounts.get(email).timeprofiles.put(tpName, tp);
 				return true;
 			}else{
 				return false;
@@ -153,7 +154,7 @@ public class ServiceTimetable {
 				VisitedCourse vc = new VisitedCourse();
 				vc.setCourse(course);
 				vc.setDay(day);
-				vc.setHour(hour);	
+				vc.setHour(hour);
 			}
 			return true;
 		}else{

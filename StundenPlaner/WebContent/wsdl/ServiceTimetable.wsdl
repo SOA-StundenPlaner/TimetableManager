@@ -7,6 +7,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="createComment">
     <complexType>
      <sequence>
+      <element name="email" type="xsd:string"/>
       <element name="author" type="xsd:string"/>
       <element name="password" type="xsd:string"/>
       <element name="c" type="xsd:string"/>
@@ -24,6 +25,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="createTimetable">
     <complexType>
      <sequence>
+      <element name="email" type="xsd:string"/>
       <element name="username" type="xsd:string"/>
       <element name="password" type="xsd:string"/>
       <element name="ttName" type="xsd:string"/>
@@ -43,6 +45,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <sequence>
       <element name="username" type="xsd:string"/>
       <element name="password" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
@@ -74,6 +77,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="createTimeprofile">
     <complexType>
      <sequence>
+      <element name="email" type="xsd:string"/>
       <element name="username" type="xsd:string"/>
       <element name="password" type="xsd:string"/>
       <element name="tpName" type="xsd:string"/>
@@ -91,6 +95,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="createVisitedCourse">
     <complexType>
      <sequence>
+      <element name="email" type="xsd:string"/>
       <element name="username" type="xsd:string"/>
       <element name="password" type="xsd:string"/>
       <element name="tpName" type="xsd:string"/>
