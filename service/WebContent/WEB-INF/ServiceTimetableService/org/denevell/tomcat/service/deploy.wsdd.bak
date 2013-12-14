@@ -27,14 +27,10 @@
         <parameter qname="pns:c" xmlns:pns="http://service.tomcat.denevell.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:courseName" xmlns:pns="http://service.tomcat.denevell.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="createDAO" qname="operNS:createDAO" xmlns:operNS="http://service.tomcat.denevell.org" soapAction="" >
-      </operation>
       <operation name="createAccount" qname="operNS:createAccount" xmlns:operNS="http://service.tomcat.denevell.org" returnQName="retNS:createAccountReturn" xmlns:retNS="http://service.tomcat.denevell.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:username" xmlns:pns="http://service.tomcat.denevell.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:password" xmlns:pns="http://service.tomcat.denevell.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:email" xmlns:pns="http://service.tomcat.denevell.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
-      <operation name="createDatabaseConnection" qname="operNS:createDatabaseConnection" xmlns:operNS="http://service.tomcat.denevell.org" soapAction="" >
       </operation>
       <operation name="createVisitedCourse" qname="operNS:createVisitedCourse" xmlns:operNS="http://service.tomcat.denevell.org" returnQName="retNS:createVisitedCourseReturn" xmlns:retNS="http://service.tomcat.denevell.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:email" xmlns:pns="http://service.tomcat.denevell.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
@@ -66,7 +62,7 @@
         <parameter qname="pns:tpName" xmlns:pns="http://service.tomcat.denevell.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:numberOfWeekdays" xmlns:pns="http://service.tomcat.denevell.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <parameter name="allowedMethods" value="createComment createCourse createAccount createTimetable createVisitedCourse createTimeprofile createDAO createDatabaseConnection"/>
+      <parameter name="allowedMethods" value="createComment createCourse createAccount createTimetable createVisitedCourse createTimeprofile"/>
 
   </service>
 </deployment>

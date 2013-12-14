@@ -25,6 +25,9 @@ public class Hour {
 	@DatabaseField(canBeNull = false)
 	private Date endtime;
 	
+	/** Zeitprofil **/
+	@DatabaseField(foreign = true)
+	private Timeprofile timeprofile;
 	
 	/**
 	 * Konstruktor der Klasse Hour.

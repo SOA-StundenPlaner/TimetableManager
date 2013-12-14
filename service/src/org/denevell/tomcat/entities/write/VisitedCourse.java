@@ -26,6 +26,9 @@ public class VisitedCourse {
 	@DatabaseField(canBeNull = false)
 	public int day;
 	
+	/** Stundenplan **/
+	@DatabaseField(foreign = true)
+	private Timetable timetable;
 	
 	/**
 	 * Konstruktor der Klasse VisitedCourse.

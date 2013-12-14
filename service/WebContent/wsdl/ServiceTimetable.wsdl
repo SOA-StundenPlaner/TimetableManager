@@ -22,12 +22,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="createDAO">
-    <complexType/>
-   </element>
-   <element name="createDAOResponse">
-    <complexType/>
-   </element>
    <element name="createAccount">
     <complexType>
      <sequence>
@@ -43,12 +37,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
       <element name="createAccountReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
-   </element>
-   <element name="createDatabaseConnection">
-    <complexType/>
-   </element>
-   <element name="createDatabaseConnectionResponse">
-    <complexType/>
    </element>
    <element name="createVisitedCourse">
     <complexType>
@@ -159,6 +147,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="createVisitedCourseResponse">
+
+      <wsdl:part element="impl:createVisitedCourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="createCommentResponse">
 
       <wsdl:part element="impl:createCommentResponse" name="parameters">
@@ -170,54 +166,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="createAccountResponse">
 
       <wsdl:part element="impl:createAccountResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="createDatabaseConnectionResponse">
-
-      <wsdl:part element="impl:createDatabaseConnectionResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="createTimeprofileResponse">
-
-      <wsdl:part element="impl:createTimeprofileResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="createCourseResponse">
-
-      <wsdl:part element="impl:createCourseResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="createDatabaseConnectionRequest">
-
-      <wsdl:part element="impl:createDatabaseConnection" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="createDAORequest">
-
-      <wsdl:part element="impl:createDAO" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="createVisitedCourseResponse">
-
-      <wsdl:part element="impl:createVisitedCourseResponse" name="parameters">
 
       </wsdl:part>
 
@@ -239,6 +187,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="createTimeprofileResponse">
+
+      <wsdl:part element="impl:createTimeprofileResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="createTimetableResponse">
 
       <wsdl:part element="impl:createTimetableResponse" name="parameters">
@@ -247,9 +203,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createDAOResponse">
+   <wsdl:message name="createCourseResponse">
 
-      <wsdl:part element="impl:createDAOResponse" name="parameters">
+      <wsdl:part element="impl:createCourseResponse" name="parameters">
 
       </wsdl:part>
 
@@ -269,18 +225,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createDAO">
-
-         <wsdl:input message="impl:createDAORequest" name="createDAORequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createDAOResponse" name="createDAOResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="createAccount">
 
          <wsdl:input message="impl:createAccountRequest" name="createAccountRequest">
@@ -288,18 +232,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:createAccountResponse" name="createAccountResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createDatabaseConnection">
-
-         <wsdl:input message="impl:createDatabaseConnectionRequest" name="createDatabaseConnectionRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createDatabaseConnectionResponse" name="createDatabaseConnectionResponse">
 
        </wsdl:output>
 
@@ -377,24 +309,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createDAO">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createDAORequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createDAOResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="createAccount">
 
          <wsdlsoap:operation soapAction=""/>
@@ -406,24 +320,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="createAccountResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createDatabaseConnection">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createDatabaseConnectionRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createDatabaseConnectionResponse">
 
             <wsdlsoap:body use="literal"/>
 
