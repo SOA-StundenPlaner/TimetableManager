@@ -13,49 +13,66 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "account")
 public class Account {
 
-	/** Benutzername fuer den Account **/
-	@DatabaseField(canBeNull = false)
-	private String username;
-	
-	/** Passwort des Benutzers fuer den Account **/
-	@DatabaseField(canBeNull = false)
-	private String password;
-	
-	/** e-Mail-Adresse des Benutzers **/
-	@DatabaseField(canBeNull = false, id = true)
-	private String email;
-	
-	
-	/**
-	 * Leerer Konstruktor der Klasse Account.
-	 */
-	public Account(){
-		
-	}
-	
-	
-	/**
-	 * Konstruktor der Klasse Account.
-	 * @param username Benutzername
-	 * @param password Passwort
-	 */
-	public Account(String username, String password, String email){
-		this.username = username;
-		this.password = password;
-		this.email = email;
-	}
-	
-	/**
-	 * Getter, der das Passwort des Benutzers zurück gibt.
-	 * @return Passwort des Benutzers
-	 */
-	public String getPassword(){
-		return password;
-	}
-	
-	/** Map: Key ist der Name des Zeitprofils, Value ist das Zeitprofil **/
-	public Map<String, Timeprofile> timeprofiles = new HashMap<String, Timeprofile>();
-	
-	/** Map: Key ist der Name des Stundenplans, Value ist der Stundenplan **/
-	public Map<String, Timetable> tt = new HashMap<String, Timetable>();
+        /** Benutzername fuer den Account **/
+        @DatabaseField(canBeNull = false)
+        private String username;
+        
+        /** Passwort des Benutzers fuer den Account **/
+        @DatabaseField(canBeNull = false)
+        private String password;
+        
+        /** e-Mail-Adresse des Benutzers **/
+        @DatabaseField(canBeNull = false, id = true)
+        private String email;
+        
+        @DatabaseField(foreign = true)
+        private ObjectRepo or;
+        
+        
+        /**
+         * Leerer Konstruktor der Klasse Account.
+         */
+        public Account(){
+                
+        }
+        
+        
+        /**
+         * Konstruktor der Klasse Account.
+         * @param username Benutzername
+         * @param password Passwort
+         */
+        public Account(String username, String password, String email){
+                this.username = username;
+                this.password = password;
+                this.email = email;
+        }
+        
+        /**
+         * Getter, der das Passwort des Benutzers zurück gibt.
+         * @return Passwort des Benutzers
+         */
+        public String getPassword(){
+                return password;
+        }
+        
+        
+        /**
+         * Getter, der die e-Mail-Adresse des Benutzers zurück gibt.
+         * @return e-Mail-Adresse
+         */
+        public String getMail(){
+        	return email;
+        }
+        
+        
+//        @ForeignCollectionField
+//        public ForeignCollection<Timeprofile> timeprofiles;
+
+        
+        /** Map: Key ist der Name des Zeitprofils, Value ist das Zeitprofil **/
+        public Map<String, Timeprofile> timeprofiles = new HashMap<String, Timeprofile>();
+        
+        /** Map: Key ist der Name des Stundenplans, Value ist der Stundenplan **/
+        public Map<String, Timetable> tt = new HashMap<String, Timetable>();
 }
