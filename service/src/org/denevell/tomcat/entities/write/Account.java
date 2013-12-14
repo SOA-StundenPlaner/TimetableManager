@@ -3,20 +3,36 @@ package org.denevell.tomcat.entities.write;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Klasse, die einen Account implementiert.
  * @author Nicole Hein
  */
+@DatabaseTable(tableName = "account")
 public class Account {
 
 	/** Benutzername fuer den Account **/
-	String username;
+	@DatabaseField(canBeNull = false)
+	private String username;
 	
 	/** Passwort des Benutzers fuer den Account **/
-	String password;
+	@DatabaseField(canBeNull = false)
+	private String password;
 	
 	/** e-Mail-Adresse des Benutzers **/
-	String email;
+	@DatabaseField(canBeNull = false, id = true)
+	private String email;
+	
+	
+	/**
+	 * Leerer Konstruktor der Klasse Account.
+	 */
+	public Account(){
+		
+	}
+	
 	
 	/**
 	 * Konstruktor der Klasse Account.

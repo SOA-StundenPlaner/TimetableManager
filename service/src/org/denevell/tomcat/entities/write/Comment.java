@@ -1,23 +1,38 @@
 package org.denevell.tomcat.entities.write;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Klasse, die einen Kommentar implementiert.
  * 
  * @author Nicole Hein
  */
+@DatabaseTable(tableName = "comment")
 public class Comment {
 
 	/** Kommentar **/
+	@DatabaseField(canBeNull = false)
 	private String comment;
 
 	/** Autor des Kommentars **/
+	@DatabaseField(canBeNull = false)
 	private String author;
 
 	/** Veranstaltungs-ID, zu der der Kommentar gehört **/
-	String courseID;
+	@DatabaseField(canBeNull = false, generatedId = true)
+	int courseID;
 
 	/** Kurs, zu dem der Kommentar erstellt werden soll **/
+	@DatabaseField(foreign = true)
 	Course course;
+	
+	/**
+	 * Konstruktor der Klasse Comment.
+	 */
+	public Comment(){
+		
+	}
 
 	/**
 	 * Setter, der den Kommentar setzt.

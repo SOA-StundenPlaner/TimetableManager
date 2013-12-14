@@ -1,18 +1,60 @@
 package org.denevell.tomcat.entities.write;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Klasse, die einen Kurs implementiert.
- * @author e73
+ * @author Nicole Hein
  */
+@DatabaseTable(tableName = "course")
 public class Course {
-	private String name, shortname;
+	
+	/** ID des Kurses **/
+	@DatabaseField(canBeNull = false, generatedId = true)
+	private int id;
+	
+	/** Name des Kurses **/
+	@DatabaseField(canBeNull = false)
+	private String name;
+	
+	/** Abkürzung des Namens des Kurses **/
+	@DatabaseField(canBeNull = true)
+	private String shortname;
+	
+	/** Name des Lehrenden **/
+	@DatabaseField(canBeNull = true)
 	private String teacher;
+	
+	/**Beschreibung des Kurses**/
+	@DatabaseField(canBeNull = true)
 	private String desciption;
+	
+	/** Raum des Kurses **/
+	@DatabaseField(canBeNull = true)
 	private String room;
-	private List<Comment> comments = new ArrayList<Comment>();
+	
+	/** Liste von Kommentaren **/
+	@ForeignCollectionField
+	private ForeignCollection<Comment> comments;
+	
+	/**
+	 * Konstruktor der Klasse Course.
+	 */
+	public Course(){
+		
+	}
+	
+	
+	/**
+	 * Getter, der die ID des Kurses zurück gibt.
+	 * @return ID des Kurses
+	 */
+	public int getId(){
+		return id;
+	}
 	
 	
 	/**

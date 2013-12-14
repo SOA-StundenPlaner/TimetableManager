@@ -22,23 +22,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="createTimetable">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="username" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="ttName" type="xsd:string"/>
-      <element name="tpName" type="xsd:string"/>
-     </sequence>
-    </complexType>
+   <element name="createDAO">
+    <complexType/>
    </element>
-   <element name="createTimetableResponse">
-    <complexType>
-     <sequence>
-      <element name="createTimetableReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
+   <element name="createDAOResponse">
+    <complexType/>
    </element>
    <element name="createAccount">
     <complexType>
@@ -56,41 +44,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="createCourse">
-    <complexType>
-     <sequence>
-      <element name="name" type="xsd:string"/>
-      <element name="shortname" type="xsd:string"/>
-      <element name="teacher" type="xsd:string"/>
-      <element name="description" type="xsd:string"/>
-      <element name="room" type="xsd:string"/>
-     </sequence>
-    </complexType>
+   <element name="createDatabaseConnection">
+    <complexType/>
    </element>
-   <element name="createCourseResponse">
-    <complexType>
-     <sequence>
-      <element name="createCourseReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createTimeprofile">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="username" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="tpName" type="xsd:string"/>
-      <element name="numberOfWeekdays" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createTimeprofileResponse">
-    <complexType>
-     <sequence>
-      <element name="createTimeprofileReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
+   <element name="createDatabaseConnectionResponse">
+    <complexType/>
    </element>
    <element name="createVisitedCourse">
     <complexType>
@@ -112,16 +70,62 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="createCourse">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="shortname" type="xsd:string"/>
+      <element name="teacher" type="xsd:string"/>
+      <element name="description" type="xsd:string"/>
+      <element name="room" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="createCourseReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimetable">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="ttName" type="xsd:string"/>
+      <element name="tpName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimetableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="tpName" type="xsd:string"/>
+      <element name="numberOfWeekdays" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimeprofileReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
   </schema>
  </wsdl:types>
-
-   <wsdl:message name="createCourseRequest">
-
-      <wsdl:part element="impl:createCourse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
 
    <wsdl:message name="createTimetableRequest">
 
@@ -131,17 +135,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createAccountRequest">
+   <wsdl:message name="createCourseRequest">
 
-      <wsdl:part element="impl:createAccount" name="parameters">
+      <wsdl:part element="impl:createCourse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="createVisitedCourseResponse">
+   <wsdl:message name="createAccountRequest">
 
-      <wsdl:part element="impl:createVisitedCourseResponse" name="parameters">
+      <wsdl:part element="impl:createAccount" name="parameters">
 
       </wsdl:part>
 
@@ -171,17 +175,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createCommentRequest">
+   <wsdl:message name="createDatabaseConnectionResponse">
 
-      <wsdl:part element="impl:createComment" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="createVisitedCourseRequest">
-
-      <wsdl:part element="impl:createVisitedCourse" name="parameters">
+      <wsdl:part element="impl:createDatabaseConnectionResponse" name="parameters">
 
       </wsdl:part>
 
@@ -203,9 +199,57 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="createDatabaseConnectionRequest">
+
+      <wsdl:part element="impl:createDatabaseConnection" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createDAORequest">
+
+      <wsdl:part element="impl:createDAO" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createVisitedCourseResponse">
+
+      <wsdl:part element="impl:createVisitedCourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createCommentRequest">
+
+      <wsdl:part element="impl:createComment" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createVisitedCourseRequest">
+
+      <wsdl:part element="impl:createVisitedCourse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="createTimetableResponse">
 
       <wsdl:part element="impl:createTimetableResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createDAOResponse">
+
+      <wsdl:part element="impl:createDAOResponse" name="parameters">
 
       </wsdl:part>
 
@@ -225,13 +269,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createTimetable">
+      <wsdl:operation name="createDAO">
 
-         <wsdl:input message="impl:createTimetableRequest" name="createTimetableRequest">
+         <wsdl:input message="impl:createDAORequest" name="createDAORequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:createTimetableResponse" name="createTimetableResponse">
+         <wsdl:output message="impl:createDAOResponse" name="createDAOResponse">
 
        </wsdl:output>
 
@@ -249,25 +293,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createCourse">
+      <wsdl:operation name="createDatabaseConnection">
 
-         <wsdl:input message="impl:createCourseRequest" name="createCourseRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createCourseResponse" name="createCourseResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createTimeprofile">
-
-         <wsdl:input message="impl:createTimeprofileRequest" name="createTimeprofileRequest">
+         <wsdl:input message="impl:createDatabaseConnectionRequest" name="createDatabaseConnectionRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:createTimeprofileResponse" name="createTimeprofileResponse">
+         <wsdl:output message="impl:createDatabaseConnectionResponse" name="createDatabaseConnectionResponse">
 
        </wsdl:output>
 
@@ -280,6 +312,42 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:createVisitedCourseResponse" name="createVisitedCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createCourse">
+
+         <wsdl:input message="impl:createCourseRequest" name="createCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createCourseResponse" name="createCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimetable">
+
+         <wsdl:input message="impl:createTimetableRequest" name="createTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimetableResponse" name="createTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdl:input message="impl:createTimeprofileRequest" name="createTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimeprofileResponse" name="createTimeprofileResponse">
 
        </wsdl:output>
 
@@ -309,17 +377,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createTimetable">
+      <wsdl:operation name="createDAO">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="createTimetableRequest">
+         <wsdl:input name="createDAORequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="createTimetableResponse">
+         <wsdl:output name="createDAOResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -345,35 +413,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createCourse">
+      <wsdl:operation name="createDatabaseConnection">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="createCourseRequest">
+         <wsdl:input name="createDatabaseConnectionRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="createCourseResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createTimeprofile">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createTimeprofileRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createTimeprofileResponse">
+         <wsdl:output name="createDatabaseConnectionResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -392,6 +442,60 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="createVisitedCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimeprofileResponse">
 
             <wsdlsoap:body use="literal"/>
 

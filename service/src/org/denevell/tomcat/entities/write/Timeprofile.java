@@ -1,21 +1,51 @@
 package org.denevell.tomcat.entities.write;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Klasse, die ein Zeitprofil implementiert.
  * @author Nicole Hein
  */
+@DatabaseTable(tableName = "timeprofile")
 public class Timeprofile {
+	/** ID des Zeitprofils **/
+	@DatabaseField(canBeNull = false, generatedId = true)
+	private int id;
+	
 	/** Anzahl der Wochentage **/
-	private int numberOfWeekdays = 5;
+	@DatabaseField(canBeNull = false)
+	private int numberOfWeekdays;
 	
 	/** Liste der Stunden **/
-	private List<Hour> hours = new ArrayList<Hour>();
+	@ForeignCollectionField
+	private ForeignCollection<Hour> hours;
 	
 	/** Name des Zeitprofils **/
+	@DatabaseField(canBeNull = false)
 	private String name;
+	
+	
+	/**
+	 * Konstruktor der Klasse Timeprofile.
+	 */
+	public Timeprofile(){
+		
+	}
+	
+	
+	/**
+	 * Getter, der die ID des Zeitprofils zurück gibt.
+	 * @return ID des Zeitprofils
+	 */
+	public int getId(){
+		return id;
+	}
+	
 	
 	/**
 	 * Getter, der die Anzahl an Wochentagen zurück gibt.
@@ -37,7 +67,7 @@ public class Timeprofile {
 	 * Getter, der die Liste der Stunden zurück gibt.
 	 * @return Liste der Stunden
 	 */
-	public List<Hour> getHours() {
+	public ForeignCollection<Hour> getHours() {
 		return hours;
 	}
 	
@@ -45,7 +75,7 @@ public class Timeprofile {
 	 * Setter, der die Liste der Stunden setzt.
 	 * @param hours Liste der Stunden
 	 */
-	public void setHours(List<Hour> hours) {
+	public void setHours(ForeignCollection<Hour> hours) {
 		this.hours = hours;
 	}
 

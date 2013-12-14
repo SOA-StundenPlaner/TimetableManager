@@ -1,8 +1,22 @@
-/** Probe-Commit **/
-
 package org.denevell.tomcat.service;
 
-import org.denevell.tomcat.entities.write.*;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.denevell.tomcat.entities.write.Account;
+import org.denevell.tomcat.entities.write.Comment;
+import org.denevell.tomcat.entities.write.Course;
+import org.denevell.tomcat.entities.write.Hour;
+import org.denevell.tomcat.entities.write.ObjectRepo;
+import org.denevell.tomcat.entities.write.Timeprofile;
+import org.denevell.tomcat.entities.write.Timetable;
+import org.denevell.tomcat.entities.write.VisitedCourse;
+
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 
 /**
  * Klasse, die den Service implementiert.
@@ -10,6 +24,58 @@ import org.denevell.tomcat.entities.write.*;
  *
  */
 public class ServiceTimetable {
+	
+	/** Verbindung zur Datenbank **/
+	private ConnectionSource cs = null;
+	
+	/** DAO für Account **/
+	Dao<Account, String> accountDao = null;
+
+	/** DAO für Comment **/
+	Dao<Comment, Integer> commentDao = null;
+	
+	/** DAO für Course **/
+	Dao<Course, Integer> courseDao = null;
+	
+	/** DAO für Hour **/
+	Dao<Hour, Integer> hourDao = null;
+	
+	/** DAO für ObjectRepo **/
+	Dao<ObjectRepo, Void> objectRepoDao = null;
+	
+	/** DAO für Timeprofile **/
+	Dao<Timeprofile, Integer> timeprofileDao = null;
+	
+	/** DAO für Timetable **/
+	Dao<Timetable, Integer> timetableDao = null;
+	
+	/** DAO für VisitedCourse **/
+	Dao<VisitedCourse, Integer> visitedCourseDao = null;
+
+	
+	/**
+	 * Methode, die - wenn möglich - eine Verbindung zur Datenbank erzeugt.
+	 * @throws SQLException
+	 */
+	public void createDatabaseConnection() throws SQLException{
+		cs = new JdbcConnectionSource("jdbc:h2:mem:account");
+	}
+	
+	/**
+	 * Methode, die Zugriffe auf Klassen und deren Objekte ermöglicht.
+	 * @throws SQLException
+	 */
+	public void createDAO() throws SQLException{
+		accountDao = DaoManager.createDao(cs, Account.class);
+		commentDao = DaoManager.createDao(cs, Comment.class);
+		courseDao = DaoManager.createDao(cs, Course.class);
+		hourDao = DaoManager.createDao(cs, Hour.class);
+		objectRepoDao = DaoManager.createDao(cs, ObjectRepo.class);
+		timeprofileDao = DaoManager.createDao(cs, Timeprofile.class);
+		timetableDao = DaoManager.createDao(cs, Timetable.class);
+		visitedCourseDao = DaoManager.createDao(cs, VisitedCourse.class);
+	}
+	
 
 	/**
 	 * Methode, die einen Account mit Benutzernamen und Passwort erstellt.
@@ -19,12 +85,36 @@ public class ServiceTimetable {
 	 * @return Gibt wahr zurück, wenn der Account erfolgreich erstellt werden konnte. Gibt falsch zurück, wenn der Benutzername bereits existiert.
 	 */
 	public boolean createAccount(String username, String password, String email){
-		if (ObjectRepo.getInstance().accounts.containsKey(email)){
-			return false;
+		try {
+			createDatabaseConnection();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		if (cs != null){
+			try {
+				createDAO();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			if (ObjectRepo.getInstance().accounts.containsKey(email)){
+				return false;
+			}else{
+				try {
+					TableUtils.clearTable(cs, Account.class);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				Account account = new Account(username, password, email);
+				ObjectRepo.getInstance().accounts.put(email, account);
+				try {
+					accountDao.create(account);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return true;
+			}
 		}else{
-			Account account = new Account(username, password, email);
-			ObjectRepo.getInstance().accounts.put(email, account);
-			return true;
+			return false;
 		}
 	}
 	
@@ -151,7 +241,13 @@ public class ServiceTimetable {
 	public boolean createVisitedCourse(String email, String username, String password, String tpName, String courseName, int day, int hourIndex){
 		if (ObjectRepo.getInstance().accounts.get(email).timeprofiles.containsKey(tpName) && ObjectRepo.getInstance().accounts.get(email).equals(password)){
 			if (ObjectRepo.getInstance().courses.containsKey(courseName)){
-				Hour hour = ObjectRepo.getInstance().accounts.get(email).timeprofiles.get(tpName).getHours().get(hourIndex);
+				List<Hour> hourList = null;
+				try {
+					hourList = hourDao.queryForAll();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				Hour hour = hourList.get(hourIndex);
 				Course course = ObjectRepo.getInstance().courses.get(courseName);
 				VisitedCourse vc = new VisitedCourse();
 				vc.setCourse(course);

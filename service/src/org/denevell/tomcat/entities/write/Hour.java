@@ -4,12 +4,43 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+/**
+ * Klasse, die eine (Schul-)Stunde implementiert.
+ * @author Nicole Hein
+ */
+@DatabaseTable(tableName = "hour")
 public class Hour {
+	/** ID **/
+	@DatabaseField(canBeNull = false, generatedId = true)
+	private int id;
+	
 	/** Zeit, zu der die Stunde startet **/
+	@DatabaseField(canBeNull = false)
 	private Date starttime;
 	
 	/** Zeit, zu der due Stunde endet **/
+	@DatabaseField(canBeNull = false)
 	private Date endtime;
+	
+	
+	/**
+	 * Konstruktor der Klasse Hour.
+	 */
+	public Hour(){
+		
+	}
+	
+	
+	/**
+	 * Getter, der die ID zurück gibt.
+	 * @return ID
+	 */
+	public int getId(){
+		return id;
+	}
 	
 	
 	/**

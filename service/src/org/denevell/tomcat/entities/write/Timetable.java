@@ -3,19 +3,50 @@ package org.denevell.tomcat.entities.write;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Klasse, die einen Stundenplan implementiert.
  * @author Nicole Hein
  */
+@DatabaseTable(tableName = "timetable")
 public class Timetable {
+	/** ID **/
+	@DatabaseField(canBeNull = false, generatedId = true)
+	private int id;
+	
 	/** Erzeugt ein neues Zeitprofil **/
+	@DatabaseField(canBeNull = false, foreign = true)
 	private Timeprofile timeprofile = new Timeprofile();
 	
 	/** Liste der besuchten Kurse **/
-	private List<VisitedCourse> visitedCourses = new ArrayList<VisitedCourse>();
+	@ForeignCollectionField
+	private ForeignCollection<VisitedCourse> visitedCourses;
 	
 	/** Name des Stundenplans **/
-	private String name;	
+	@DatabaseField(canBeNull = false)
+	private String name;
+	
+	
+	/**
+	 * Konstruktor der Klasse Timetable.
+	 */
+	public Timetable(){
+		
+	}
+	
+	
+	/**
+	 * Getter, der die ID zurück gibt.
+	 * @return ID
+	 */
+	public int getId(){
+		return id;
+	}
+	
 	
 	/**
 	 * Getter, der ein Zeitprofil zurück gibt.
@@ -37,7 +68,7 @@ public class Timetable {
 	 * Getter, der die Liste der besuchten Kurse zurück gibt.
 	 * @return besuchte Kurse
 	 */
-	public List<VisitedCourse> getCourses() {
+	public ForeignCollection<VisitedCourse> getCourses() {
 		return visitedCourses;
 	}
 	

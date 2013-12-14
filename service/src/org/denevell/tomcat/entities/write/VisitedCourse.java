@@ -1,19 +1,48 @@
 package org.denevell.tomcat.entities.write;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Klasse, die einen besuchten Kurs implementiert.
  * @author Nicole Hein
  */
+@DatabaseTable(tableName = "visitedCourse")
 public class VisitedCourse {
-		
+	
+	/** ID **/
+	@DatabaseField(canBeNull = false, generatedId = true)	
+	private int id;
+	
 	/** Kurs **/
+	@DatabaseField(foreign = true, canBeNull = false)
 	public Course course;
 	
 	/** Stunde **/
+	@DatabaseField(foreign = true, canBeNull = false)
 	public Hour hour;
 	
 	/** Wochentag **/
+	@DatabaseField(canBeNull = false)
 	public int day;
+	
+	
+	/**
+	 * Konstruktor der Klasse VisitedCourse.
+	 */
+	public VisitedCourse(){
+		
+	}
+	
+	
+	/**
+	 * Getter, der die ID zurück gibt.
+	 * @return ID
+	 */
+	public int getId(){
+		return id;
+	}
+	
 	
 	/**
 	 * Getter, der einen Kurs zurück gibt.

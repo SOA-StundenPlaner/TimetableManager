@@ -3,11 +3,19 @@ package org.denevell.tomcat.entities.write;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Klasse, die als Objekt-Repository dient.
  * @author Nicole Hein
  */
+@DatabaseTable(tableName = "objectRepo")
 public class ObjectRepo {
+	/** ID **/
+	@DatabaseField(id = true)
+	private int id;
+	
 	
 	/**
 	 * Konstruktor der Klasse ObjectRepo.
@@ -17,7 +25,9 @@ public class ObjectRepo {
 	}
 	
 	/** Instanz der Klasse ObjectRepo **/
-	private static ObjectRepo instance;
+	@DatabaseField(foreign = true)
+	private static ObjectRepo instance = null;
+	
 	
 	/**
 	 * Getter, der die Instanz der Klasse ObjectRepo setzt, wenn sie noch nicht existiert.
