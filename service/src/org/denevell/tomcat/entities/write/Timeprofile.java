@@ -1,5 +1,7 @@
 package org.denevell.tomcat.entities.write;
 
+import java.util.List;
+
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -55,6 +57,24 @@ public class Timeprofile {
 	 */
 	public ForeignCollection<Hour> getHours() {
 		return hours;
+	}
+	
+	
+	/**
+	 * Methode, die prüft, ob eine Stunde mit entsprechendem Index vorhanden ist.
+	 * @param hourIndex Index der Stunde
+	 * @param hourList Liste aller Stunden
+	 * @return Stunde
+	 */
+	public Hour getHourByIndex(int hourIndex, List<Hour> hourList){
+		for (int i=0; i<hourList.size(); i++){
+			if (hourList.get(i).getHourIndex() == hourIndex){
+				return hourList.get(i);
+			}else{
+				return null;
+			}
+		}
+		return null;
 	}
 	
 

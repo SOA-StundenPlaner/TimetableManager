@@ -34,7 +34,7 @@ public class VisitedCourse {
 	 * Konstruktor der Klasse VisitedCourse.
 	 */
 	public VisitedCourse(){
-		
+
 	}
 	
 	

@@ -150,7 +150,7 @@ public class ServiceTimetable {
 	 * @param password Passwort des Benutzers
 	 * @return
 	 */
-	public boolean createHour(String start, String end, String tpName, String email, String password){
+	public boolean createHour(String start, String end, String tpName, String email, String password, int hourIndex){
 		Account account = null;
 		Timeprofile tp = null;
 		try {
@@ -161,6 +161,7 @@ public class ServiceTimetable {
 					Hour hour = new Hour();
 					hour.setStarttime(start);
 					hour.setEndtime(end);
+					hour.setHourIndex(hourIndex);
 					hour.setTimeprofileName(tpName);
 					hourDao.create(hour);
 					System.out.println("Stunde erfolgreich erstellt");
@@ -328,23 +329,21 @@ public class ServiceTimetable {
 	 *         existiert, der Zeitplan nicht bereits existiert oder die
 	 *         Passworteingabe falsch war.
 	 */
-	public boolean createVisitedCourse(String email, String password, String ttName, String courseName, int day, int hourIndex) {
+	public boolean createVisitedCourse(String email, String password, String ttName, String tpName, String courseName, int day, int hourIndex) {
+		VisitedCourse vc = new VisitedCourse();
 		Account account = null;
 		Course course = null;
-		Hour hour = null;
 		Timetable tt = null;
 		try {
 			account = accountDao.queryForId(email);
-			course = courseDao.queryForId(courseName);
-			hour = hourDao.queryForId(hourIndex);
-			tt = timetableDao.queryForId(ttName);
 			if (account != null && account.getPassword().equals(password)){
+				tt = timetableDao.queryForId(ttName);
 				if (tt != null) {
+					course = courseDao.queryForId(courseName);
 					if (course != null) {
-						VisitedCourse vc = new VisitedCourse();
 						vc.setCourse(course);
 						vc.setDay(day);
-						vc.setHour(hour);
+						vc.setHour(tt.getTimeprofile().getHourByIndex(hourIndex, hourDao.queryForAll()));
 						visitedCourseDao.create(vc);
 						System.out.println("Besuchter Kurs erfolgreich erstellt");
 						return true;

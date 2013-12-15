@@ -26,12 +26,16 @@ public class Hour {
 	private Date endtime;
 	
 	/** Name des Zeitprofils **/
-	@DatabaseField
+	@DatabaseField(canBeNull = false)
 	private String tpName;
 	
 	/** Zeitprofil **/
 	@DatabaseField(foreign = true)
 	private Timeprofile timeprofile;
+	
+	/** Index der Stunde **/
+	@DatabaseField(canBeNull = false)
+	private int hourIndex;
 	
 	/**
 	 * Konstruktor der Klasse Hour.
@@ -47,6 +51,24 @@ public class Hour {
 	 */
 	public int getId(){
 		return id;
+	}
+	
+	
+	/**
+	 * Setter, der den Index der Stunde setzt (z.B. 1. Stunde).
+	 * @param hourIndex Index der Stunde
+	 */
+	public void setHourIndex(int hourIndex){
+		this.hourIndex = hourIndex;
+	}
+	
+	
+	/**
+	 * Getter, der den Index der Stunde zurück gibt.
+	 * @return Index der Stunde
+	 */
+	public int getHourIndex(){
+		return hourIndex;
 	}
 	
 	
