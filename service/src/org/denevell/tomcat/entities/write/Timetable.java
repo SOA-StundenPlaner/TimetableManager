@@ -1,8 +1,5 @@
 package org.denevell.tomcat.entities.write;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -14,20 +11,17 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "timetable")
 public class Timetable {
-	/** ID **/
-	@DatabaseField(canBeNull = false, generatedId = true)
-	private int id;
 	
 	/** Erzeugt ein neues Zeitprofil **/
 	@DatabaseField(canBeNull = false, foreign = true)
-	private Timeprofile timeprofile = new Timeprofile();
+	private Timeprofile timeprofile;
 	
 	/** Liste der besuchten Kurse **/
 	@ForeignCollectionField
 	private ForeignCollection<VisitedCourse> visitedCourses;
 	
 	/** Name des Stundenplans **/
-	@DatabaseField(canBeNull = false)
+	@DatabaseField(canBeNull = false, id = true)
 	private String name;
 	
 	
@@ -36,15 +30,6 @@ public class Timetable {
 	 */
 	public Timetable(){
 		
-	}
-	
-	
-	/**
-	 * Getter, der die ID zurück gibt.
-	 * @return ID
-	 */
-	public int getId(){
-		return id;
 	}
 	
 	

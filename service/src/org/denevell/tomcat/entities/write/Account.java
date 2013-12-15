@@ -64,11 +64,15 @@ public class Account {
         public String getMail(){
         	return email;
         }
-        
-        
-//        @ForeignCollectionField
-//        public ForeignCollection<Timeprofile> timeprofiles;
 
+        
+        /**
+         * Getter, der den Benutzernamen zurück gibt.
+         * @return Benutzername
+         */
+        public String getUsername(){
+        	return username;
+        }
         
         /** Map: Key ist der Name des Zeitprofils, Value ist das Zeitprofil **/
         public Map<String, Timeprofile> timeprofiles = new HashMap<String, Timeprofile>();

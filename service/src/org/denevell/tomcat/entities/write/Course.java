@@ -12,12 +12,8 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "course")
 public class Course {
         
-        /** ID des Kurses **/
-        @DatabaseField(canBeNull = false, generatedId = true)
-        private int id;
-        
         /** Name des Kurses **/
-        @DatabaseField(canBeNull = false)
+        @DatabaseField(canBeNull = false, id = true)
         private String name;
         
         /** Abkürzung des Namens des Kurses **/
@@ -25,12 +21,12 @@ public class Course {
         private String shortname;
         
         /** Name des Lehrenden **/
-        @DatabaseField(canBeNull = true)
+        @DatabaseField(canBeNull = false)
         private String teacher;
         
         /**Beschreibung des Kurses**/
-        @DatabaseField(canBeNull = true)
-        private String desciption;
+        @DatabaseField(canBeNull = false)
+        private String description;
         
         /** Raum des Kurses **/
         @DatabaseField(canBeNull = true)
@@ -52,20 +48,11 @@ public class Course {
         
         
         /**
-         * Getter, der die ID des Kurses zurück gibt.
-         * @return ID des Kurses
-         */
-        public int getId(){
-                return id;
-        }
-        
-        
-        /**
          * Getter, der den Namen des Kurses zurück gibt.
          * @return Name des Kurses
          */
         public String getName() {
-                return name;
+            return name;
         }
         
         /**
@@ -73,7 +60,7 @@ public class Course {
          * @param name Name des Kurses
          */
         public void setName(String name) {
-                this.name = name;
+            this.name = name;
         }
         
         /**
@@ -113,7 +100,7 @@ public class Course {
          * @return Beschreibung des Kurses
          */
         public String getDesciption() {
-                return desciption;
+                return description;
         }
 
         /**
@@ -121,7 +108,7 @@ public class Course {
          * @param desciption Beschreibung des Kurses
          */
         public void setDesciption(String desciption) {
-                this.desciption = desciption;
+                this.description = desciption;
         }
 
         /**
@@ -144,8 +131,13 @@ public class Course {
          * Methode, die einen Kommentar in die Liste der Kommentare hinzufügt.
          * @param comment hinzuzufügender Kommentar
          */
-        public void addComment(Comment comment){
-                comments.add(comment);
+        public boolean addComment(Comment comment){
+        	if (comments.contains(comment)){
+        		return false;
+        	}else{
+            	comments.add(comment);
+            	return true;
+        	}
         }
         
         

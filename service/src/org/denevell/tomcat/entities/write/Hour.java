@@ -25,6 +25,10 @@ public class Hour {
 	@DatabaseField(canBeNull = false)
 	private Date endtime;
 	
+	/** Name des Zeitprofils **/
+	@DatabaseField
+	private String tpName;
+	
 	/** Zeitprofil **/
 	@DatabaseField(foreign = true)
 	private Timeprofile timeprofile;
@@ -43,6 +47,24 @@ public class Hour {
 	 */
 	public int getId(){
 		return id;
+	}
+	
+	
+	/**
+	 * Setter, der den Namen des Zeitprofils setzt.
+	 * @param tpName Name des Zeitprofils
+	 */
+	public void setTimeprofileName(String tpName){
+		this.tpName = tpName;
+	}
+	
+	
+	/**
+	 * Getter, der den Namen des Zeitprofils zurück gibt.
+	 * @return Name des Zeitprofils
+	 */
+	public String getTimeprofileName(){
+		return tpName;
 	}
 	
 	

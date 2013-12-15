@@ -1,10 +1,9 @@
 package org.denevell.tomcat.entities.write;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
@@ -47,48 +46,10 @@ public class ObjectRepo {
                 return instance;
         }
         
+        /** Map: Key ist e-Mail, Value ist Account **/
+        public Map<String, Account> accounts = new HashMap<String, Account>();
         
-        /** Collection, die die Accounts der Benutzer speichert **/
-        @ForeignCollectionField
-        public ForeignCollection<Account> accounts;
+        /** Map: Key ist Kursname, Value ist Kurs **/
+        public Map<String, Course> course = new HashMap<String, Course>();
         
-        /** Collection, die die Kurse speichert **/
-        @ForeignCollectionField
-        public ForeignCollection<Course> courses;
-        
-        
-        /**
-         * Methode, die einen Account in einer Liste sucht.
-         * @param email zu findende e-Mail-Adresse
-         * @param accountList Liste der Accounts
-         * @return Index
-         */
-        public int searchForAccount(String email, List<Account> accountList){
-        	for (int i=0; i<accountList.size(); i++){
-        		if (accountList.get(i).getMail().equals(email)){
-        			return i;
-        		}else{
-        			continue;
-        		}
-        	}
-        	return -1;
-        }
-        
-        
-        /**
-         * Methode, die einen Kurs in einer Liste sucht.
-         * @param courseName zu findender Kursname
-         * @param courseList Liste der Kurse
-         * @return Index
-         */
-        public int searchForCourse(String courseName, List<Course> courseList){
-        	for (int i=0; i<courseList.size(); i++){
-        		if (courseList.get(i).getName().equals(courseName)){
-        			return i;
-        		}else{
-        			continue;
-        		}
-        	}
-        	return -1;
-        }
 }

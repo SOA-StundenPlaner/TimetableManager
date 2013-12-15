@@ -1,13 +1,11 @@
 package org.denevell.tomcat.service;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import org.denevell.tomcat.entities.write.Account;
 import org.denevell.tomcat.entities.write.Comment;
 import org.denevell.tomcat.entities.write.Course;
 import org.denevell.tomcat.entities.write.Hour;
-import org.denevell.tomcat.entities.write.ObjectRepo;
 import org.denevell.tomcat.entities.write.Timeprofile;
 import org.denevell.tomcat.entities.write.Timetable;
 import org.denevell.tomcat.entities.write.VisitedCourse;
@@ -20,9 +18,7 @@ import com.j256.ormlite.table.TableUtils;
 
 /**
  * Klasse, die den Service implementiert.
- * 
  * @author Nicole Hein
- * 
  */
 public class ServiceTimetable {
 
@@ -36,23 +32,24 @@ public class ServiceTimetable {
 	private Dao<Comment, Integer> commentDao = null;
 
 	/** DAO für Course **/
-	private Dao<Course, Integer> courseDao = null;
+	private Dao<Course, String> courseDao = null;
 
 	/** DAO für Hour **/
 	private Dao<Hour, Integer> hourDao = null;
 
-	/** DAO für ObjectRepo **/
-	private Dao<ObjectRepo, Void> objectRepoDao = null;
-
 	/** DAO für Timeprofile **/
-	private Dao<Timeprofile, Integer> timeprofileDao = null;
+	private Dao<Timeprofile, String> timeprofileDao = null;
 
 	/** DAO für Timetable **/
-	private Dao<Timetable, Integer> timetableDao = null;
+	private Dao<Timetable, String> timetableDao = null;
 
 	/** DAO für VisitedCourse **/
 	private Dao<VisitedCourse, Integer> visitedCourseDao = null;
 
+	
+	/**
+	 * Konstruktor der Klasse ServiceTimetable.
+	 */
 	public ServiceTimetable() {
 		try {
 			cs = new JdbcConnectionSource("jdbc:h2:mem:timetable");
@@ -65,8 +62,6 @@ public class ServiceTimetable {
 			TableUtils.createTableIfNotExists(cs, Course.class);
 			hourDao = DaoManager.createDao(cs, Hour.class);
 			TableUtils.createTableIfNotExists(cs, Hour.class);
-			objectRepoDao = DaoManager.createDao(cs, ObjectRepo.class);
-			TableUtils.createTableIfNotExists(cs, ObjectRepo.class);
 			timeprofileDao = DaoManager.createDao(cs, Timeprofile.class);
 			TableUtils.createTableIfNotExists(cs, Timeprofile.class);
 			timetableDao = DaoManager.createDao(cs, Timetable.class);
@@ -74,9 +69,7 @@ public class ServiceTimetable {
 			visitedCourseDao = DaoManager.createDao(cs, VisitedCourse.class);
 			TableUtils.createTableIfNotExists(cs, VisitedCourse.class);
 			System.out.println("DAO und Tabellen erfolgreich erstellt");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {}
 	}
 
 	/**
@@ -89,25 +82,155 @@ public class ServiceTimetable {
 	 *         existiert.
 	 */
 	public boolean createAccount(String username, String password, String email) {
-		Account account = new Account(username, password, email);
-		List<Account> accounts = null;
+		Account account = null;
 		try {
-			accounts = accountDao.queryForAll();
+			account = accountDao.queryForId(email);
+			if (account == null){
+				account = new Account(username, password, email);
+				try {
+					accountDao.create(account);
+					System.out.println("Account erfolgreich erzeugt: " + accountDao.queryForAll().size());
+					return true;
+				} catch (SQLException e) {
+					System.out.println("Account nicht erzeugt");
+					return false;
+				}
+			}else{
+				System.out.println("Account nicht erstellt: existiert bereits");
+				return false;
+			}
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			return false;
 		}
+	}	
+	
+	
+	/**
+	 * Methode, die ein Zeitprofil erstellt.
+	 * @param email e-Mail-Adresse des Benutzers
+	 * @param password Passwort des Benutzers
+	 * @param tpName Name des Zeitprofils
+	 * @param start Startzeit der Stunde
+	 * @param end Endzeit der Stunde
+	 * @return
+	 */
+	public boolean createTimeprofile(String email, String password, String tpName){
+		Account account = null;
+		Timeprofile tp = null;
 		try {
-			accountDao.create(account);
-			accounts.add(account);
-			System.out.println("Account erfolgreich erzeugt");
-			return true;
+			account = accountDao.queryForId(email);
+			tp = timeprofileDao.queryForId(tpName);
+			if (account != null && account.getPassword().equals(password)){
+				if (tp == null){
+					tp = new Timeprofile();
+					tp.setName(tpName);
+					timeprofileDao.create(tp);
+					System.out.println("Zeitprofil erfolgreich erstellt.");
+					return true;
+				}else{
+					System.out.println("Zeitprofil nicht erstellt: Zeitprofil existiert bereits");
+					return false;
+				}
+			}else{
+				System.out.println("Zeitprofil nicht erstellt: Account existiert nicht oder Passwort ist falsch");
+				return false;
+			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Account nicht erzeugt");
 			return false;
 		}
 	}
-
+	
+	
+	/**
+	 * Methode, die eine Stunde erstellt.
+	 * @param start Startzeit
+	 * @param end Endzeit
+	 * @param tpName Name des Zeitprofils
+	 * @param email e-Mail-Adresse des Benutzers
+	 * @param password Passwort des Benutzers
+	 * @return
+	 */
+	public boolean createHour(String start, String end, String tpName, String email, String password){
+		Account account = null;
+		Timeprofile tp = null;
+		try {
+			account = accountDao.queryForId(email);
+			tp = timeprofileDao.queryForId(tpName);
+			if (account != null && account.getPassword().equals(password)){
+				if (tp != null){
+					Hour hour = new Hour();
+					hour.setStarttime(start);
+					hour.setEndtime(end);
+					hour.setTimeprofileName(tpName);
+					hourDao.create(hour);
+					System.out.println("Stunde erfolgreich erstellt");
+					return true;
+				}else{
+					System.out.println("Stunde nicht erstellt: Zeitprofil existiert nicht");
+					return false;
+				}
+			}else{
+				System.out.println("Stunde nicht erstellt: Account existiert nicht oder Passwort ist falsch");
+				return false;
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Methode, die einen Stundenplan erstellt.
+	 * @param email e-Mail-Adresse des Benutzers
+	 * @param username Benutzername
+	 * @param password Passwort des Benutzers
+	 * @param ttName Name des Stundenplans
+	 * @param tpName Name des Zeitprofils
+	 * @return Gibt wahr zurück, wenn der Stundenplan erfolgreich erstellt
+	 *         werden konnte. Gibt falsch zurück, wenn entweder der Benutzer
+	 *         nicht existiert, der Stundenplan bereits existiert oder die
+	 *         Passworteingabe falsch war.
+	 */
+	public boolean createTimetable(String email, String password, String ttName, String tpName) {
+		Account account = null;
+		Timetable tt = null;
+		Timeprofile tp = null;
+		try {
+			account = accountDao.queryForId(email);
+			tt = timetableDao.queryForId(ttName);
+			tp = timeprofileDao.queryForId(tpName);
+			if (account != null && account.getPassword().equals(password)) {
+				if (tt != null) {
+					System.out.println("Stundenplan nicht erstellt: existiert bereits");
+					return false;
+				} else {
+					if (tp != null){
+						tt = new Timetable();
+						try {
+							tt.setName(ttName);
+							tt.setTimeprofile(tp);
+							timetableDao.create(tt);
+							System.out.println("Stundenplan erfolgreich erstellt");
+							return true;
+						} catch (SQLException e) {
+							System.out.println("Stundenplan nicht erstellt");
+							return false;
+						}
+					}else{
+						System.out.println("Stundenplan nicht erstellt: Zeitprofil existiert nicht");
+						return false;
+					}
+				}
+			}else{
+				System.out.println("Stundenplan nicht erstellt: Account existiert nicht oder Passwort ist falsch");
+				return false;
+			}
+		} catch (SQLException e1) {
+			return false;
+		}
+	}
+	
+	
 	/**
 	 * Methode, die einen Kurs erstellt.
 	 * @param name Name des Kurses
@@ -119,26 +242,29 @@ public class ServiceTimetable {
 	 *         konnte. Gibt falsch zurück, wenn der Kurs bereits existiert.
 	 */
 	public boolean createCourse(String name, String shortname, String teacher, String description, String room) {
-		Course course = new Course();
-		course.setDesciption(description);
-		course.setName(name);
-		course.setRoom(room);
-		course.setShortname(shortname);
-		course.setTeacher(teacher);
-		List<Course> courseList = null;
+		Course course = null;
 		try {
-			courseList = courseDao.queryForAll();
+			course = courseDao.queryForId(name);
+			if (course == null){
+				course = new Course();
+				course.setDesciption(description);
+				course.setName(name);
+				course.setRoom(room);
+				course.setShortname(shortname);
+				course.setTeacher(teacher);	
+				try {
+					courseDao.create(course);
+					System.out.println("Kurs erfolgreich erzeugt");
+					return true;
+				} catch (SQLException e) {
+					System.out.println("Kurs nicht erzeugt");
+					return false;
+				}
+			}else{
+				System.out.println("Kurs nicht erzeugt: existiert bereits");
+				return false;
+			}
 		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		try {
-			courseDao.create(course);
-			courseList.add(course);
-			System.out.println("Kurs erfolgreich erzeugt");
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Kurs nicht erzeugt");
 			return false;
 		}
 	}
@@ -153,128 +279,47 @@ public class ServiceTimetable {
 	 *         konnte. Gibt falsch zurück, wenn der Kurs oder der Autor nicht
 	 *         existieren.
 	 */
-	public boolean createComment(String email, String author, String password, String c, String courseName) {
-		List<Account> accounts = null;
-		List<Course> courseList = null;
+	public boolean createComment(String email, String password, String c, String courseName) {
+		Account account = null;
+		Course course = null;
 		try {
-			accounts = accountDao.queryForAll();
-			courseList = courseDao.queryForAll();
+			account = accountDao.queryForId(email);
+			course = courseDao.queryForId(courseName);
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			return false;
 		}
-		int accountIndex = ObjectRepo.getInstance().searchForAccount(email, accounts);
-		int courseIndex = ObjectRepo.getInstance().searchForCourse(courseName, courseList);
-		if (accountIndex!=-1) {
-			if (courseIndex!=-1) {
+		if (account != null && account.getPassword().equals(password)) {
+			if (course != null) {
 				Comment comment = new Comment();
-				comment.setAuthor(author);
+				comment.setAuthor(account.getUsername());
 				comment.setComment(c);
+				comment.setCourseName(courseName);
 				try {
-					courseList.get(courseIndex).addComment(comment);
+					course.addComment(comment);
 					commentDao.create(comment);
 					System.out.println("Kommentar erfolgreich erzeugt");
 					return true;
 				} catch (SQLException e) {
-					e.printStackTrace();
 					System.out.println("Kommentar nicht erzeugt");
 					return false;
 				}
 			}else{
+				System.out.println("Kommentar nicht erzeugt: Kurs existiert nicht");
 				return false;
 			}
 		}else{
+			System.out.println("Kommentar nicht erzeugt: Account existiert nicht oder Passwort ist falsch");
 			return false;
 		}
 	}
 
-	/**
-	 * Methode, die einen Stundenplan erstellt.
-	 * @param email e-Mail-Adresse des Benutzers
-	 * @param username Benutzername
-	 * @param password Passwort des Benutzers
-	 * @param ttName Name des Stundenplans
-	 * @param tpName Name des Zeitprofils
-	 * @return Gibt wahr zurück, wenn der Stundenplan erfolgreich erstellt
-	 *         werden konnte. Gibt falsch zurück, wenn entweder der Benutzer
-	 *         nicht existiert, der Stundenplan bereits existiert oder die
-	 *         Passworteingabe falsch war.
-	 */
-	public boolean createTimetable(String email, String username, String password, String ttName, String tpName) {
-		List<Account> accounts = null;
-		try {
-			accounts = accountDao.queryForAll();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		int accountIndex = ObjectRepo.getInstance().searchForAccount(email, accounts);
-		if (accountIndex!=-1) {
-			if (accounts.get(accountIndex).tt.containsKey(ttName)) {
-				return false;
-			} else {
-				Timetable tt = new Timetable();
-				try {
-					timetableDao.create(tt);
-					tt.setName(ttName);
-					tt.setTimeprofile(accounts.get(accountIndex).timeprofiles.get(tpName));
-					accounts.get(accountIndex).tt.put(tpName, tt);
-					System.out.println("Stundenplan erfolgreich erstellt");
-					return true;
-				} catch (SQLException e) {
-					e.printStackTrace();
-					System.out.println("Stundenplan nicht erstellt");
-					return false;
-				}
-			}
-		}else{
-			return false;
-		}
-	}
-
-	/**
-	 * Methode, die ein Zeitprofil erstellt.
-	 * @param email e-Mail-Adresse des Benutzers
-	 * @param username Benutzername
-	 * @param password Passwort des Benutzers
-	 * @param tpName Name des Zeitprofils
-	 * @param numberOfWeekdays Anzahhl der Wochentage
-	 * @return Gibt wahr zurück, wenn das Zeitprofil erfolgreich erstellt werden
-	 *         konnte. Gibt falsch zurück, wenn der Benutzer nicht existiert
-	 *         oder die Passworteingabe falsch war.
-	 */
-	public boolean createTimeprofile(String email, String username, String password, String tpName, int numberOfWeekdays) {
-		List<Account> accounts = null;
-		try {
-			accounts = accountDao.queryForAll();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		int accountIndex = ObjectRepo.getInstance().searchForAccount(email, accounts);
-		if (accountIndex!=-1) {
-			try {
-				Timeprofile tp = new Timeprofile();
-				tp.setHours(accounts.get(accountIndex).timeprofiles.get(tpName).getHours());
-				tp.setName(tpName);
-				tp.setNumberOfWeekdays(numberOfWeekdays);
-				accounts.get(accountIndex).timeprofiles.put(tpName, tp);
-				timeprofileDao.create(tp);
-				System.out.println("Zeitprofil erfolgreich erstellt");
-				return true;
-			} catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println("Zeitprofil nicht erstellt");
-				return false;
-			}
-		}else{
-			return false;
-		}
-	}
-
+	
 	/**
 	 * Methode, die einen besuchten Kurs erstellt.
 	 * @param email e-Mail-Adresse des Benutzers
 	 * @param username Benutzername
 	 * @param password Passwort
-	 * @param tpName Name des Zeitprofils
+	 * @param ttName Name des Stundenplans
 	 * @param courseName Name des Kurses
 	 * @param day Tag
 	 * @param hourIndex Stunde
@@ -283,33 +328,39 @@ public class ServiceTimetable {
 	 *         existiert, der Zeitplan nicht bereits existiert oder die
 	 *         Passworteingabe falsch war.
 	 */
-	public boolean createVisitedCourse(String email, String username, String password, String tpName, String courseName, int day, int hourIndex) {
-		List<Account> accounts = null;
-		List<Course> courseList = null;
+	public boolean createVisitedCourse(String email, String password, String ttName, String courseName, int day, int hourIndex) {
+		Account account = null;
+		Course course = null;
+		Hour hour = null;
+		Timetable tt = null;
 		try {
-			accounts = accountDao.queryForAll();
-			courseList = courseDao.queryForAll();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-		int accountIndex = ObjectRepo.getInstance().searchForAccount(email, accounts);
-		int courseIndex = ObjectRepo.getInstance().searchForCourse(courseName, courseList);
-		if (accounts.get(accountIndex).timeprofiles.containsKey(tpName)) {
-			if (courseIndex!=-1) {
-				List<Hour> hourList = null;
-				try {
-					hourList = hourDao.queryForAll();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			account = accountDao.queryForId(email);
+			course = courseDao.queryForId(courseName);
+			hour = hourDao.queryForId(hourIndex);
+			tt = timetableDao.queryForId(ttName);
+			if (account != null && account.getPassword().equals(password)){
+				if (tt != null) {
+					if (course != null) {
+						VisitedCourse vc = new VisitedCourse();
+						vc.setCourse(course);
+						vc.setDay(day);
+						vc.setHour(hour);
+						visitedCourseDao.create(vc);
+						System.out.println("Besuchter Kurs erfolgreich erstellt");
+						return true;
+					}else{
+						System.out.println("Besuchter Kurs nicht erstellt: Kurs existiert nicht");
+						return false;
+					}
+				}else{
+					System.out.println("Besuchter Kurs nicht erstellt: Stundenplan existiert nicht");
+					return false;
 				}
-				Hour hour = hourList.get(hourIndex);
-				VisitedCourse vc = new VisitedCourse();
-				vc.setCourse(courseList.get(courseIndex));
-				vc.setDay(day);
-				vc.setHour(hour);
+			}else{
+				System.out.println("Besuchter nicht erstellt: Account existiert nicht oder Passwort ist falsch");
+				return false;
 			}
-			return true;
-		} else {
+		} catch (SQLException e) {
 			return false;
 		}
 	}

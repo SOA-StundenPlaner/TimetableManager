@@ -21,11 +21,11 @@ public class Comment {
 
         /** Veranstaltungs-ID, zu der der Kommentar gehört **/
         @DatabaseField(canBeNull = false, generatedId = true)
-        int courseID;
+        private int courseID;
 
         /** Kurs, zu dem der Kommentar erstellt werden soll **/
         @DatabaseField(foreign = true)
-        Course course;
+        private Course course;
         
         /** Name des Kurses **/
         @DatabaseField(canBeNull = false)
@@ -35,8 +35,11 @@ public class Comment {
          * Konstruktor der Klasse Comment.
          */
         public Comment(){
-                
+        	
         }
+        
+        
+        
 
         /**
          * Setter, der den Kommentar setzt.
@@ -70,7 +73,21 @@ public class Comment {
                 return author;
         }
         
+        
+        /**
+         * Setter, der den Kursnamen setzt, für den der Kommentar gespeichert werden soll.
+         * @param courseName
+         */
         public void setCourseName(String courseName){
         	this.courseName = courseName;
+        }
+        
+        
+        /**
+         * Getter, der den Kursnamen zurück gibt, für den der Kommentar gespeichert werden soll.
+         * @return Kursname
+         */
+        public String getCourseName(){
+        	return courseName;
         }
 }

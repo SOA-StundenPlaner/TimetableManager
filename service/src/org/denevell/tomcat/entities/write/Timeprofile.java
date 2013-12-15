@@ -1,7 +1,5 @@
 package org.denevell.tomcat.entities.write;
 
-import java.util.List;
-
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -13,20 +11,17 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "timeprofile")
 public class Timeprofile {
-	/** ID des Zeitprofils **/
-	@DatabaseField(canBeNull = false, generatedId = true)
-	private int id;
 	
 	/** Anzahl der Wochentage **/
-	@DatabaseField(canBeNull = false)
-	private int numberOfWeekdays;
+//	@DatabaseField(canBeNull = false)
+//	private int numberOfWeekdays;
 	
 	/** Liste der Stunden **/
 	@ForeignCollectionField
 	private ForeignCollection<Hour> hours;
 	
 	/** Name des Zeitprofils **/
-	@DatabaseField(canBeNull = false)
+	@DatabaseField(canBeNull = false, id = true)
 	private String name;
 	
 	
@@ -38,30 +33,21 @@ public class Timeprofile {
 	}
 	
 	
-	/**
-	 * Getter, der die ID des Zeitprofils zurück gibt.
-	 * @return ID des Zeitprofils
-	 */
-	public int getId(){
-		return id;
-	}
-	
-	
-	/**
-	 * Getter, der die Anzahl an Wochentagen zurück gibt.
-	 * @return Anzahl an Wochentagen
-	 */
-	public int getNumberOfWeekdays() {
-		return numberOfWeekdays;
-	}
-	
-	/**
-	 * Setter, der die Anzahl an Wochentagen setzt.
-	 * @param numberOfWeekdays Anzahl der Wochentage
-	 */
-	public void setNumberOfWeekdays(int numberOfWeekdays) {
-		this.numberOfWeekdays = numberOfWeekdays;
-	}
+//	/**
+//	 * Getter, der die Anzahl an Wochentagen zurück gibt.
+//	 * @return Anzahl an Wochentagen
+//	 */
+//	public int getNumberOfWeekdays() {
+//		return numberOfWeekdays;
+//	}
+//	
+//	/**
+//	 * Setter, der die Anzahl an Wochentagen setzt.
+//	 * @param numberOfWeekdays Anzahl der Wochentage
+//	 */
+//	public void setNumberOfWeekdays(int numberOfWeekdays) {
+//		this.numberOfWeekdays = numberOfWeekdays;
+//	}
 	
 	/**
 	 * Getter, der die Liste der Stunden zurück gibt.
@@ -71,13 +57,6 @@ public class Timeprofile {
 		return hours;
 	}
 	
-	/**
-	 * Setter, der die Liste der Stunden setzt.
-	 * @param hours Liste der Stunden
-	 */
-	public void setHours(ForeignCollection<Hour> hours) {
-		this.hours = hours;
-	}
 
 	/**
 	 * Getter, der den Namen des Zeitprofils zurück gibt.
