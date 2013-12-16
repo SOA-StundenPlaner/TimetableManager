@@ -15,6 +15,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
 
 /**
  * Klasse, die den Service implementiert.
@@ -44,7 +45,7 @@ public class ServiceTimetable {
 	private Dao<Timetable, String> timetableDao = null;
 
 	/** DAO für VisitedCourse **/
-	private Dao<VisitedCourse, Integer> visitedCourseDao = null;
+	private Dao<VisitedCourse, String> visitedCourseDao = null;
 
 	
 	/**
@@ -106,6 +107,35 @@ public class ServiceTimetable {
 	
 	
 	/**
+	 * Methode, die einen Account löscht.
+	 * @param email e-Mail-Adresse des Benutzers
+	 * @param password Passwort des Benutzers
+	 * @return
+	 */
+	public boolean removeAccount(String email, String password){
+		Account account = null;
+		try {
+			account = accountDao.queryForId(email);
+			if (account != null){
+				if (account.getPassword().equals(password)){
+					accountDao.deleteById(email);
+					System.out.println("Account wurde erfolgreich gelöscht");
+					return true;
+				}else{
+					System.out.println("Account wurde nicht gelöscht: Passwort falsch");
+					return false;
+				}	
+			}else{
+				System.out.println("Account wurde nicht gelöscht: Account existiert nicht");
+				return false;
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+		
+	}
+	
+	/**
 	 * Methode, die ein Zeitprofil erstellt.
 	 * @param email e-Mail-Adresse des Benutzers
 	 * @param password Passwort des Benutzers
@@ -136,6 +166,38 @@ public class ServiceTimetable {
 				return false;
 			}
 		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	
+	/**
+	 * Methode, die ein Zeitprofil löscht.
+	 * @param timeprofile
+	 * @param email
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean removeTimeprofile(String timeprofile, String email, String password) throws SQLException{
+		Account account = accountDao.queryForId(email);
+		Timeprofile tp = timeprofileDao.queryForId(timeprofile);
+		if (account != null){
+			if (account.getPassword().equals(password)){
+				if (tp != null){
+					timeprofileDao.deleteById(timeprofile);	
+					System.out.println("Zeitprofil wurde erfolgreich gelöscht");
+					return true;
+				}else{
+					System.out.println("Zeitprofil nicht gelöscht: Zeitprofil existiert nicht");
+					return false;
+				}
+			}else{
+				System.out.println("Zeitprofil nicht gelöscht: Passwort falsch");
+				return false;
+			}
+		}else{
+			System.out.println("Zeitprofile nicht gelöscht: Account existiert nicht");
 			return false;
 		}
 	}
@@ -227,6 +289,38 @@ public class ServiceTimetable {
 				return false;
 			}
 		} catch (SQLException e1) {
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Methode, die einen Stundenplan löscht.
+	 * @param ttName
+	 * @param email
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean removeTimetable(String ttName, String email, String password) throws SQLException{
+		Account account = accountDao.queryForId(email);
+		Timetable tt = timetableDao.queryForId(ttName);
+		if (account != null){
+			if (account.getPassword().equals(password)){
+				if (tt != null){
+					timetableDao.deleteById(ttName);
+					System.out.println("Stundenplan erfolgreich gelöscht");
+					return true;
+				}else{
+					System.out.println("Stundenplan nicht gelöscht: Stundenplan existiert nicht");
+					return false;
+				}
+			}else{
+				System.out.println("Stundenplan nicht gelöscht: Passwort falsch");
+				return false;
+			}
+		}else{
+			System.out.println("Stundenplan nicht gelöscht: Account existiert nicht");
 			return false;
 		}
 	}
@@ -360,6 +454,38 @@ public class ServiceTimetable {
 				return false;
 			}
 		} catch (SQLException e) {
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Methode, die einen besuchten Kurs löscht.
+	 * @param courseName
+	 * @param email
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean removeVisitedCourse(String courseName, String email, String password) throws SQLException{
+		Account account = accountDao.queryForId(email);
+		VisitedCourse vs = visitedCourseDao.queryForId(courseName);
+		if (account != null){
+			if (account.getPassword().equals(password)){
+				if (vs != null){
+					courseDao.deleteById(courseName);
+					System.out.println("Kurs erfolgreich gelöscht");
+					return true;
+				}else{
+					System.out.println("Kurs nicht gelöscht: Kurs existiert nicht");
+					return false;
+				}
+			}else{
+				System.out.println("Kurs nicht gelöscht: Passwort falsch");
+				return false;
+			}
+		}else{
+			System.out.println("Kurs nicht gelöscht: Account existiert nicht");
 			return false;
 		}
 	}

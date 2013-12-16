@@ -11,12 +11,16 @@ import com.j256.ormlite.table.DatabaseTable;
 public class VisitedCourse {
 	
 	/** ID **/
-	@DatabaseField(canBeNull = false, generatedId = true)	
+	@DatabaseField(canBeNull = false)	
 	private int id;
 	
 	/** Kurs **/
 	@DatabaseField(foreign = true, canBeNull = false)
 	public Course course;
+	
+	/** Name des Kurses **/
+	@DatabaseField(canBeNull = false, id = true)
+	public String courseName;
 	
 	/** Stunde **/
 	@DatabaseField(foreign = true, canBeNull = false)
@@ -60,6 +64,7 @@ public class VisitedCourse {
 	 * @param course Kurs
 	 */
 	public void setCourse(Course course) {
+		courseName = course.getName();
 		this.course = course;
 	}
 	
