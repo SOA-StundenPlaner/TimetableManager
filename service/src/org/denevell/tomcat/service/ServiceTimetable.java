@@ -15,7 +15,6 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
 
 /**
  * Klasse, die den Service implementiert.
@@ -30,7 +29,7 @@ public class ServiceTimetable {
 	private Dao<Account, String> accountDao = null;
 
 	/** DAO für Comment **/
-	private Dao<Comment, Integer> commentDao = null;
+	private Dao<Comment, String> commentDao = null;
 
 	/** DAO für Course **/
 	private Dao<Course, String> courseDao = null;
@@ -406,6 +405,46 @@ public class ServiceTimetable {
 			System.out.println("Kommentar nicht erzeugt: Account existiert nicht oder Passwort ist falsch");
 			return false;
 		}
+	}
+	
+	
+	/**
+	 * Methode, die einen Kommentar löscht.
+	 * @param email
+	 * @param password
+	 * @param courseName
+	 * @param comment
+	 * @return
+	 * @throws SQLException
+	 */
+	@SuppressWarnings("unused")
+	public boolean removeComment(String email, String password, String courseName, String comment) throws SQLException{
+		Account account = accountDao.queryForId(email);
+		Comment c = commentDao.queryForId(account.getUsername()+courseName+comment);
+		if (account != null){
+			if (account.getPassword().equals(password)){
+				if (c != null){
+					if (c.getAuthor().equals(account.getUsername())){
+						commentDao.deleteById(account.getUsername()+courseName+comment);
+						System.out.println("Kommentar erfolgreich gelöscht");
+						return true;
+					}else{
+						System.out.println("Kommentar nicht gelöscht: Autor ist nicht Nutzer");
+						return false;
+					}
+				}else{
+					System.out.println("Kommentar nicht gelöscht: Kommentar existiert nicht");
+					return false;
+				}
+			}else{
+				System.out.println("Kommentar nicht gelöscht: Passwort falsch");
+				return false;
+			}
+		}else{
+			System.out.println("Kommentar nicht gelöscht: Account existiert nicht");
+			return false;
+		}
+		
 	}
 
 	

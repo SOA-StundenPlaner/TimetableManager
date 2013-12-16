@@ -20,8 +20,8 @@ public class Comment {
         private String author;
 
         /** Veranstaltungs-ID, zu der der Kommentar gehört **/
-        @DatabaseField(canBeNull = false, generatedId = true)
-        private int courseID;
+        @DatabaseField(canBeNull = false, id = true)
+        private String courseID;
 
         /** Kurs, zu dem der Kommentar erstellt werden soll **/
         @DatabaseField(foreign = true)
@@ -62,7 +62,8 @@ public class Comment {
          * @param author zu setzender Kommentarautor
          */
         public void setAuthor(String author) {
-                this.author = author;
+        	courseID = author+courseName+comment;
+        	this.author = author;
         }
 
         /**
