@@ -1,9 +1,8 @@
 package org.denevell.tomcat.entities.write;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
@@ -58,11 +57,29 @@ public class Account {
         
         
         /**
+         * Setter, der das Passwort den Benutzers setzt.
+         * @param password Passwort
+         */
+        public void setPassword(String password){
+        	this.password = password;
+        }
+        
+        
+        /**
          * Getter, der die e-Mail-Adresse des Benutzers zurück gibt.
          * @return e-Mail-Adresse
          */
         public String getMail(){
         	return email;
+        }
+        
+        
+        /**
+         * Setter, der die e-Mail-Adresse setzt.
+         * @param email e-Mail-Adresse
+         */
+        public void setMail(String email){
+        	this.email = email;
         }
 
         
@@ -74,9 +91,19 @@ public class Account {
         	return username;
         }
         
-        /** Map: Key ist der Name des Zeitprofils, Value ist das Zeitprofil **/
-        public Map<String, Timeprofile> timeprofiles = new HashMap<String, Timeprofile>();
         
-        /** Map: Key ist der Name des Stundenplans, Value ist der Stundenplan **/
-        public Map<String, Timetable> tt = new HashMap<String, Timetable>();
+        /**
+         * Setter, der den Benutzernamen setzt.
+         * @param username Benutzername
+         */
+        public void setUsername(String username){
+        	this.username = username;
+        }
+        
+        
+        @ForeignCollectionField
+        public ForeignCollection<Timeprofile> timeprofiles;
+        
+        @ForeignCollectionField
+        public ForeignCollection<Timetable> timetables;
 }

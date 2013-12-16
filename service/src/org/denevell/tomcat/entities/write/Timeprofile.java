@@ -13,11 +13,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "timeprofile")
 public class Timeprofile {
-	
-	/** Anzahl der Wochentage **/
-//	@DatabaseField(canBeNull = false)
-//	private int numberOfWeekdays;
-	
+		
 	/** Liste der Stunden **/
 	@ForeignCollectionField
 	private ForeignCollection<Hour> hours;
@@ -33,23 +29,7 @@ public class Timeprofile {
 	public Timeprofile(){
 		
 	}
-	
-	
-//	/**
-//	 * Getter, der die Anzahl an Wochentagen zurück gibt.
-//	 * @return Anzahl an Wochentagen
-//	 */
-//	public int getNumberOfWeekdays() {
-//		return numberOfWeekdays;
-//	}
-//	
-//	/**
-//	 * Setter, der die Anzahl an Wochentagen setzt.
-//	 * @param numberOfWeekdays Anzahl der Wochentage
-//	 */
-//	public void setNumberOfWeekdays(int numberOfWeekdays) {
-//		this.numberOfWeekdays = numberOfWeekdays;
-//	}
+
 	
 	/**
 	 * Getter, der die Liste der Stunden zurück gibt.
@@ -70,8 +50,6 @@ public class Timeprofile {
 		for (int i=0; i<hourList.size(); i++){
 			if (hourList.get(i).getHourIndex() == hourIndex){
 				return hourList.get(i);
-			}else{
-				return null;
 			}
 		}
 		return null;
@@ -101,6 +79,23 @@ public class Timeprofile {
 	public void addHour(Hour h){
 		hours.add(h);
 	}
+	
+	
+	/**
+	 * Methode, die eine Stunde ändert.
+	 * @param hour Stunde
+	 * @param start Startzeit
+	 * @param end Endzeit
+	 * @param hourIndex Index der Stunde
+	 * @param tpName Name des Zeitprofils
+	 */
+	public void editHour(Hour hour, String start, String end, int hourIndex, String tpName){
+		hour.setStarttime(start);
+		hour.setEndtime(end);
+		hour.setHourIndex(hourIndex);
+		hour.setTimeprofileName(tpName);
+	}
+
 	
 	/**
 	 * Methode, die eine Stunde von der Liste der Stunden löscht.

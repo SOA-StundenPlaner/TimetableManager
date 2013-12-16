@@ -21,11 +21,21 @@
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
       </operation>
+      <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="editAccount" qname="operNS:editAccount" returnQName="retNS:editAccountReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+      </operation>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="removeAccount" qname="operNS:removeAccount" returnQName="retNS:removeAccountReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
       </operation>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createTimeprofile" qname="operNS:createTimeprofile" returnQName="retNS:createTimeprofileReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:tpName" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="editTimeprofile" qname="operNS:editTimeprofile" returnQName="retNS:editTimeprofileReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:tpName" type="tns:string"/>
@@ -48,6 +58,12 @@
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:ttName" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:tpName" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="editTimetable" qname="operNS:editTimetable" returnQName="retNS:editTimetableReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:ttName" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:tpName" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
       </operation>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="removeTimetable" qname="operNS:removeTimetable" returnQName="retNS:removeTimetableReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:ttName" type="tns:string"/>
@@ -80,8 +96,9 @@
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:courseName" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+        <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:ttName" type="tns:string"/>
       </operation>
-      <parameter name="allowedMethods" value="removeAccount createComment removeComment createCourse removeTimetable createAccount createTimetable createVisitedCourse createTimeprofile removeVisitedCourse createHour removeTimeprofile"/>
+      <parameter name="allowedMethods" value="removeComment createCourse createTimetable createTimeprofile removeTimeprofile createComment removeAccount editAccount editTimetable createAccount removeTimetable editTimeprofile createVisitedCourse removeVisitedCourse createHour"/>
 
   </service>
 </deployment>

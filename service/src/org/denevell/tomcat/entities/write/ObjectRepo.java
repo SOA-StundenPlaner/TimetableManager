@@ -1,9 +1,8 @@
 package org.denevell.tomcat.entities.write;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
@@ -13,7 +12,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "objectRepo")
 public class ObjectRepo {
         /** ID **/
-        @DatabaseField(id = true)
+        @DatabaseField(generatedId = true)
         private int id;
         
         @DatabaseField(foreign = true)
@@ -46,10 +45,10 @@ public class ObjectRepo {
                 return instance;
         }
         
-        /** Map: Key ist e-Mail, Value ist Account **/
-        public Map<String, Account> accounts = new HashMap<String, Account>();
+        @ForeignCollectionField
+        public ForeignCollection<Account> accounts;
         
-        /** Map: Key ist Kursname, Value ist Kurs **/
-        public Map<String, Course> course = new HashMap<String, Course>();
+        @ForeignCollectionField
+        public ForeignCollection<Course> courses;
         
 }
