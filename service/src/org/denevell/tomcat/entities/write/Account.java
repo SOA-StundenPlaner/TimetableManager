@@ -1,8 +1,9 @@
 package org.denevell.tomcat.entities.write;
 
-import com.j256.ormlite.dao.ForeignCollection;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 /**
@@ -101,9 +102,9 @@ public class Account {
         }
         
         
-        @ForeignCollectionField
-        public ForeignCollection<Timeprofile> timeprofiles;
+        Map<String, Timeprofile> timeprofiles = new HashMap<String, Timeprofile>();
         
-        @ForeignCollectionField
-        public ForeignCollection<Timetable> timetables;
+        Map<String, Timetable> timetables = new HashMap<String, Timetable>();
+        
+      
 }

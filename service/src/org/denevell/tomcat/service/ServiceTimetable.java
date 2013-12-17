@@ -6,7 +6,6 @@ import org.denevell.tomcat.entities.write.Account;
 import org.denevell.tomcat.entities.write.Comment;
 import org.denevell.tomcat.entities.write.Course;
 import org.denevell.tomcat.entities.write.Hour;
-import org.denevell.tomcat.entities.write.ObjectRepo;
 import org.denevell.tomcat.entities.write.Timeprofile;
 import org.denevell.tomcat.entities.write.Timetable;
 import org.denevell.tomcat.entities.write.VisitedCourse;
@@ -25,9 +24,6 @@ public class ServiceTimetable {
 
 	/** Verbindung zur Datenbank **/
 	private ConnectionSource cs = null;
-
-	/** DAO für ObjectRepo **/
-	private Dao<ObjectRepo, Integer> objectRepoDao = null;
 	
 	/** DAO für Account **/
 	private Dao<Account, String> accountDao = null;
@@ -58,8 +54,6 @@ public class ServiceTimetable {
 		try {
 			cs = new JdbcConnectionSource("jdbc:h2:mem:timetable");
 			System.out.println("DatabaseConnection erfolgreich erstellt");
-			objectRepoDao = DaoManager.createDao(cs, ObjectRepo.class);
-			TableUtils.createTableIfNotExists(cs, ObjectRepo.class);
 			accountDao = DaoManager.createDao(cs, Account.class);
 			TableUtils.createTableIfNotExists(cs, Account.class);
 			commentDao = DaoManager.createDao(cs, Comment.class);
@@ -92,7 +86,6 @@ public class ServiceTimetable {
 		Account account = accountDao.queryForId(email);
 		if (account == null){
 			account = new Account(username, password, email);
-			ObjectRepo.getInstance().accounts.add(account);
 			accountDao.create(account);
 			System.out.println("Account erfolgreich erzeugt: " + accountDao.queryForAll().size());
 			return true;
@@ -138,7 +131,6 @@ public class ServiceTimetable {
 		Account account = accountDao.queryForId(email);
 		if (account != null){
 			if (account.getPassword().equals(password)){
-				ObjectRepo.getInstance().accounts.remove(account);
 				accountDao.deleteById(email);
 				System.out.println("Account wurde erfolgreich gelöscht");
 				return true;
@@ -169,7 +161,6 @@ public class ServiceTimetable {
 			if (tp == null){
 				tp = new Timeprofile();
 				tp.setName(tpName);
-				account.timeprofiles.add(tp);
 				timeprofileDao.create(tp);
 				System.out.println("Zeitprofil erfolgreich erstellt.");
 				return true;
@@ -224,7 +215,6 @@ public class ServiceTimetable {
 		if (account != null){
 			if (account.getPassword().equals(password)){
 				if (tp != null){
-					account.timeprofiles.remove(tp);
 					timeprofileDao.deleteById(timeprofile);	
 					System.out.println("Zeitprofil wurde erfolgreich gelöscht");
 					return true;
@@ -304,7 +294,6 @@ public class ServiceTimetable {
 					tt = new Timetable();
 					tt.setName(ttName);
 					tt.setTimeprofile(tp);
-					account.timetables.add(tt);
 					timetableDao.create(tt);
 					System.out.println("Stundenplan erfolgreich erstellt");
 					return true;
@@ -362,7 +351,6 @@ public class ServiceTimetable {
 		if (account != null){
 			if (account.getPassword().equals(password)){
 				if (tt != null){
-					account.timetables.remove(tt);
 					timetableDao.deleteById(ttName);
 					System.out.println("Stundenplan erfolgreich gelöscht");
 					return true;
@@ -401,7 +389,6 @@ public class ServiceTimetable {
 			course.setRoom(room);
 			course.setShortname(shortname);
 			course.setTeacher(teacher);
-			ObjectRepo.getInstance().courses.add(course);
 			courseDao.create(course);
 			System.out.println("Kurs erfolgreich erzeugt");
 			return true;
@@ -431,7 +418,6 @@ public class ServiceTimetable {
 				comment.setAuthor(account.getUsername());
 				comment.setComment(c);
 				comment.setCourseName(courseName);
-				course.addComment(comment);
 				commentDao.create(comment);
 				System.out.println("Kommentar erfolgreich erzeugt");
 				return true;
@@ -464,7 +450,6 @@ public class ServiceTimetable {
 			if (account.getPassword().equals(password)){
 				if (c != null){
 					if (c.getAuthor().equals(account.getUsername())){
-						course.removeComment(c);
 						commentDao.deleteById(account.getUsername()+courseName+comment);
 						System.out.println("Kommentar erfolgreich gelöscht");
 						return true;
@@ -514,7 +499,6 @@ public class ServiceTimetable {
 					vc.setCourse(course);
 					vc.setDay(day);
 					vc.setHour(tt.getTimeprofile().getHourByIndex(hourIndex, hourDao.queryForAll()));
-					tt.addVisitedCourse(vc);
 					visitedCourseDao.create(vc);
 					System.out.println("Besuchter Kurs erfolgreich erstellt");
 					return true;
@@ -549,7 +533,6 @@ public class ServiceTimetable {
 		if (account != null){
 			if (account.getPassword().equals(password)){
 				if (vs != null && tt != null){
-					tt.removeVisitedCourse(vs);
 					visitedCourseDao.deleteById(courseName);
 					System.out.println("Kurs erfolgreich gelöscht");
 					return true;

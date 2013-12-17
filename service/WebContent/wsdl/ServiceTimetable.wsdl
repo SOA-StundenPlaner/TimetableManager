@@ -21,22 +21,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="createAccount">
-    <complexType>
-     <sequence>
-      <element name="username" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="email" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createAccountResponse">
-    <complexType>
-     <sequence>
-      <element name="createAccountReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
    <element name="editAccount">
     <complexType>
      <sequence>
@@ -50,88 +34,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="editAccountReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeAccount">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeAccountResponse">
-    <complexType>
-     <sequence>
-      <element name="removeAccountReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createTimeprofile">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="tpName" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createTimeprofileResponse">
-    <complexType>
-     <sequence>
-      <element name="createTimeprofileReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editTimeprofile">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="tpName" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editTimeprofileResponse">
-    <complexType>
-     <sequence>
-      <element name="editTimeprofileReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeTimeprofile">
-    <complexType>
-     <sequence>
-      <element name="timeprofile" type="xsd:string"/>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeTimeprofileResponse">
-    <complexType>
-     <sequence>
-      <element name="removeTimeprofileReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createHour">
-    <complexType>
-     <sequence>
-      <element name="start" type="xsd:string"/>
-      <element name="end" type="xsd:string"/>
-      <element name="tpName" type="xsd:string"/>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="hourIndex" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createHourResponse">
-    <complexType>
-     <sequence>
-      <element name="createHourReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -257,6 +159,104 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="createAccount">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="createAccountReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeAccount">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="removeAccountReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="tpName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimeprofileReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="tpName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="editTimeprofileReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="timeprofile" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="removeTimeprofileReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createHour">
+    <complexType>
+     <sequence>
+      <element name="start" type="xsd:string"/>
+      <element name="end" type="xsd:string"/>
+      <element name="tpName" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="hourIndex" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createHourResponse">
+    <complexType>
+     <sequence>
+      <element name="createHourReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
   </schema>
  </wsdl:types>
 
@@ -284,17 +284,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="editAccountRequest">
+   <wsdl:message name="removeTimeprofileRequest">
 
-      <wsdl:part element="impl:editAccount" name="parameters">
+      <wsdl:part element="impl:removeTimeprofile" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="removeTimeprofileRequest">
+   <wsdl:message name="editAccountRequest">
 
-      <wsdl:part element="impl:removeTimeprofile" name="parameters">
+      <wsdl:part element="impl:editAccount" name="parameters">
 
       </wsdl:part>
 
@@ -308,14 +308,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createVisitedCourseResponse">
-
-      <wsdl:part element="impl:createVisitedCourseResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="removeCommentResponse">
 
       <wsdl:part element="impl:removeCommentResponse" name="parameters">
@@ -324,9 +316,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="removeVisitedCourseResponse">
+   <wsdl:message name="createVisitedCourseResponse">
 
-      <wsdl:part element="impl:removeVisitedCourseResponse" name="parameters">
+      <wsdl:part element="impl:createVisitedCourseResponse" name="parameters">
 
       </wsdl:part>
 
@@ -340,17 +332,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createVisitedCourseRequest">
+   <wsdl:message name="removeVisitedCourseResponse">
 
-      <wsdl:part element="impl:createVisitedCourse" name="parameters">
+      <wsdl:part element="impl:removeVisitedCourseResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="createTimetableResponse">
+   <wsdl:message name="createVisitedCourseRequest">
 
-      <wsdl:part element="impl:createTimetableResponse" name="parameters">
+      <wsdl:part element="impl:createVisitedCourse" name="parameters">
 
       </wsdl:part>
 
@@ -364,9 +356,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createTimetableRequest">
+   <wsdl:message name="createTimetableResponse">
 
-      <wsdl:part element="impl:createTimetable" name="parameters">
+      <wsdl:part element="impl:createTimetableResponse" name="parameters">
 
       </wsdl:part>
 
@@ -375,6 +367,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="createCourseRequest">
 
       <wsdl:part element="impl:createCourse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimetableRequest">
+
+      <wsdl:part element="impl:createTimetable" name="parameters">
 
       </wsdl:part>
 
@@ -404,17 +404,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createTimeprofileRequest">
+   <wsdl:message name="createCommentResponse">
 
-      <wsdl:part element="impl:createTimeprofile" name="parameters">
+      <wsdl:part element="impl:createCommentResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="createCommentResponse">
+   <wsdl:message name="createTimeprofileRequest">
 
-      <wsdl:part element="impl:createCommentResponse" name="parameters">
+      <wsdl:part element="impl:createTimeprofile" name="parameters">
 
       </wsdl:part>
 
@@ -428,17 +428,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="removeAccountRequest">
+   <wsdl:message name="createHourResponse">
 
-      <wsdl:part element="impl:removeAccount" name="parameters">
+      <wsdl:part element="impl:createHourResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="createHourResponse">
+   <wsdl:message name="removeAccountRequest">
 
-      <wsdl:part element="impl:createHourResponse" name="parameters">
+      <wsdl:part element="impl:removeAccount" name="parameters">
 
       </wsdl:part>
 
@@ -452,17 +452,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createTimeprofileResponse">
+   <wsdl:message name="createCourseResponse">
 
-      <wsdl:part element="impl:createTimeprofileResponse" name="parameters">
+      <wsdl:part element="impl:createCourseResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="createCourseResponse">
+   <wsdl:message name="createTimeprofileResponse">
 
-      <wsdl:part element="impl:createCourseResponse" name="parameters">
+      <wsdl:part element="impl:createTimeprofileResponse" name="parameters">
 
       </wsdl:part>
 
@@ -514,18 +514,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createAccount">
-
-         <wsdl:input message="impl:createAccountRequest" name="createAccountRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createAccountResponse" name="createAccountResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="editAccount">
 
          <wsdl:input message="impl:editAccountRequest" name="editAccountRequest">
@@ -533,66 +521,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:editAccountResponse" name="editAccountResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="removeAccount">
-
-         <wsdl:input message="impl:removeAccountRequest" name="removeAccountRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:removeAccountResponse" name="removeAccountResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createTimeprofile">
-
-         <wsdl:input message="impl:createTimeprofileRequest" name="createTimeprofileRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createTimeprofileResponse" name="createTimeprofileResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="editTimeprofile">
-
-         <wsdl:input message="impl:editTimeprofileRequest" name="editTimeprofileRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:editTimeprofileResponse" name="editTimeprofileResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="removeTimeprofile">
-
-         <wsdl:input message="impl:removeTimeprofileRequest" name="removeTimeprofileRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:removeTimeprofileResponse" name="removeTimeprofileResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createHour">
-
-         <wsdl:input message="impl:createHourRequest" name="createHourRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createHourResponse" name="createHourResponse">
 
        </wsdl:output>
 
@@ -682,6 +610,78 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="createAccount">
+
+         <wsdl:input message="impl:createAccountRequest" name="createAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createAccountResponse" name="createAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeAccount">
+
+         <wsdl:input message="impl:removeAccountRequest" name="removeAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeAccountResponse" name="removeAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdl:input message="impl:createTimeprofileRequest" name="createTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimeprofileResponse" name="createTimeprofileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editTimeprofile">
+
+         <wsdl:input message="impl:editTimeprofileRequest" name="editTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editTimeprofileResponse" name="editTimeprofileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTimeprofile">
+
+         <wsdl:input message="impl:removeTimeprofileRequest" name="removeTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeTimeprofileResponse" name="removeTimeprofileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createHour">
+
+         <wsdl:input message="impl:createHourRequest" name="createHourRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createHourResponse" name="createHourResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="ServiceTimetableSoapBinding" type="impl:ServiceTimetable">
@@ -706,24 +706,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createAccount">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createAccountRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createAccountResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="editAccount">
 
          <wsdlsoap:operation soapAction=""/>
@@ -735,96 +717,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="editAccountResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="removeAccount">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="removeAccountRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="removeAccountResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createTimeprofile">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createTimeprofileRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createTimeprofileResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="editTimeprofile">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="editTimeprofileRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="editTimeprofileResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="removeTimeprofile">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="removeTimeprofileRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="removeTimeprofileResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createHour">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createHourRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createHourResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -951,6 +843,114 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="removeVisitedCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimeprofileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editTimeprofileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeTimeprofileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createHour">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createHourRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createHourResponse">
 
             <wsdlsoap:body use="literal"/>
 
