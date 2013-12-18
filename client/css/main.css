@@ -21,7 +21,7 @@ header{
 	font-weight: bold;
 	font-size: 18pt;
 	color: white;
-	margin-top: 10px;
+	margin-top: 20px;
 	z-index: 2;
 }
 
@@ -36,14 +36,14 @@ header{
 
 .wrapped {
 	position: relative;
-	width: 1150px;
-	left: 50%;
-	margin-left: -575px;
+	width: 100%;
+	/*left: 50%;
+	margin-left: -575px;*/
 	min-height: 600px;
 	height: auto !important;	
 	height: 100%;
-	background-color: #eee !important;
-	margin-bottom: 20px;
+	background-color: #EEEEEE !important;
+	/*margin-bottom: 20px;*/
 	margin-top: 25px;
 	margin-right: 0px;
 }
@@ -64,9 +64,10 @@ header{
 	height: 60px;
 	left: 0;
 	width: 100%;
-	background-color: #01939A;
+	/*background-color: #01939A;*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#01939A), to(rgba(75, 30, 0, 0))); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #01939A,  rgba(75, 30, 0, 0)); /* for firefox 3.6+ */
 	color: white;
-	margin-top: 10px;
 	z-index: 1;	
 }
 .menuul {
@@ -109,7 +110,9 @@ header{
 }
 
 .menupart:hover{
-	background-color: #5DCEC6; 
+	/*background-color: #5DCEC6; */
+	background: -webkit-gradient(linear, left top, left bottom, from(#5DCEC6), to(rgba(75, 30, 0, 0))); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #5DCEC6,  rgba(75, 30, 0, 0)); /* for firefox 3.6+ */
 }
 
 .left {
@@ -142,7 +145,9 @@ header{
 }
 /* colorshighlighting for each page */
 .menuactive {
-	background-color: #5DCEC6;
+	/*background-color: #5DCEC6;*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#5DCEC6), to(rgba(75, 30, 0, 0))); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #5DCEC6,  rgba(75, 30, 0, 0)); /* for firefox 3.6+ */
 }
 
 
@@ -371,6 +376,26 @@ header{
 	color: white;
 	font-style: italic;
 	text-decoration: none;
+}
+
+/* ########## notification ############## */
+#noti {
+	widht: 300px;
+	height: 50px;
+	position: fixed;
+	top: 0;
+	z-index: -1;
+	opacity: 0.0;
+	left: 50%;
+	margin-left: -100px;
+	background-color: #EEEEEE;
+	color: #01939A;
+	box-shadow: 2px 2px 2px #333;
+}
+
+#noti p {
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 

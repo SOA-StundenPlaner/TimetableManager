@@ -9,6 +9,7 @@ var _this = this;
 
 $(document).ready(
 		function() {
+			//register
 			$('.registerbutton').click(function(e){
 				var em = document.forms["formreg"].elements["email"].value;
 				var un = document.forms["formreg"].elements["username"].value;
@@ -20,16 +21,19 @@ $(document).ready(
 				}else if(pw != pw2){
 					console.log("Passwörter stimmen nicht überein.");
 				}else{
-										
+					window.localStorage.setItem("email", em);
+					window.localStorage.setItem("password", pw);
+					window.localStorage.setItem("username", un);
+					
 					var xmlhttp = new XMLHttpRequest();
-			        xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl', false);
+			        xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createAccount', false);
 
 			        // build SOAP request
 			        var xml = buildSOAPEnvelope('<q0:createAccount><q0:username>' + un + '</q0:username><q0:password>' + pw + '</q0:password><q0:email>' + em + '</q0:email></q0:createAccount>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
-			            url : "http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl",
+			            url : "http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createAccount",
 			            data : xml,
 			            contentType : "text/xml; charset=utf-8",
 			            dataType : "text xml",
@@ -42,7 +46,8 @@ $(document).ready(
 			            success : function (respxml) {
 			                //var respxml = msg.responseXML;
 			                //console.log("response: "+respxml);
-							var bool = respxml.firstChild.firstChild.firstChild.firstChild.innerHTML;
+							//var bool = respxml.firstChild.firstChild.firstChild.firstChild.innerHTML;
+			            	var bool = respxml.getElementsByTagName("createAccountReturn")[0].firstChild.nodeValue;
 							console.log("Erfolgreich registriert: "+bool);
 							_this.showPopup2(bool);		
 			            },
@@ -55,27 +60,113 @@ $(document).ready(
 				}
 			});
 			
-			/*$('.createtimetablebutton').click(function(e){
+			$('.createtimetablebutton').click(function(e){
 				var ttname = document.forms["formtimetable"].elements["ttname"].value;
 				var tpname = document.forms["formtimetable"].elements["tpname"].value;
-				var email = "test@test.de";
-				var pw = "asd";
-				timeprofilesoap(tpname, email, pw, e);
-				var courses = document.getElementsByClassName('course');
+				//var email = "test@test.de";
+				//var pw = "asd";
+				var email = window.localStorage.getItem("email");
+				var pw = window.localStorage.getItem("password");
+				
+				//timeprofilesoap(tpname, email, pw, e);
+				
+				var xmlhttp = new XMLHttpRequest();
+			    xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl', false);
+
+			    // build SOAP request
+			    var xml = buildSOAPEnvelope('<q0:createTimeprofile><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:tpName>' + tpname + '</q0:tpName></q0:createTimeprofile>', 'q0', 'http://service.tomcat.denevell.org');
+			   	var bool = false;
+			   	var courses = document.getElementsByClassName('course');
 				var courses2 = document.getElementsByClassName('course1');
-				for(var i = 0; i < courses.length; i ++){
+			    jQuery.support.cors = true;
+			    jQuery.ajax({
+			        type : "POST",
+			        url : "http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl",
+			        data : xml,
+			        contentType : "text/xml; charset=utf-8",
+			        dataType : "text xml",
+			        cache: false,
+			        callback: showPopup22(),
+			        beforeSend: function (xmlhttp) {
+			        	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+			            xmlhttp.setRequestHeader('SOAPAction', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createTimeprofile');
+
+			        },
+			        success : function (respxml) {
+						bool = respxml.firstChild.firstChild.firstChild.firstChild.innerHTML;
+						console.log("timeprofile erstellt: "+bool);
+						for(var i = 0; i < courses.length; i ++){
+							var start = courses[i].value;
+							var end = courses2[i].value;
+							var index = i+1;
+							coursesoap(start, end, tpname, ttname, email, pw, index, e, i, courses.length);
+						}
+						//return;
+						//_this.showPopup2(bool);		
+			        },
+			        error : function (xhr, status, errorThrown) {
+			            console.log("error: "+errorThrown);
+			        }
+			    });			    
+			    
+			    e.preventDefault();
+				return false;
+				
+				/*for(var i = 0; i < courses.length; i ++){
 					var start = courses[i].value;
 					var end = courses2[i].value;
 					var index = i+1;
 					coursesoap(start, end, tpname, email, pw, index, e);
 				}
 				timetablesoap(email, pw, ttname, tpname, e);
-				showPopup22(this.timebool);
-				e.preventDefault();
-				return false;
-			});*/
-		});
+				showPopup22(this.timebool);*/
+				//e.preventDefault();
+				//return false;
+			});
+			$("#createCourseButton").click(function(e){
+				var name = document.forms["createCourseForm"].elements["coursename"].value;
+				var shortname = document.forms["createCourseForm"].elements["courseshortname"].value;
+				var teacher = document.forms["createCourseForm"].elements["courseteacher"].value;
+				var descr = document.forms["createCourseForm"].elements["coursedescr"].value;
+				var room = document.forms["createCourseForm"].elements["courseroom"].value;
+				
+				if(name == "" || name == null || shortname == "" || shortname == null || teacher == "" || teacher == null || descr == "" || descr == null || room == "" || room == null){
+					console.log("Alle Textfelder m&uuml;ssen zum Registrieren ausgefüllt werden.");
+					//popup mit Fehlermeldung
+				}else{					
+					var xmlhttp = new XMLHttpRequest();
+			        xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createCourse', false);
 
+			        // build SOAP request
+			        var xml = buildSOAPEnvelope('<q0:createCourse><q0:name>' + name + '</q0:name><q0:shortname>' + shortname + '</q0:shortname><q0:teacher>' + teacher + '</q0:teacher><q0:description>' + descr + '</q0:description><q0:room>' + room + '</q0:room></q0:createCourse>', 'q0', 'http://service.tomcat.denevell.org');
+			        jQuery.support.cors = true;
+			        jQuery.ajax({
+			            type : "POST",
+			            url : "http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createCourse",
+			            data : xml,
+			            contentType : "text/xml; charset=utf-8",
+			            dataType : "text xml",
+			            cache: false,
+			            beforeSend: function (xmlhttp) {
+			            	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+			                xmlhttp.setRequestHeader('SOAPAction', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createCourse');
+			            },
+			            success : function (respxml) {
+			            	var bool = respxml.getElementsByTagName("createCourseReturn")[0].firstChild.nodeValue;
+							console.log("Kurs erfolgreich erstellt: "+bool);
+							//_this.showPopup2(bool);	
+							//window.location.href = 'http://localhost:8080/timetableClient/index.html';
+							_this.showNotification("Kurs "+name+" erstellt.");
+			            },
+			            error : function (xhr, status, errorThrown) {
+			                console.log("error: "+errorThrown);
+			            }
+			        });
+			        e.preventDefault();
+			        return false;
+				}
+			});
+		});
 
 function showAddCourse(){
 	var selektiert = document.forms["formtt"].elements["timetables"].selectedIndex;
@@ -115,7 +206,7 @@ function closePopup2() {
 	$('#popup').empty();
 	window.location.href = 'http://localhost:8080/timetableClient/index.html';
 };
-function closePopup22() {
+function closePopup21() {
 	//$("#popup").css('opacity', '0.0');
 	$("#popup").animate({opacity: 0.0});	
 	$("#popup").css('pointer-events', 'none');
@@ -162,53 +253,14 @@ function addComment(){
 	$('#comments').append('</p></div>');
 }
 
-
-function register () {
-	var em = document.forms["formreg"].elements["email"].value;
-	var un = document.forms["formreg"].elements["username"].value;
-	var pw = document.forms["formreg"].elements["pw"].value;
-	var pw2 = document.forms["formreg"].elements["pw2"].value;
-	
-	if(un == "" || un == null || pw == "" || pw == null || pw2 == "" || pw2 == null || em == "" || em == null){
-		console.log("Alle Textfelder m&uuml;ssen zum Registrieren ausgef&uuml;llt werden.");
-	}else if(pw != pw2){
-		console.log("Passw&ouml;rter stimmen nicht &uuml;berein.");
-	}else{
-		
-		var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl', false);
-
-        // build SOAP request
-        var xml = buildSOAPEnvelope('<q0:createAccount><q0:username>' + un + '</q0:username><q0:password>' + pw + '</q0:password><q0:email>' + em + '</q0:email></q0:createAccount>', 'q0', 'http://service.tomcat.denevell.org');
-        jQuery.support.cors = true;
-        jQuery.ajax({
-            type : "POST",
-            url : "http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl",
-            data : xml,
-            contentType : "text/xml; charset=utf-8",
-            dataType : "text xml",
-            cache: false,
-            beforeSend: function (xmlhttp) {
-            	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
-                xmlhttp.setRequestHeader('SOAPAction', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createAccount');
-
-            },
-            success : function (msg) {
-                console.log("success"+msg);
-                var respxml = msg.responseXML;
-                console.log("response: "+respxml);
-				var bool = respxml.firstChild.firstChild.firstChild.firstChild.innerHTML;
-				_this.showPopup2(bool);		
-            },
-            error : function (xhr, status, errorThrown) {
-                console.log("error: "+errorThrown);
-            }
-        });
-        return false;
-        
-	}	
-	
+function showNotification(infotext){
+	$('#noti').append('<p>'+infotext+'</p>');
+	$("#noti").animate({opacity: 1});
+	$("#noti").css('z-index', '3');
+	$("#noti").css('pointer-events', 'auto');
+	$("#noti").animate({opacity: 1.0}, 10000).fadeOut('slow');
 }
+
 
 function showPopup2(bool){
 
@@ -230,7 +282,7 @@ function showPopup2(bool){
 				$('#popup2').append('</p>');
 				$('#popup2').append('<p>Bitte versuche es erneut.</p>');
 				$('#popup2').append('</br>');
-				$('#popup2').append('<button class="close2" onClick="closePopup22();">OK</button>');	
+				$('#popup2').append('<button class="close2" onClick="closePopup21();">OK</button>');	
 				$("#popup2").animate({opacity: 1});
 				$("#popup2").css('z-index', '3');
 				$("#popup2").css('pointer-events', 'auto');
@@ -239,7 +291,9 @@ function showPopup2(bool){
 	
 }
 
-function showPopup22(bool){
+function showPopup22(){
+	console.log("check "+this.timebool);
+	var bool = this.timebool;
 	$(document).ready(function(){
 		if(bool){
 			$('#popup2').append('<p class="detailsheadingpopup">Erfolg!</p>');
@@ -265,33 +319,15 @@ function showPopup22(bool){
 
 }
 
-function createTimetable (){
-	var ttname = document.forms["formtimetable"].elements["ttname"].value;
-	var tpname = document.forms["formtimetable"].elements["tpname"].value;
-	var email = "test@test.de";
-	var pw = "asd";
-	this.timeprofilesoap(tpname, email, pw);
-	var courses = document.getElementsByClassName('course');
-	var courses2 = document.getElementsByClassName('course1');
-	for(var i = 0; i < courses.length; i ++){
-		var start = courses[i].value;
-		var end = courses2[i].value;
-		var index = i+1;
-		this.coursesoap(start, end, tpname, email, pw, index);
-	}
-	var bool = this.timetablesoap(email, pw, ttname, tpname);
-	this.showPopup22(bool);
-	
-}
 
 function timetablesoap(email, pw, ttname, tpname, e){
 	var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createTimetable', false);
+    xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl', false);
 
     // build SOAP request
     var xml = buildSOAPEnvelope('<q0:createTimetable><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:ttName>' + ttname + '</q0:ttName><q0:tpName>' + tpname + '</q0:tpName></q0:createTimetable>', 'q0', 'http://service.tomcat.denevell.org');
    	
-    /*jQuery.support.cors = true;
+    jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
         url : "http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl",
@@ -305,19 +341,39 @@ function timetablesoap(email, pw, ttname, tpname, e){
 
         },
         success : function (respxml) {
-			this.timebool = respxml.firstChild.firstChild.firstChild.firstChild.innerHTML;
-			console.log("timetable erstellt: "+this.timebool);
-			
-			//_this.showPopup2(bool);		
+			var bool = respxml.firstChild.firstChild.firstChild.firstChild.innerHTML;
+			console.log("timetable erstellt: "+ bool);
+			//showPopup22();	
+				if(bool){
+					$('#popup2').append('<p class="detailsheadingpopup">Erfolg!</p>');
+					$('#popup2').append('<p>Stundenplan wurde erfolgreich erstellt.');
+					$('#popup2').append('</p>');
+					$('#popup2').append('</br>');
+					$('#popup2').append('<button class="close2" onClick="closePopup2();">OK</button>');	
+					$("#popup2").animate({opacity: 1});
+					$("#popup2").css('z-index', '3');
+					$("#popup2").css('pointer-events', 'auto');
+				}else{
+					$('#popup2').append('<p class="detailsheadingpopup">Fehler!</p>');
+					$('#popup2').append('<p>Ein Fehler ist aufgetreten.');
+					$('#popup2').append('</p>');
+					$('#popup2').append('<p>&Uuml;berpr&uuml;fe bitte deine Angaben.</p>');
+					$('#popup2').append('</br>');
+					$('#popup2').append('<button class="close2" onClick="closePopup3();">OK</button>');	
+					$("#popup2").animate({opacity: 1});
+					$("#popup2").css('z-index', '3');
+					$("#popup2").css('pointer-events', 'auto');
+				}
+		
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
         }
     });
-    e.preventDefault();*/
-    //return false;
+    e.preventDefault();
+    return false;
     
-	xmlhttp.onreadystatechange = function () {
+	/*xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4) {
             if (xmlhttp.status == 200) {
             	var respxml = xmlhttp.responseXML;                	
@@ -339,17 +395,17 @@ function timetablesoap(email, pw, ttname, tpname, e){
     // Send the POST request
     xmlhttp.setRequestHeader('Content-Type', 'text/xml');
     xmlhttp.setRequestHeader('SOAPAction', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createTimetable');
-    xmlhttp.send(xml);
+    xmlhttp.send(xml);*/
 }
 
-function coursesoap(start, end, tpname, email, pw, index, e){
+function coursesoap(start, end, tpname, ttname, email, pw, index, e, i, length){
 	var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createHour', false);
+    xmlhttp.open('POST', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl', false);
 
     // build SOAP request
     var xml = buildSOAPEnvelope('<q0:createHour><q0:start>' + start + '</q0:start><q0:end>' + end + '</q0:end><q0:tpName>' + tpname + '</q0:tpName><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:hourIndex>' + index + '</q0:hourIndex></q0:createHour>', 'q0', 'http://service.tomcat.denevell.org');
    	
-    /*jQuery.support.cors = true;
+    jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
         url : "http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl",
@@ -365,6 +421,9 @@ function coursesoap(start, end, tpname, email, pw, index, e){
         success : function (respxml) {
 			var bool = respxml.firstChild.firstChild.firstChild.firstChild.innerHTML;
 			console.log("course ertsellt: "+bool);
+			if(i == length-1){
+				timetablesoap(email, pw, ttname, tpname, e);
+			}
 			//_this.showPopup2(bool);		
 			//return bool;
         },
@@ -372,9 +431,10 @@ function coursesoap(start, end, tpname, email, pw, index, e){
             console.log("error: "+errorThrown);
         }
     });
-    e.preventDefault();*/
-    //return false;
-	xmlhttp.onreadystatechange = function () {
+    e.preventDefault();
+    return false;
+    
+	/*xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4) {
             if (xmlhttp.status == 200) {
             	var respxml = xmlhttp.responseXML;                	
@@ -395,7 +455,7 @@ function coursesoap(start, end, tpname, email, pw, index, e){
     // Send the POST request
     xmlhttp.setRequestHeader('Content-Type', 'text/xml');
     xmlhttp.setRequestHeader('SOAPAction', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createHour');
-    xmlhttp.send(xml);
+    xmlhttp.send(xml);*/
 }
 
 function timeprofilesoap(tpname, email, pw, e){
@@ -404,7 +464,7 @@ function timeprofilesoap(tpname, email, pw, e){
 
     // build SOAP request
     var xml = buildSOAPEnvelope('<q0:createTimeprofile><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:tpName>' + tpname + '</q0:tpName></q0:createTimeprofile>', 'q0', 'http://service.tomcat.denevell.org');
-   	/*var bool = false;
+   	var bool = false;
     jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
@@ -428,10 +488,10 @@ function timeprofilesoap(tpname, email, pw, e){
             console.log("error: "+errorThrown);
         }
     });
-    e.preventDefault();*/
-    //return bool;
+    e.preventDefault();
+    return bool;
     
-	xmlhttp.onreadystatechange = function () {
+	/*xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4) {
             if (xmlhttp.status == 200) {
             	var respxml = xmlhttp.responseXML;                	
@@ -452,7 +512,7 @@ function timeprofilesoap(tpname, email, pw, e){
     // Send the POST request
     xmlhttp.setRequestHeader('Content-Type', 'text/xml');
     xmlhttp.setRequestHeader('SOAPAction', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createTimeprofile');
-    xmlhttp.send(xml);
+    xmlhttp.send(xml);*/
 }
 
 //###################### soap functions ##########################
