@@ -9,6 +9,14 @@ var _this = this;
 
 $(document).ready(
 		function() {
+			/*$('#test').mouseover(function(t){		
+				$('#test').append('<div class="hoverdiv"><a href="details.html"><img src="img/eye.png" alt="seeDetails" class="hoverbild"></a><a href="#"><img src="img/trash_can.png" alt="delete" class="hoverbild"></a></div>')
+				$('.hoverdiv').css("visibility", "visible");
+			});
+			$('#test').mouseout(function(t){
+				$('.hoverdiv').css("visibility", "hidden");
+				$('.hoverdiv').remove();
+			});*/
 			//register
 			$('.registerbutton').click(function(e){
 				var em = document.forms["formreg"].elements["email"].value;
@@ -204,7 +212,7 @@ function closePopup2() {
 	$("#popup").css('pointer-events', 'none');
 	$("#popup").css('z-index', '-1');
 	$('#popup').empty();
-	window.location.href = 'http://localhost:8080/timetableClient/index.html';
+	window.location.href = './index.html';
 };
 function closePopup21() {
 	//$("#popup").css('opacity', '0.0');
@@ -212,7 +220,7 @@ function closePopup21() {
 	$("#popup").css('pointer-events', 'none');
 	$("#popup").css('z-index', '-1');
 	$('#popup').empty();
-	window.location.href = 'http://localhost:8080/timetableClient/register.html';
+	window.location.href = './register.html';
 };
 
 function closePopup22() {
@@ -221,12 +229,12 @@ function closePopup22() {
 	$("#popup").css('pointer-events', 'none');
 	$("#popup").css('z-index', '-1');
 	$('#popup').empty();
-	window.location.href = 'http://localhost:8080/timetableClient/createTimetable.html';
+	window.location.href = './createTimetable.html';
 };
 
 
 function addCourse(){
-	$('#courseadding').append('<li><label>Kurszeit '+i+': </label><input class="course" type="text" name="course'+i+'" value="HH:MM"><input class="course1" type="text" name="course'+i+'1" value="HH:MM"></li>');
+	$('#courseadding').append('<li><label class="formlabel">Kurszeit '+i+': </label><input class="course" type="text" name="course'+i+'" value="HH:MM"><input class="course1" type="text" name="course'+i+'1" value="HH:MM"></li>');
 	//var currentheight = h+26;
 	//console.log(currentheight);
 	//$('.wrapped').css("min-height", currentheight+"px");
@@ -251,6 +259,18 @@ function addComment(){
 	$('#comments').append('</span></p><p>');
 	$('#comments').append(text);
 	$('#comments').append('</p></div>');
+}
+
+function openAccountForm() {
+	var username = document.getElementById("accountusername").innerHTML;
+	var email = document.getElementById("accountemail");
+	$('#usernameaccount').val(username);
+	window.location.href = './changeAccount.html';
+	
+}
+
+function editAccount() {
+	window.location.href = './account.html';
 }
 
 function showNotification(infotext){

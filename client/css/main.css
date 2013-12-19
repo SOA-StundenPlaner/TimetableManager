@@ -252,6 +252,7 @@ header{
 	font-family: Roboto;
 	font-size: 18pt;
 	color: #01939A;
+	float: left;
 }
 
 .detailsheading2 {
@@ -434,6 +435,39 @@ header{
 	color: #666;
 	font-size: 12pt;
 }
+
+/* ############### account ############### */
+
+.formlabel {
+	width: 120px;
+	color:#666666;
+	float:left;
+}
+
+.changebild {
+	margin-top: -20px;
+	margin-left: 15px;
+	height: 10%;
+	width: 10%;
+	cursor: pointer;
+}
+
+.radio {
+	margin-right: 25px;
+}
+
+/*hoverdiv */
+.hoverdiv {
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+	margin-top: -40px;
+}
+
+.hoverbild {
+	width: 35%;
+}
+
 
 /* clear */
 .clear {

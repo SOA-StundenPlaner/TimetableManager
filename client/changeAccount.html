@@ -27,18 +27,21 @@
 			<div class="wrapper">
 				<section class="detailsabove">
 					<div class="details-right">
-						<p><span class="detailsheading">Dein Account</span><img src="img/pencil.png" alt="change" class="changebild" onclick="openAccountForm();"></p>
-						<div class="clear"></div>						
-						<ul class="create">
-							<li><label class="formlabel">Name:</label><p id="accountusername">Emil</p></li>
-							<!--<li><label class="formlabel">Institution:</label><p id="accountinst"></p></li>-->
-							<!--<li><label class="formlabel">Studiengang:</label><p id=""></p></li>-->
-							<li><label class="formlabel">E-Mail:</label><p id="accountemail">test@test.de</p></li>
-							<!--<li><label class="formlabel">Skype:</label><p></p></li>
-							<li><label class="formlabel">ICQ:</label><p></p></li>-->
-							</br>
-							<li><label>Als Teilnehmer in Kursen angezeigen lassen?</label><label>Ja</label><input name="showasmember" type="radio" value="yes" checked="checked" class="radio"><label>Nein</label><input name="showasmember" type="radio" value="no"></li>
-						</ul>					
+						<p><span class="detailsheading">Account-Daten &auml;ndern</span></p>
+						<div class="clear"></div>		
+						<form name="changeaccount">				
+							<ul class="create">
+								<li><label class="formlabel">Name:</label><input type="text" id="usernameaccount"></li>
+								<!--<li><label class="formlabel">Institution:</label><p id="accountinst"></p></li>-->
+								<!--<li><label class="formlabel">Studiengang:</label><p id=""></p></li>-->
+								<li><label class="formlabel">E-Mail:</label><input type="text" id="emailaccount"></li>
+								<!--<li><label class="formlabel">Skype:</label><p></p></li>
+								<li><label class="formlabel">ICQ:</label><p></p></li>-->
+								</br>
+								<li><input type="submit" value="Ok" onclick="editAccount();"></li>
+								
+							</ul>		
+						</form>			
 					</div>	
 					<div class="details-left">
 						
