@@ -25,6 +25,11 @@ header{
 	z-index: 2;
 }
 
+.head a {
+	text-decoration: none;
+	color: white;
+}
+
 .bluegreen{
 	font-weight: lighter;
 	color: #5DCEC6;
@@ -44,7 +49,7 @@ header{
 	height: 100%;
 	background-color: #EEEEEE !important;
 	/*margin-bottom: 20px;*/
-	margin-top: 25px;
+	margin-top: 8px;
 	margin-right: 0px;
 }
 
@@ -138,6 +143,7 @@ header{
 	position: relative;
 	top: -4px;
 	height: 24px;
+	cursor: pointer;
 }
 
 .highlight {
@@ -252,7 +258,6 @@ header{
 	font-family: Roboto;
 	font-size: 18pt;
 	color: #01939A;
-	float: left;
 }
 
 .detailsheading2 {
@@ -280,12 +285,50 @@ header{
 	text-decoration: none;
 }
 
+.deletecomment{
+	height: 60px;
+	margin-top: -20px;
+	clear: both;
+	cursor: pointer;
+}
+
+.commenthead {
+	margin-bottom: -20px;
+}
+
+.bluegreencomment{
+	font-weight: lighter;
+	color: #5DCEC6;
+}
+
 #writecomment{
 	visibility: hidden;
 }
 
-.comwrap {
 
+/* pictos for courses in the table*/
+.showdetails {
+	float: left;
+	height: 60px;
+	margin-top: -18px;
+	margin-bottom: -20px;
+	opacity: 0.5;
+}
+
+.deletecourse {
+	height: 60px;
+	margin-top: -18px;
+	margin-bottom: -20px;
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+.showdetails:hover{
+	opacity: 1;
+}
+
+.deletecourse:hover{
+	opacity: 1;
 }
 
 /* ########## create ############## */
@@ -299,6 +342,20 @@ header{
 }
 
 /* ########## popup ############## */
+
+.overlay {
+ 	position:absolute;
+	display:none; 
+
+    /* color with alpha transparency */
+    background-color: rgba(0, 0, 0, 0.7);
+
+    /* stretch to screen edges */
+    top: 0;
+	left: 0;
+    bottom: 0;
+    right: 0;
+}
 
 #popup {
 	/*-webkit-transition: all 1s;
@@ -379,6 +436,30 @@ header{
 	text-decoration: none;
 }
 
+.help {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -300px;
+	margin-left: -350px;
+	width: 700px;
+	height: 540px;
+	opacity: 0.0;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #333;
+	padding: 16px;
+	z-index: -1;
+	background-color: #666;
+	color: white;
+	pointer-events: none;
+	box-shadow: 2px 2px 2px #333;
+}
+
+.subheading {
+	color: #5DCEC6;
+}
+
 /* ########## notification ############## */
 #noti {
 	widht: 300px;
@@ -454,6 +535,17 @@ header{
 
 .radio {
 	margin-right: 25px;
+}
+
+.detailsheadingAccount {
+	float: left;
+	font-family: Roboto;
+	font-size: 18pt;
+	color: #01939A;
+}
+
+#changeShowMemberButton {
+	margin-left: 30px;
 }
 
 /*hoverdiv */

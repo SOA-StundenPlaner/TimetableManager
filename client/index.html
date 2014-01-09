@@ -9,7 +9,7 @@
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 </head><body>	
 	<header>
-		<div class="head">Stunden<span class="bluegreen">Planer</span></div>
+		<div class="head"><a href="index.html">Stunden<span class="bluegreen">Planer</span></a></div>
 		<div class="menu">
 			<div class="menuul">
 				<ul>
@@ -17,7 +17,7 @@
 					<li class="menupart mid"><a href="createTimetable.html">Neuer Stundenplan</a></li>
 					<li class="menupart mid"><a href="createCourse.html">Neuer Kurs</a></li>
 					<li class="menupart mid"><a href="account.html">Account</a></li>
-					<li class="menupart right"><a href="#"><img src="img/fragezeichen.png" alt="fragezeichen" class="rightbild"></a></li>
+					<li class="menupart right"><img src="img/fragezeichen.png" alt="fragezeichen" class="rightbild" onclick="showHelp();"></li>
 				</ul>
 			</div>
 		</div>
@@ -26,6 +26,7 @@
 		<div class="wrapped">			
 			<div class="wrapper">
 				<span class="detailsheading">Dein Stundenplan</span>
+				</br>
 				</br>
 				<div class="caption">
 					<span class="heading">Stundenplan: Teststundenplan</span>
@@ -59,7 +60,7 @@
 					</tr>
 					<tr class="row">
 						<td class="kasten first">9:20 - 10:50</td>
-						<td class="kasten" id="test"><a href="details.html"><span class="light">E-Learning</span> </br>E272</a></td>
+						<td class="kasten" id="test"><span class="light">E-Learning</span> </br>E272</br><a href="details.html"><img src="img/eye.png" alt="view" class="showdetails"></a><img src="img/trash_can.png" alt="delete" class="deletecourse" onclick="deleteCourse(id);"></td>
 						<td class="kasten"></td>
 						<td class="kasten"></td>
 						<td class="kasten"></td>
@@ -74,6 +75,8 @@
 		</div>
 	
 	<div id="noti"></div>
+	<div class="overlay"></div>
+	<div class="help"></div>
 	<div id="popup"></div>
 	<script type="text/javascript">
 	var jetzt = new Date();

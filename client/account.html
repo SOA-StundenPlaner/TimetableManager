@@ -9,7 +9,7 @@
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 </head><body>
 	<header>
-		<div class="head">Stunden<span class="bluegreen">Planer</span></div>
+		<div class="head"><a href="index.html">Stunden<span class="bluegreen">Planer</span></a></div>
 		<div class="menu">
 			<div class="menuul">
 				<ul>
@@ -17,7 +17,7 @@
 					<li class="menupart mid"><a href="createTimetable.html">Neuer Stundenplan</a></li>
 					<li class="menupart mid"><a href="createCourse.html">Neuer Kurs</a></li>
 					<li class="menupart mid menuactive"><a href="account.html">Account</a></li>
-					<li class="menupart right"><a href="#"><img src="img/fragezeichen.png" alt="fragezeichen" class="rightbild"></a></li>
+					<li class="menupart right"><a href="#"><img src="img/fragezeichen.png" alt="fragezeichen" class="rightbild" onclick="showHelp();"></a></li>
 				</ul>
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 			<div class="wrapper">
 				<section class="detailsabove">
 					<div class="details-right">
-						<p><span class="detailsheading">Dein Account</span><img src="img/pencil.png" alt="change" class="changebild" onclick="openAccountForm();"></p>
+						<p><span class="detailsheadingAccount">Dein Account</span><img src="img/pencil.png" alt="change" class="changebild" onclick="openAccountForm();"></p>
 						<div class="clear"></div>						
 						<ul class="create">
 							<li><label class="formlabel">Name:</label><p id="accountusername">Emil</p></li>
@@ -37,7 +37,12 @@
 							<!--<li><label class="formlabel">Skype:</label><p></p></li>
 							<li><label class="formlabel">ICQ:</label><p></p></li>-->
 							</br>
-							<li><label>Als Teilnehmer in Kursen angezeigen lassen?</label><label>Ja</label><input name="showasmember" type="radio" value="yes" checked="checked" class="radio"><label>Nein</label><input name="showasmember" type="radio" value="no"></li>
+							<li>
+								<label>Als Teilnehmer in Kursen angezeigen lassen?</label>
+								<label>Ja</label><input name="showasmember" type="radio" value="yes" checked="checked" class="radio">
+								<label>Nein</label><input name="showasmember" type="radio" value="no"> 
+								<button id="changeShowMemberButton">Speichern</button>
+							</li>
 						</ul>					
 					</div>	
 					<div class="details-left">
@@ -49,6 +54,8 @@
 			</div>
 		</div>
 	</section>
+	<div class="overlay"></div>
+	<div class="help"></div>
 	<div id="popup"></div>
 
 </body></html>

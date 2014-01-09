@@ -9,14 +9,15 @@ var _this = this;
 
 $(document).ready(
 		function() {
-			/*$('#test').mouseover(function(t){		
-				$('#test').append('<div class="hoverdiv"><a href="details.html"><img src="img/eye.png" alt="seeDetails" class="hoverbild"></a><a href="#"><img src="img/trash_can.png" alt="delete" class="hoverbild"></a></div>')
-				$('.hoverdiv').css("visibility", "visible");
+			$('.kasten').click(function(e){	
+				console.log("test");
+				//$('#test').append('<div class="hoverdiv"><a href="details.html"><img src="img/eye.png" alt="seeDetails" class="hoverbild"></a><a href="#"><img src="img/trash_can.png" alt="delete" class="hoverbild"></a></div>')
+				//$('.hoverdiv').css("visibility", "visible");
 			});
-			$('#test').mouseout(function(t){
+			$('.kasten').mouseout(function(t){
 				$('.hoverdiv').css("visibility", "hidden");
 				$('.hoverdiv').remove();
-			});*/
+			});
 			//register
 			$('.registerbutton').click(function(e){
 				var em = document.forms["formreg"].elements["email"].value;
@@ -180,6 +181,7 @@ function showAddCourse(){
 	var selektiert = document.forms["formtt"].elements["timetables"].selectedIndex;
 	var wert = document.forms["formtt"].elements["timetables"].options[selektiert].value;
 	var text = document.forms["formtt"].elements["timetables"].options[selektiert].text;
+	$(".overlay").fadeIn();
 	$('#popup').append('<p class="detailsheadingpopup">Kurs hinzuf&uuml;gen</p>');
 	//$('#popup').append('</br>');
 	$('#popup').append('<p>zum Stundenplan: '+text);
@@ -198,12 +200,37 @@ function showAddCourse(){
 	$("#popup").css('pointer-events', 'auto');
 }
 
+function showHelp(){
+	$(".overlay").fadeIn();
+	$('.help').append('<p class="detailsheadingpopup">Hilfe</p>');
+	$('.help').append('<p class="subheading">Kurs erstellen und Kurs hinzuf&uuml;gen');
+	$('.help').append('</p>');
+	$('.help').append('<p>Unter "Neuer Kurs" kann ein neuer Kurs angelegt werden. Dieser Kurs steht dann allen Nutzern der StundenPlaner-Plattform zur Verf&uuml;gung. Damit der Kurs dann auch in deinem Stundenplan erscheint, musst du auf die Seite gehen, die deinen Stundenplan anzeigt (Startseite) und "Kurs hinzuf&uuml;gen" klicken. In dem ge&ouml;ffneten Popup w&auml;hlst du nun den gerade erstellten Kurs aus.</p>');
+	$('.help').append('<p class="subheading">Account Informationen</p>');
+	$('.help').append('<p>Deine Account-Informationen kannst du unter "Account" einsehen. Um &Auml;nderungen an deinen Informationen vorzunehmen, klicke auf den Stift neben der &Uuml;berschrift. Auf der folgenden Seite gebe die Neuen Informationen ein und speichere sie ab. Die Einstellung, ob du anderen in einem Kurs als Teilnehmer angezeigt werden m&ouml;chtest, kannst die direkt auf der "Account"-Seite &auml;ndern.</p>');
+	$('.help').append('<p class="subheading">Kurs ansehen</p>');
+	$('.help').append('<p>Um die Informationen und Kommentare zu einem Kurs in deinem Stundenplan anzusehen, dr&uuml;cke auf das Auge, das erscheint, wenn du die Maus auf den Kurs in deinem Stundenplan bewegest.</p>');
+	$('.help').append('<button class="close" onClick="closeHelp()">Schlie&szlig;en</button>');
+	$(".help").animate({opacity: 1});
+	$(".help").css('z-index', '3');
+	$(".help").css('pointer-events', 'auto');
+}
+
 function closePopup() {
 	//$("#popup").css('opacity', '0.0');
 	$("#popup").animate({opacity: 0.0});	
 	$("#popup").css('pointer-events', 'none');
 	$("#popup").css('z-index', '-1');
 	$('#popup').empty();
+	$(".overlay").fadeOut();
+};
+
+function closeHelp() {
+	$(".help").animate({opacity: 0.0});	
+	$(".help").css('pointer-events', 'none');
+	$(".help").css('z-index', '-1');
+	$('.help').empty();
+	$(".overlay").fadeOut();
 };
 
 function closePopup2() {
@@ -534,6 +561,8 @@ function timeprofilesoap(tpname, email, pw, e){
     xmlhttp.setRequestHeader('SOAPAction', 'http://localhost:8080/StundenPlaner/services/ServiceTimetable?wsdl/createTimeprofile');
     xmlhttp.send(xml);*/
 }
+
+
 
 //###################### soap functions ##########################
 
