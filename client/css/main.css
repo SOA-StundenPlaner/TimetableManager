@@ -313,6 +313,7 @@ header{
 	margin-top: -18px;
 	margin-bottom: -20px;
 	opacity: 0.5;
+	cursor: pointer;
 }
 
 .deletecourse {
@@ -321,6 +322,7 @@ header{
 	margin-bottom: -20px;
 	cursor: pointer;
 	opacity: 0.5;
+	cursor: pointer;
 }
 
 .showdetails:hover{
@@ -366,7 +368,7 @@ header{
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-top: -200px;
+	margin-top: -175px;
 	margin-left: -350px;
 	height: 350px;
 	width: 700px;
@@ -389,7 +391,7 @@ header{
 
 .close {
 	position: relative;
-	margin-top: 85px;
+	margin-top: 80px;
 }
 
 #popup a {
@@ -398,6 +400,67 @@ header{
 	text-decoration: none;
 }
 
+#popupaddcourse {
+	/*-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	-ms-transition: all 1s;
+	transition: all 1s;*/
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -200px;
+	margin-left: -350px;
+	height: 350px;
+	width: 700px;
+	opacity: 0.0;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #333;
+	padding: 16px;
+	z-index: -1;
+	background-color: #666;
+	color: white;
+	pointer-events: none;
+	box-shadow: 2px 2px 2px #333;
+}
+
+#popupaddcourse a {
+	color: white;
+	font-style: italic;
+	text-decoration: none;
+}
+
+.popupklein {
+	/*-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	-ms-transition: all 1s;
+	transition: all 1s;*/
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -60px;
+	margin-left: -200px;
+	height: 185px;
+	width: 400px;
+	opacity: 0.0;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #333;
+	padding: 16px;
+	z-index: -1;
+	background-color: #666;
+	color: white;
+	pointer-events: none;
+	box-shadow: 2px 2px 2px #333;
+}
+
+.popupklein a {
+	color: white;
+	font-style: italic;
+	text-decoration: none;
+}
 
 #popup2 {
 	/*-webkit-transition: all 1s;
@@ -408,7 +471,7 @@ header{
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-top: -50px;
+	margin-top: -100px;
 	margin-left: -150px;
 	height: 200px;
 	width: 300px;
@@ -443,7 +506,7 @@ header{
 	margin-top: -300px;
 	margin-left: -350px;
 	width: 700px;
-	height: 540px;
+	height: 560px;
 	opacity: 0.0;
 	border-style: solid;
 	border-width: 2px;
@@ -462,14 +525,14 @@ header{
 
 /* ########## notification ############## */
 #noti {
-	widht: 300px;
+	width: auto;
 	height: 50px;
 	position: fixed;
 	top: 0;
 	z-index: -1;
 	opacity: 0.0;
 	left: 50%;
-	margin-left: -100px;
+	margin-left: -50px;
 	background-color: #EEEEEE;
 	color: #01939A;
 	box-shadow: 2px 2px 2px #333;
@@ -531,6 +594,24 @@ header{
 	height: 10%;
 	width: 10%;
 	cursor: pointer;
+	opacity: 0.7;
+}
+
+.changebild2 {
+	margin-top: -20px;
+	height: 7%;
+	width: 7%;
+	cursor: pointer;
+	opacity: 0.7;
+	float: right;
+}
+
+.changebild:hover {
+	opacity: 1;
+}
+
+.changebild2:hover {
+	opacity: 1;
 }
 
 .radio {
@@ -558,6 +639,18 @@ header{
 
 .hoverbild {
 	width: 35%;
+}
+
+/*loggedin field */
+.loggedin{
+	height: 30px;
+	width: 300px;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 1px;
+	background-color: #000;
+	color: #FFFFFF;
+	float: right;
 }
 
 

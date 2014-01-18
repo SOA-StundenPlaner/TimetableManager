@@ -7,13 +7,17 @@
 <script type="text/javascript" src="js/script.js"></script>                                  
 <link rel="stylesheet" type="text/css" href="css/main.css" media="all" />                    
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-</head><body>	
+</head><body>
+		
 	<header>
-		<div class="head"><a href="index.html">Stunden<span class="bluegreen">Planer</span></a></div>
+		<div class="head">
+			<a href="index.html">Stunden<span class="bluegreen">Planer</span></a>
+			
+		</div>
 		<div class="menu">
 			<div class="menuul">
 				<ul>
-					<li class="menupart left menuactive"><a href="index.html"><img src="img/spreadsheet.png" alt="spreadsheet" class="leftbild"></a></li>
+					<li class="menupart left menuactive"><a href="index.html"><img src="img/spreadsheet.png" alt="spreadsheet" class="leftbild" onclick="getTimetableData();"></a></li>
 					<li class="menupart mid"><a href="createTimetable.html">Neuer Stundenplan</a></li>
 					<li class="menupart mid"><a href="createCourse.html">Neuer Kurs</a></li>
 					<li class="menupart mid"><a href="account.html">Account</a></li>
@@ -22,62 +26,93 @@
 			</div>
 		</div>
 	</header>
-
-		<div class="wrapped">			
-			<div class="wrapper">
-				<span class="detailsheading">Dein Stundenplan</span>
-				</br>
-				</br>
-				<div class="caption">
-					<span class="heading">Stundenplan: Teststundenplan</span>
-					<form name="formtt">
-						<select name="timetables">
-							<option>Stundenplan w&auml;hlen</option>
-							<option>2012/13</option>
-						</select>
-					</form>
-				</br>
-					<p class="addcourse"><a href="#" onClick="showAddCourse();">Kurs hinzufügen</a></p><!-- popup mit liste und darunter: Kurs nicht dabei? Neuen Kurs anlegen-->
-				<table class="timetable">
-					<tr>
-						<th></th>
-						<th id="Montag">Mo</th>
-						<th id="Dienstag">Di</th>
-						<th id="Mittwoch">Mi</th>
-						<th id="Donnerstag">Do</th>
-						<th id="Freitag">Fr</th>
-						<th id="Samstag">Sa</th>
-					</tr>
-					<!-- generate tr per hour add td per weekday -->
-					<tr class="row">
-						<td class="kasten first">7:30 - 9:00</td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-					</tr>
-					<tr class="row">
-						<td class="kasten first">9:20 - 10:50</td>
-						<td class="kasten" id="test"><span class="light">E-Learning</span> </br>E272</br><a href="details.html"><img src="img/eye.png" alt="view" class="showdetails"></a><img src="img/trash_can.png" alt="delete" class="deletecourse" onclick="deleteCourse(id);"></td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-						<td class="kasten"></td>
-					</tr>				
-				</table>
-				</div> <!--insert specific name via jsp-->
-				
-				
-			</div>
-		</div>
 	
+	<div class="wrapped">			
+		<div class="wrapper">
+			<span class="detailsheading">Dein Stundenplan</span>
+			</br>
+			</br>
+			<div class="caption">
+				<span class="heading" id="testgettt">Stundenplan: </span>
+				<form name="formtt">
+					<select id="timtableselect" name="timetables" onchange="getTimetable();">
+						<option>Stundenplan w&auml;hlen</option>
+						<option>test</option>
+					</select>
+					<img src="img/trash_can.png" alt="delete" id="deleteaccount" onclick="openDeleteTT();" class="changebild2"><img src="img/pencil.png" alt="change" class="changebild2" onclick="openChangeTTname();">					
+					</br>
+					<p class="addcourse"><a href="#" onClick="showAddCourse();">Kurs hinzufügen</a></p>
+					<table class="timetable">
+						<tr>
+							<th></th>
+							<th id="Montag">Mo</th>
+							<th id="Dienstag">Di</th>
+							<th id="Mittwoch">Mi</th>
+							<th id="Donnerstag">Do</th>
+							<th id="Freitag">Fr</th>
+							<th id="Samstag">Sa</th>
+						</tr>
+						<tr class="row">
+							<td class="kasten first">7:30 - 9:00</td>
+							<td class="kasten" id="11"></td>
+							<td class="kasten" id="12"></td>
+							<td class="kasten" id="13"></td>
+							<td class="kasten" id="14"></td>
+							<td class="kasten" id="15"></td>
+							<td class="kasten" id="16"></td>
+						</tr>
+						<tr class="row">
+							<td class="kasten first">9:20 - 10:50</td>
+							<td class="kasten" id="21"><span class="light">E-Learning</span> </br>E272</br><img src="img/eye.png" alt="view" class="showdetails" onclick="gotoDetails('kurs1');"><img src="img/trash_can.png" alt="delete" class="deletecourse" onclick="deleteCourse('kurs1');"></td>
+							<td class="kasten" id="22"></td>
+							<td class="kasten" id="23"></td>
+							<td class="kasten" id="24"></td>
+							<td class="kasten" id="25"></td>
+							<td class="kasten" id="26"></td>
+						</tr>				
+					</table>
+				</form>
+			</div> 				
+		</div>
+	</div>	
+		
 	<div id="noti"></div>
 	<div class="overlay"></div>
 	<div class="help"></div>
 	<div id="popup"></div>
+	
+	<div id="popupaddcourse">		
+		<p class="detailsheadingpopup">Kurs hinzuf&uuml;gen</p>	
+		<form name="addviscourseform">
+			<p>zum aktuell ausgew&auml;hlten Stundenplan</p>
+			<select name="courseselect"><option>Kurs w&auml;hlen</option><option>kurs1</option><option>kurs2</option>
+			</select>
+			</br>
+			<p>Kurs nicht dabei? Erstelle einen neuen Kurs: <a href="createCourse.html">Kurs erstellen</a></p>
+			<p>Wann findet der Kurs statt?</p>
+			<select name="dayselect"><option>Tag w&auml;hlen</option><option value="1">Montag</option><option value="2">Dienstag</option><option value="3">Mittwoch</option><option value="4">Donnerstag</option><option value="5">Freitag</option><option value="6">Samstag</option></select>
+			<select name="hourselect"><option>Stunde w&auml;hlen</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+			</br>
+			<button class="close" id="addviscoursebutton">Hinzuf&uuml;gen</button><button class="close" onClick="closeAddCoursePopup();">Schlie&szlig;en</button>
+		</form>		
+	</div>
+	
+	<div id="popupchangettname" class="popupklein">		
+		<p class="detailsheadingpopup">Neuer Stundenplanname:</p>	
+		<form name="changettnameform">
+			<input type="text" name="newttname">
+			</br>
+			<button class="close" id="changettname">&Auml;ndern</button><button class="close" onClick="closeChangeTTPopup();">Schlie&szlig;en</button>
+		</form>		
+	</div>
+	
+	<div id="popupdeletett" class="popupklein">		
+		<p class="detailsheadingpopup">Stundenplan wirklich l&ouml;schen?</p>	
+		<form name="deletettform">
+			<button class="close" id="deletett">Ja</button><button class="close" onClick="closeDeleteTTPopup();">Abbrechen</button>
+		</form>		
+	</div>
+	
 	<script type="text/javascript">
 	var jetzt = new Date();
 	var tagInWoche = jetzt.getDay();
@@ -87,4 +122,5 @@
 	var tag = Wochentag[tagInWoche];
 	$('#'+tag).css('background-color', '#01939A');
 	</script>
+	
 </body></html>

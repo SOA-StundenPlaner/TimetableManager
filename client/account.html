@@ -7,7 +7,7 @@
 <script type="text/javascript" src="js/script.js"></script>                                  
 <link rel="stylesheet" type="text/css" href="css/main.css" media="all" />                      
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-</head><body>
+</head><body onload="getAccountInfos();">
 	<header>
 		<div class="head"><a href="index.html">Stunden<span class="bluegreen">Planer</span></a></div>
 		<div class="menu">
@@ -27,22 +27,22 @@
 			<div class="wrapper">
 				<section class="detailsabove">
 					<div class="details-right">
-						<p><span class="detailsheadingAccount">Dein Account</span><img src="img/pencil.png" alt="change" class="changebild" onclick="openAccountForm();"></p>
+						<p><span class="detailsheadingAccount">Dein Account</span><img src="img/pencil.png" alt="change" class="changebild" onclick="openChangeAccount();"><img src="img/trash_can.png" alt="delete" id="deleteaccount" onclick="showCheckDelete();" class="changebild"></p>
 						<div class="clear"></div>						
 						<ul class="create">
-							<li><label class="formlabel">Name:</label><p id="accountusername">Emil</p></li>
+							<li id="accountusername"><label class="formlabel">Name:</label></li>
 							<!--<li><label class="formlabel">Institution:</label><p id="accountinst"></p></li>-->
 							<!--<li><label class="formlabel">Studiengang:</label><p id=""></p></li>-->
-							<li><label class="formlabel">E-Mail:</label><p id="accountemail">test@test.de</p></li>
+							<li id="accountemail"><label class="formlabel">E-Mail:</label></li>
 							<!--<li><label class="formlabel">Skype:</label><p></p></li>
 							<li><label class="formlabel">ICQ:</label><p></p></li>-->
 							</br>
-							<li>
+							<!--<li>
 								<label>Als Teilnehmer in Kursen angezeigen lassen?</label>
 								<label>Ja</label><input name="showasmember" type="radio" value="yes" checked="checked" class="radio">
 								<label>Nein</label><input name="showasmember" type="radio" value="no"> 
 								<button id="changeShowMemberButton">Speichern</button>
-							</li>
+							</li>-->
 						</ul>					
 					</div>	
 					<div class="details-left">
@@ -57,5 +57,21 @@
 	<div class="overlay"></div>
 	<div class="help"></div>
 	<div id="popup"></div>
+	<div id="checkdelete" class="popupklein">
+		<p class="detailsheadingpopup">Willst du deinen Account wirklich l&ouml;schen?</p>	
+		<form name="deleteaccountform">
+			</br>
+			<button class="close" id="deleteaccountbutton">L&ouml;schen</button><button class="close" onClick="closeCheckDelete()">Abbrechen</button>
+		</form>			
+	</div>
+	
+	<div id="changeaccount" class="popupklein">
+		<p class="detailsheadingpopup">Neuer Nutzername:</p>	
+		<form name="changeaccountform">
+			<input type="text" name="newusername">
+			</br>
+			<button class="close" id="editAccount">&Auml;ndern</button><button class="close" onClick="closeChangeAccount()">Abbrechen</button>
+		</form>			
+	</div>
 
 </body></html>
