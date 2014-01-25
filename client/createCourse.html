@@ -9,7 +9,10 @@
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 </head><body>
 	<header>
-		<div class="head"><a href="index.html">Stunden<span class="bluegreen">Planer</span></a></div>
+		<div class="head">
+			<a href="index.html">Stunden<span class="bluegreen">Planer</span></a>
+			<div class="loggedin"></div>
+		</div>
 		<div class="menu">
 			<div class="menuul">
 				<ul>
@@ -30,7 +33,7 @@
 					<span class="detailsheading">Kurs erstellen</span>
 					</br>
 					<form name="createCourseForm">
-						<ul class="create">
+						<ul class="createc">
 							<!--<p>F&uuml;r welchen Stundenplan soll der Kurs erstellt werden?</p>
 							<li><select>
 							<option>Stundenplan w&auml;hlen</option>
@@ -46,9 +49,11 @@
 							<li><label>Institutionsname*:</label><input type="text" name="institutename"></li>-->
 							<li><label class="formlabel">Raum*:</label><input type="text" name="courseroom"></li>
 							<li><label class="formlabel">Lehrender*:</label><input type="text" name="courseteacher"></li>
-							<li><label class="formlabel">Beschreibung*:</label><input type="textarea" name="coursedescr"></li>
+							<li><label class="formlabel">Beschreibung*:</label><input type="textarea" name="coursedescr"></li>							
 							</br>
 							<li><button id="createCourseButton">Erstellen</button></li>	
+							</br>
+							<li id="errornoti"></li>
 							</ul>
 					</form>
 				
@@ -61,4 +66,7 @@
 	<div id="noti"></div>
 	<div id="popup"></div>
 
+	<script type="text/javascript">
+			init();
+	</script>
 </body></html>

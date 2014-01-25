@@ -9,7 +9,10 @@
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 </head><body>
 	<header>
-		<div class="head"><a href="index.html">Stunden<span class="bluegreen">Planer</span></a></div>
+		<div class="head">
+			<a href="index.html">Stunden<span class="bluegreen">Planer</span></a>
+			<div class="loggedin"></div>
+		</div>
 		<div class="menu">
 			<div class="menuul">
 				<ul>
@@ -30,24 +33,26 @@
 					<span class="detailsheading">Stundenplan erstellen</span>
 					</br>
 					<form name="formtimetable">
-						<ul class="create" id="courseadding">
+						<ul class="createc" id="courseadding">
 							<li><label class="formlabel">Name:</label><input type="text" name="ttname"></li>
 							<!--<li><label>Jahr:</label><input type="text"></li>-->
 							<li></br></li>
-							<li><!--<span class="detailsheading2">Zeitprofil</span><label class="formlabel">Zeitprofil-Name:</label><input type="text" name="tpname"></li>-->						
+							<!--<li><span class="detailsheading2">Zeitprofil</span><label class="formlabel">Zeitprofil-Name:</label><input type="text" name="tpname"></li>-->						
 							<!--<p><label>W&auml;hle aus vorhandenen Zeitprofilen:</label></p>
 							<li><select>
 							<option>Zeitprofil w&auml;hlen</option>
 							</select></li>-->
 						</br>
-							<p><label>Oder erstelle ein eigenes (Start- | Endzeit):</label></p>
-							<li><label class="formlabel">Kurszeit 1: </label><input class="course" type="text" name="course1" value="HH:MM"><input class="course1" type="text" name="course11" value="HH:MM"></li>
+							<p><label>Welche Zeiten haben deine Stunden: (Start- | Endzeit):</label></p>
+							<li><label class="formlabel">1. Stunde: </label><input class="course" type="text" name="course1" value="HH:MM"><input class="course1" type="text" name="course11" value="HH:MM"></li>
 							
 							</ul>
 							<ul class="create">						
-							<li><p class="addcourse" onclick="addCourse();">Weiterer Kurs</p></li>
+							<li><p class="addcourse" onclick="addCourse();">Weiterer Kurs</p></li>							
 							</br>
 							<li><button class="createtimetablebutton">Erstellen</button></li>
+							</br>
+							<li id="errornoti"></li>
 							</ul>			
 					</form>
 				
@@ -59,4 +64,7 @@
 	<div class="help"></div>
 	<div id="popup"></div>
 
+	<script type="text/javascript">
+			init();
+	</script>
 </body></html>
