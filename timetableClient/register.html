@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html><head>
+<title>Timetable Managing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/sha512.js"></script> 
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/layouthelper.js"></script>                                 
+<link rel="stylesheet" type="text/css" href="css/main.css" media="all" />                       
+<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+</head><body>
+	<header>
+		<div class="head">Stunden<span class="bluegreen">Planer</span></div>
+		<div class="menu">
+
+		</div>
+	</header>
+		<div class="wrapped">			
+			<div class="wrapper">
+				<span class="detailsheading">Registrieren</span>
+				</br>
+					<form name="formreg">
+						<ul class="createc">
+							<!--<li><label>Name*:</label><input type="text"></li>
+							<li><label>Vorname*:</label><input type="text"></li>
+							<li><label>Alter:</label><input type="text"></li>
+							<li><label>Geschlecht:</label><input type="text"></li>-->
+							<li><label class="formlabelr">E-Mail*:</label><input type="text" name="email"></li>
+							<li><label class="formlabelr">Nutzername*:</label><input type="text" name="username"></li>
+							<li><label class="formlabelr">Passwort*:</label><input type="password" name="pw"></li>
+							<li><label class="formlabelr">Passwort wiederholen*:</label><input type="password" name="pw2"></li>
+							</br>
+							<li id="errornoti"></li>
+							<!--<li><label>Du bist?*</label>
+								<select>
+									<option>Sch&uuml;ler</option>
+									<option>Student</option>
+								</select>
+
+							</li>-->
+							</br>
+							<li><button class="registerbutton">Registrieren</button></li>
+						</ul>
+						
+					</form>
+			</div>
+		</div>
+		<div id="popup2"></div>
+		<div id="noti"></div>
+</body></html>

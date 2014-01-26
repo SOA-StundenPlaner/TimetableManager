@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html><head>
+<title>Timetable Managing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/sha512.js"></script>      
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/layouthelper.js"></script>                                  
+<link rel="stylesheet" type="text/css" href="css/main.css" media="all" />                    
+<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+</head><body onload="getTimetableList();">
+		
+	<header>
+		<div class="head">
+			<a href="index.html">Stunden<span class="bluegreen">Planer</span></a>
+			<div class="loggedin"></div>
+		</div>
+		<div class="menu">
+			<div class="menuul">
+				<ul>
+					<li class="menupart left menuactive"><a href="index.html"><img src="img/spreadsheet.png" alt="spreadsheet" class="leftbild" onclick="getTimetableData();"></a></li>
+					<li class="menupart mid"><a href="createTimetable.html">Neuer Stundenplan</a></li>
+					<li class="menupart mid"><a href="createCourse.html">Neuer Kurs</a></li>
+					<li class="menupart mid"><a href="account.html">Account</a></li>
+					<li class="menupart right"><img src="img/fragezeichen.png" alt="fragezeichen" class="rightbild" onclick="showHelp();"></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	
+	<div class="wrapped">			
+		<div class="wrapper">
+			<span class="detailsheading">Dein Stundenplan</span>
+			</br>
+			</br>
+			<div class="caption">
+				<span class="heading" id="testgettt">Stundenplan: </span>
+				<form name="formtt">
+					<select id="timtableselect" name="timetables" onchange="getTimetable();">
+
+					</select>					
+						<img src="img/trash_can.png" alt="delete" id="deleteaccount" onclick="openDeleteTT();" class="changebild2"><img src="img/pencil.png" alt="change" class="changebild2" onclick="openChangeTTname();">					
+						</br>
+						<div id="timewrapper">
+							
+						</div>
+				</form>
+			</div> 				
+		</div>
+	</div>	
+		
+	<div id="noti"></div>
+	<div class="overlay"></div>
+	<div class="help"></div>
+	<div id="popup"></div>
+	
+	<div id="popupaddcourse">		
+		<p class="detailsheadingpopup">Kurs hinzuf&uuml;gen</p>	
+		<form name="addviscourseform">
+			<p>zum aktuell ausgew&auml;hlten Stundenplan</p>
+			<select name="courseselect" id="courselist">
+			</select>
+			</br>
+			<p>Kurs nicht dabei? Erstelle einen neuen Kurs: <a href="createCourse.html">Kurs erstellen</a></p>
+			<p>Wann findet der Kurs statt?</p>
+			<select name="dayselect"><option>Tag w&auml;hlen</option><option value="1">Montag</option><option value="2">Dienstag</option><option value="3">Mittwoch</option><option value="4">Donnerstag</option><option value="5">Freitag</option><option value="6">Samstag</option></select>
+			<select name="hourselect" id="hourlist"></select>
+			</br>
+			<button class="close" id="addviscoursebutton">Hinzuf&uuml;gen</button><button class="close" onClick="closeAddCoursePopup();">Schlie&szlig;en</button>
+			</br>
+			<p id="errornoti"></p>
+		</form>		
+	</div>
+	
+	<div id="popupchangettname" class="popupklein">		
+		<p class="detailsheadingpopup">Neuer Stundenplanname:</p>	
+		<form name="changettnameform">
+			<input type="text" name="newttname">
+			</br>
+			<button class="close" id="changettname">&Auml;ndern</button><button class="close" onClick="closeChangeTTPopup();">Schlie&szlig;en</button>
+			</br>
+			<p id="errornotit"></p>
+		</form>		
+	</div>
+	
+	<div id="popupdeletett" class="popupklein">		
+		<p class="detailsheadingpopup">Stundenplan wirklich l&ouml;schen?</p>	
+		<form name="deletettform">
+			</br>
+			<button class="close" id="deletett">Ja</button><button class="close" onClick="closeDeleteTTPopup();">Abbrechen</button>
+		</form>		
+	</div>
+	
+	<div id="popupdeletecourse" class="popupklein">		
+		<p class="detailsheadingpopup">Stundenplan wirklich l&ouml;schen?</p>	
+		<form name="deletecourseform" id="delcourse">
+			</br>
+			<button class="close" id="deletecourse">Ja</button><button class="close" onClick="closeDeleteCoursePopup();">Abbrechen</button>
+		</form>		
+	</div>
+	
+	<script type="text/javascript">
+	init();
+	
+	</script>
+	
+</body></html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html><head>
+<title>Timetable Managing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/sha512.js"></script>
+<script type="text/javascript" src="js/script.js"></script>   
+<script type="text/javascript" src="js/layouthelper.js"></script>                               
+<link rel="stylesheet" type="text/css" href="css/main.css" media="all" />                      
+<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+</head><body onload="getAccountInfos();">
+	<header>
+		<div class="head">
+			<a href="index.html">Stunden<span class="bluegreen">Planer</span></a>
+			<div class="loggedin"></div>
+		</div>
+		<div class="menu">
+			<div class="menuul">
+				<ul>
+					<li class="menupart left"><a href="index.html"><img src="img/spreadsheet.png" alt="spreadsheet" class="leftbild"></a></li>
+					<li class="menupart mid"><a href="createTimetable.html">Neuer Stundenplan</a></li>
+					<li class="menupart mid"><a href="createCourse.html">Neuer Kurs</a></li>
+					<li class="menupart mid menuactive"><a href="account.html">Account</a></li>
+					<li class="menupart right"><a href="#"><img src="img/fragezeichen.png" alt="fragezeichen" class="rightbild" onclick="showHelp();"></a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<section >
+		<div class="wrapped">			
+			<div class="wrapper">
+				<section class="detailsabove">
+					<div class="details-right">
+						<p><span class="detailsheadingAccount">Dein Account</span><img src="img/trash_can.png" alt="delete" id="deleteaccount" onclick="showCheckDelete();" class="changebild"></p>
+						<div class="clear"></div>						
+						<ul class="create">
+							<li><p id="accountusername"><label class="formlabel">Name:</label></p><img src="img/pencil.png" alt="change" class="changebildinline" onclick="openChangeAccount();"></li>
+							<!--<li><label class="formlabel">Institution:</label><p id="accountinst"></p></li>-->
+							<!--<li><label class="formlabel">Studiengang:</label><p id=""></p></li>-->
+							<li><p id="accountemail"><label class="formlabel">E-Mail:</label></p><img src="img/pencil.png" alt="change" class="changebildinline" onclick="openChangeEmail();"></li>
+							<!--<li><label class="formlabel">Skype:</label><p></p></li>
+							<li><label class="formlabel">ICQ:</label><p></p></li>-->
+							</br>
+							<li>
+								<label>Als Teilnehmer in Kursen angezeigen lassen?</label>
+								<label>Ja</label><input name="showasmember" type="radio" value="yes" class="radio">
+								<label>Nein</label><input name="showasmember" type="radio" value="no"> 
+								<button id="changeShowMemberButton">Speichern</button>
+							</li>
+							</br>
+							<li>
+								<p class="changepw" onclick="showchangepw();">Passwort &auml;ndern</p>
+							</li>
+						</ul>					
+					</div>	
+					<div class="details-left">
+						
+					</div>			
+				</section>
+
+			</div>
+		</div>
+	</section>
+	<div class="overlay"></div>
+	<div class="help"></div>
+	<div id="popup"></div>
+	<div id="checkdelete" class="popupklein">
+		<p class="detailsheadingpopup">Willst du deinen Account wirklich l&ouml;schen?</p>	
+		<form name="deleteaccountform">
+			</br>
+			<button class="close" id="deleteaccountbutton">L&ouml;schen</button><button class="close" onClick="closeCheckDelete()">Abbrechen</button>
+		</form>			
+	</div>
+	
+	<div id="changeaccount" class="popupklein">
+		<p class="detailsheadingpopup">Neuer Nutzername:</p>	
+		<form name="changeaccountform">
+			<input type="text" name="newusername">			
+			</br>
+			<button class="close" id="editAccount">&Auml;ndern</button><button class="close" onClick="closeChangeAccount()">Abbrechen</button>
+			</br>
+			<p id="errornotiu"></p>
+		</form>			
+	</div>
+	
+	<div id="changeemail" class="popupklein">
+		<p class="detailsheadingpopup">Neue Email:</p>	
+		<form name="changeemailform">
+			<input type="text" name="newemail">			
+			</br>
+			<button class="close" id="editEmail">&Auml;ndern</button><button class="close" onClick="closeChangeEmail()">Abbrechen</button>
+			</br>
+			<p id="errornotie"></p>
+		</form>			
+	</div>
+	
+	<div id="changepw" class="popupmittel">	
+		<p class="detailsheadingpopup">Passwort &auml;ndern</p>	
+		<form name="changeaccountform">
+			<label class="pwlabel">Neues Passwort: </label><input type="password" name="newpw">
+			</br>
+			<label class="pwlabel">Neues Passwort wiederholen: </label><input type="password" name="newpw2">
+			</br>
+			<label class="pwlabel">Altes Passwort: </label><input type="password" name="oldpw">
+			</br>	
+			</br>		
+			<button class="close2" id="editPw">&Auml;ndern</button><button class="close2" id="closepw" onClick="closeChangePW();">Abbrechen</button>
+			</br>
+			<p id="errornoti"></p>
+			<div class="clear"></div>
+		</form>			
+	</div>
+	<div id="noti"></div>
+	<script type="text/javascript">
+			init();
+	</script>
+</body></html>
