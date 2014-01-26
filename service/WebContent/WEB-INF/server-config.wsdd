@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -30,8 +30,8 @@
    </ns1:handler>
   </ns1:requestFlow>
   <ns1:parameter name="allowedMethods" value="getQuote"/>
-  <ns1:parameter name="scope" value="application"/>
   <ns1:parameter name="className" value="org.denevell.tomcat.service.ServiceTimetable"/>
+  <ns1:parameter name="scope" value="application"/>
  </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>
@@ -44,15 +44,15 @@
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="ServiceTimetable" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="createComment" qname="ns1:createComment" returnQName="ns1:createCommentReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:email" type="xsd:string"/>
-   <ns2:parameter qname="ns1:password" type="xsd:string"/>
-   <ns2:parameter qname="ns1:c" type="xsd:string"/>
-   <ns2:parameter qname="ns1:courseName" type="xsd:string"/>
-   <ns2:parameter qname="ns1:courseDescription" type="xsd:string"/>
+  <ns2:operation name="dateToString" qname="ns1:dateToString" returnQName="ns1:dateToStringReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:date" type="xsd:dateTime"/>
   </ns2:operation>
-  <ns1:operation name="dateToString" qname="ns2:dateToString" returnQName="ns2:dateToStringReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns2:date" type="xsd:dateTime"/>
+  <ns1:operation name="createComment" qname="ns2:createComment" returnQName="ns2:createCommentReturn" returnType="xsd:boolean" soapAction="" xmlns:ns2="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:email" type="xsd:string"/>
+   <ns1:parameter qname="ns2:password" type="xsd:string"/>
+   <ns1:parameter qname="ns2:c" type="xsd:string"/>
+   <ns1:parameter qname="ns2:courseName" type="xsd:string"/>
+   <ns1:parameter qname="ns2:courseDescription" type="xsd:string"/>
   </ns1:operation>
   <ns1:operation name="createTimeprofile" qname="ns3:createTimeprofile" returnQName="ns3:createTimeprofileReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns3:email" type="xsd:string"/>
@@ -83,117 +83,119 @@
    <ns1:parameter qname="ns7:password" type="xsd:string"/>
    <ns1:parameter qname="ns7:hourIndex" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="createTimetable" qname="ns8:createTimetable" returnQName="ns8:createTimetableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns8="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="editAccountUsername" qname="ns8:editAccountUsername" returnQName="ns8:editAccountUsernameReturn" returnType="xsd:boolean" soapAction="" xmlns:ns8="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns8:email" type="xsd:string"/>
    <ns1:parameter qname="ns8:password" type="xsd:string"/>
-   <ns1:parameter qname="ns8:timetableName" type="xsd:string"/>
-   <ns1:parameter qname="ns8:timeprofileName" type="xsd:string"/>
+   <ns1:parameter qname="ns8:newUsername" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="createAccount" qname="ns9:createAccount" returnQName="ns9:createAccountReturn" returnType="xsd:boolean" soapAction="" xmlns:ns9="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns9:username" type="xsd:string"/>
-   <ns1:parameter qname="ns9:password" type="xsd:string"/>
+  <ns1:operation name="getHourData" qname="ns9:getHourData" returnQName="ns9:getHourDataReturn" returnType="xsd:string" soapAction="" xmlns:ns9="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns9:email" type="xsd:string"/>
-   <ns1:parameter qname="ns9:visibility" type="xsd:int"/>
+   <ns1:parameter qname="ns9:password" type="xsd:string"/>
+   <ns1:parameter qname="ns9:timeprofileName" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="removeVisitedCourse" qname="ns10:removeVisitedCourse" returnQName="ns10:removeVisitedCourseReturn" returnType="xsd:boolean" soapAction="" xmlns:ns10="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns10:courseName" type="xsd:string"/>
-   <ns1:parameter qname="ns10:courseDescription" type="xsd:string"/>
-   <ns1:parameter qname="ns10:visistedCourseDay" type="xsd:int"/>
-   <ns1:parameter qname="ns10:visitedCourseHour" type="xsd:int"/>
+  <ns1:operation name="createTimetable" qname="ns10:createTimetable" returnQName="ns10:createTimetableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns10="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns10:email" type="xsd:string"/>
    <ns1:parameter qname="ns10:password" type="xsd:string"/>
    <ns1:parameter qname="ns10:timetableName" type="xsd:string"/>
+   <ns1:parameter qname="ns10:timeprofileName" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="getVisitedCourseData" qname="ns11:getVisitedCourseData" returnQName="ns11:getVisitedCourseDataReturn" returnType="xsd:string" soapAction="" xmlns:ns11="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="editTimetable" qname="ns11:editTimetable" returnQName="ns11:editTimetableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns11="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns11:timetableName" type="xsd:string"/>
+   <ns1:parameter qname="ns11:newTimetableName" type="xsd:string"/>
+   <ns1:parameter qname="ns11:timeprofileName" type="xsd:string"/>
+   <ns1:parameter qname="ns11:newTimeprofileName" type="xsd:string"/>
    <ns1:parameter qname="ns11:email" type="xsd:string"/>
    <ns1:parameter qname="ns11:password" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="getParticipantsOfCourse" qname="ns12:getParticipantsOfCourse" returnQName="ns12:getParticipantsOfCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns12="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns12:visitedCourse" type="xsd:string"/>
-   <ns1:parameter qname="ns12:courseDay" type="xsd:int"/>
-   <ns1:parameter qname="ns12:hourIndex" type="xsd:int"/>
+  <ns1:operation name="removeTimetable" qname="ns12:removeTimetable" returnQName="ns12:removeTimetableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns12="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns12:timetableName" type="xsd:string"/>
+   <ns1:parameter qname="ns12:email" type="xsd:string"/>
+   <ns1:parameter qname="ns12:password" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="getVisitedCoursesOfTimetable" qname="ns13:getVisitedCoursesOfTimetable" returnQName="ns13:getVisitedCoursesOfTimetableReturn" returnType="xsd:string" soapAction="" xmlns:ns13="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="getTimetableData" qname="ns13:getTimetableData" returnQName="ns13:getTimetableDataReturn" returnType="xsd:string" soapAction="" xmlns:ns13="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns13:email" type="xsd:string"/>
    <ns1:parameter qname="ns13:password" type="xsd:string"/>
    <ns1:parameter qname="ns13:timetableName" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="removeTimetable" qname="ns14:removeTimetable" returnQName="ns14:removeTimetableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns14="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns14:timetableName" type="xsd:string"/>
+  <ns1:operation name="getAllTimetablesOfUser" qname="ns14:getAllTimetablesOfUser" returnQName="ns14:getAllTimetablesOfUserReturn" returnType="xsd:string" soapAction="" xmlns:ns14="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns14:email" type="xsd:string"/>
    <ns1:parameter qname="ns14:password" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="getTimetableData" qname="ns15:getTimetableData" returnQName="ns15:getTimetableDataReturn" returnType="xsd:string" soapAction="" xmlns:ns15="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns15:email" type="xsd:string"/>
-   <ns1:parameter qname="ns15:password" type="xsd:string"/>
-   <ns1:parameter qname="ns15:timetableName" type="xsd:string"/>
+  <ns1:operation name="createCourse" qname="ns15:createCourse" returnQName="ns15:createCourseReturn" returnType="xsd:boolean" soapAction="" xmlns:ns15="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns15:name" type="xsd:string"/>
+   <ns1:parameter qname="ns15:shortname" type="xsd:string"/>
+   <ns1:parameter qname="ns15:teacher" type="xsd:string"/>
+   <ns1:parameter qname="ns15:description" type="xsd:string"/>
+   <ns1:parameter qname="ns15:room" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="getAllTimetablesOfUser" qname="ns16:getAllTimetablesOfUser" returnQName="ns16:getAllTimetablesOfUserReturn" returnType="xsd:string" soapAction="" xmlns:ns16="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="getCourseData" qname="ns16:getCourseData" returnQName="ns16:getCourseDataReturn" returnType="xsd:string" soapAction="" xmlns:ns16="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns16:email" type="xsd:string"/>
    <ns1:parameter qname="ns16:password" type="xsd:string"/>
+   <ns1:parameter qname="ns16:courseName" type="xsd:string"/>
+   <ns1:parameter qname="ns16:description" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="createCourse" qname="ns17:createCourse" returnQName="ns17:createCourseReturn" returnType="xsd:boolean" soapAction="" xmlns:ns17="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns17:name" type="xsd:string"/>
-   <ns1:parameter qname="ns17:shortname" type="xsd:string"/>
-   <ns1:parameter qname="ns17:teacher" type="xsd:string"/>
-   <ns1:parameter qname="ns17:description" type="xsd:string"/>
-   <ns1:parameter qname="ns17:room" type="xsd:string"/>
-  </ns1:operation>
-  <ns1:operation name="getCourseData" qname="ns18:getCourseData" returnQName="ns18:getCourseDataReturn" returnType="xsd:string" soapAction="" xmlns:ns18="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="getAllCourses" qname="ns17:getAllCourses" returnQName="ns17:getAllCoursesReturn" returnType="xsd:string" soapAction="" xmlns:ns17="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getCommentHeaderData" qname="ns18:getCommentHeaderData" returnQName="ns18:getCommentHeaderDataReturn" returnType="xsd:string" soapAction="" xmlns:ns18="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns18:email" type="xsd:string"/>
    <ns1:parameter qname="ns18:password" type="xsd:string"/>
    <ns1:parameter qname="ns18:courseName" type="xsd:string"/>
-   <ns1:parameter qname="ns18:description" type="xsd:string"/>
+   <ns1:parameter qname="ns18:courseDescription" type="xsd:string"/>
+   <ns1:parameter qname="ns18:comment" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="getAllCourses" qname="ns19:getAllCourses" returnQName="ns19:getAllCoursesReturn" returnType="xsd:string" soapAction="" xmlns:ns19="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="getCommentHeaderData" qname="ns20:getCommentHeaderData" returnQName="ns20:getCommentHeaderDataReturn" returnType="xsd:string" soapAction="" xmlns:ns20="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="removeComment" qname="ns19:removeComment" returnQName="ns19:removeCommentReturn" returnType="xsd:boolean" soapAction="" xmlns:ns19="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns19:email" type="xsd:string"/>
+   <ns1:parameter qname="ns19:password" type="xsd:string"/>
+   <ns1:parameter qname="ns19:courseName" type="xsd:string"/>
+   <ns1:parameter qname="ns19:courseDescription" type="xsd:string"/>
+   <ns1:parameter qname="ns19:comment" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getCommentData" qname="ns20:getCommentData" returnQName="ns20:getCommentDataReturn" returnType="xsd:string" soapAction="" xmlns:ns20="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns20:email" type="xsd:string"/>
    <ns1:parameter qname="ns20:password" type="xsd:string"/>
    <ns1:parameter qname="ns20:courseName" type="xsd:string"/>
    <ns1:parameter qname="ns20:courseDescription" type="xsd:string"/>
    <ns1:parameter qname="ns20:comment" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="removeComment" qname="ns21:removeComment" returnQName="ns21:removeCommentReturn" returnType="xsd:boolean" soapAction="" xmlns:ns21="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="createVisitedCourse" qname="ns21:createVisitedCourse" returnQName="ns21:createVisitedCourseReturn" returnType="xsd:boolean" soapAction="" xmlns:ns21="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns21:email" type="xsd:string"/>
    <ns1:parameter qname="ns21:password" type="xsd:string"/>
+   <ns1:parameter qname="ns21:timetableName" type="xsd:string"/>
+   <ns1:parameter qname="ns21:timeprofileName" type="xsd:string"/>
    <ns1:parameter qname="ns21:courseName" type="xsd:string"/>
    <ns1:parameter qname="ns21:courseDescription" type="xsd:string"/>
-   <ns1:parameter qname="ns21:comment" type="xsd:string"/>
+   <ns1:parameter qname="ns21:day" type="xsd:int"/>
+   <ns1:parameter qname="ns21:hourIndex" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="getCommentData" qname="ns22:getCommentData" returnQName="ns22:getCommentDataReturn" returnType="xsd:string" soapAction="" xmlns:ns22="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns22:email" type="xsd:string"/>
-   <ns1:parameter qname="ns22:password" type="xsd:string"/>
+  <ns1:operation name="removeVisitedCourse" qname="ns22:removeVisitedCourse" returnQName="ns22:removeVisitedCourseReturn" returnType="xsd:boolean" soapAction="" xmlns:ns22="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns22:courseName" type="xsd:string"/>
    <ns1:parameter qname="ns22:courseDescription" type="xsd:string"/>
-   <ns1:parameter qname="ns22:comment" type="xsd:string"/>
+   <ns1:parameter qname="ns22:visistedCourseDay" type="xsd:int"/>
+   <ns1:parameter qname="ns22:visitedCourseHour" type="xsd:int"/>
+   <ns1:parameter qname="ns22:email" type="xsd:string"/>
+   <ns1:parameter qname="ns22:password" type="xsd:string"/>
+   <ns1:parameter qname="ns22:timetableName" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="createVisitedCourse" qname="ns23:createVisitedCourse" returnQName="ns23:createVisitedCourseReturn" returnType="xsd:boolean" soapAction="" xmlns:ns23="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ns1:operation name="getVisitedCourseData" qname="ns23:getVisitedCourseData" returnQName="ns23:getVisitedCourseDataReturn" returnType="xsd:string" soapAction="" xmlns:ns23="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns23:email" type="xsd:string"/>
    <ns1:parameter qname="ns23:password" type="xsd:string"/>
-   <ns1:parameter qname="ns23:timetableName" type="xsd:string"/>
-   <ns1:parameter qname="ns23:timeprofileName" type="xsd:string"/>
-   <ns1:parameter qname="ns23:courseName" type="xsd:string"/>
-   <ns1:parameter qname="ns23:courseDescription" type="xsd:string"/>
-   <ns1:parameter qname="ns23:day" type="xsd:int"/>
-   <ns1:parameter qname="ns23:hourIndex" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="getHourData" qname="ns24:getHourData" returnQName="ns24:getHourDataReturn" returnType="xsd:string" soapAction="" xmlns:ns24="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns24:email" type="xsd:string"/>
-   <ns1:parameter qname="ns24:password" type="xsd:string"/>
-   <ns1:parameter qname="ns24:timeprofileName" type="xsd:string"/>
+  <ns1:operation name="getParticipantsOfCourse" qname="ns24:getParticipantsOfCourse" returnQName="ns24:getParticipantsOfCourseReturn" returnType="xsd:string" soapAction="" xmlns:ns24="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns24:visitedCourse" type="xsd:string"/>
+   <ns1:parameter qname="ns24:courseDay" type="xsd:int"/>
+   <ns1:parameter qname="ns24:hourIndex" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="editTimetable" qname="ns25:editTimetable" returnQName="ns25:editTimetableReturn" returnType="xsd:boolean" soapAction="" xmlns:ns25="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns25:timetableName" type="xsd:string"/>
-   <ns1:parameter qname="ns25:newTimetableName" type="xsd:string"/>
-   <ns1:parameter qname="ns25:timeprofileName" type="xsd:string"/>
-   <ns1:parameter qname="ns25:newTimeprofileName" type="xsd:string"/>
+  <ns1:operation name="getVisitedCoursesOfTimetable" qname="ns25:getVisitedCoursesOfTimetable" returnQName="ns25:getVisitedCoursesOfTimetableReturn" returnType="xsd:string" soapAction="" xmlns:ns25="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns25:email" type="xsd:string"/>
    <ns1:parameter qname="ns25:password" type="xsd:string"/>
+   <ns1:parameter qname="ns25:timetableName" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="editAccountUsername" qname="ns26:editAccountUsername" returnQName="ns26:editAccountUsernameReturn" returnType="xsd:boolean" soapAction="" xmlns:ns26="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns26:email" type="xsd:string"/>
-   <ns1:parameter qname="ns26:password" type="xsd:string"/>
+  <ns1:operation name="editAccount" qname="ns26:editAccount" returnQName="ns26:editAccountReturn" returnType="xsd:boolean" soapAction="" xmlns:ns26="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns26:newUsername" type="xsd:string"/>
+   <ns1:parameter qname="ns26:email" type="xsd:string"/>
+   <ns1:parameter qname="ns26:newEmail" type="xsd:string"/>
+   <ns1:parameter qname="ns26:password" type="xsd:string"/>
+   <ns1:parameter qname="ns26:newPassword" type="xsd:string"/>
+   <ns1:parameter qname="ns26:newVisibility" type="xsd:int"/>
   </ns1:operation>
   <ns1:operation name="editAccountPassword" qname="ns27:editAccountPassword" returnQName="ns27:editAccountPasswordReturn" returnType="xsd:boolean" soapAction="" xmlns:ns27="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns27:email" type="xsd:string"/>
@@ -219,15 +221,13 @@
    <ns1:parameter qname="ns31:password" type="xsd:string"/>
   </ns1:operation>
   <ns1:operation name="getAllAccounts" qname="ns32:getAllAccounts" returnQName="ns32:getAllAccountsReturn" returnType="xsd:string" soapAction="" xmlns:ns32="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="editAccount" qname="ns33:editAccount" returnQName="ns33:editAccountReturn" returnType="xsd:boolean" soapAction="" xmlns:ns33="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns33:newUsername" type="xsd:string"/>
-   <ns1:parameter qname="ns33:email" type="xsd:string"/>
-   <ns1:parameter qname="ns33:newEmail" type="xsd:string"/>
+  <ns1:operation name="createAccount" qname="ns33:createAccount" returnQName="ns33:createAccountReturn" returnType="xsd:boolean" soapAction="" xmlns:ns33="http://service.tomcat.denevell.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns33:username" type="xsd:string"/>
    <ns1:parameter qname="ns33:password" type="xsd:string"/>
-   <ns1:parameter qname="ns33:newPassword" type="xsd:string"/>
-   <ns1:parameter qname="ns33:newVisibility" type="xsd:int"/>
+   <ns1:parameter qname="ns33:email" type="xsd:string"/>
+   <ns1:parameter qname="ns33:visibility" type="xsd:int"/>
   </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="getCommentHeaderData createCourse getCourseData editAccountUsername removeTimeprofile dateToString getTimeprofileData getAllCourses getVisitedCourseData editTimeprofile editAccountVisibility createHour getParticipantsOfCourse getAccountData removeComment editAccountEmail createTimetable editAccountPassword createTimeprofile removeAccount createComment editAccount getAllTimetablesOfUser editTimetable getVisitedCoursesOfTimetable createAccount removeTimetable getTimetableData getCommentData createVisitedCourse getAllAccounts removeVisitedCourse getHourData"/>
+  <ns1:parameter name="allowedMethods" value="getCommentHeaderData createCourse getCourseData editAccountUsername removeTimeprofile dateToString getTimeprofileData getAllCourses editTimeprofile getVisitedCourseData editAccountVisibility createHour getParticipantsOfCourse getAccountData removeComment editAccountEmail createTimetable editAccountPassword createTimeprofile removeAccount createComment editAccount getAllTimetablesOfUser getVisitedCoursesOfTimetable editTimetable createAccount removeTimetable getTimetableData getCommentData createVisitedCourse getAllAccounts getHourData removeVisitedCourse"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="ServiceTimetable"/>
   <ns1:parameter name="className" value="org.denevell.tomcat.service.ServiceTimetable"/>
