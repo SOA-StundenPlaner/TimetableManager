@@ -16,6 +16,8 @@ import org.denevell.tomcat.entities.write.Timeprofile;
 import org.denevell.tomcat.entities.write.Timetable;
 import org.denevell.tomcat.entities.write.VisitedCourse;
 
+import com.db4o.Db4oEmbedded;
+import com.db4o.ObjectContainer;
 import com.google.gson.Gson;
 
 /**
@@ -24,6 +26,9 @@ import com.google.gson.Gson;
  */
 @Policies({ @Policy(uri = "securepolicy.xml") })
 public class ServiceTimetable {	
+	
+	final static String file = System.getProperty("user.home") + "/timetableManager.db4o";
+	ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), file);
 	
 	@SuppressWarnings("deprecation")
 	public String dateToString(Date date){
@@ -38,6 +43,16 @@ public class ServiceTimetable {
 		}
 	}
 	
+	
+	public boolean login(String email, String password){
+		Account account = ObjectRepo.getInstance().getAccount(email);
+		if (account != null && account.getMail().equals(email) && account.getPassword().equals(password)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 
 	public boolean createAccount(String username, String password, String email, int visibility) {
 		if (ObjectRepo.getInstance().getAccount(email) != null){
@@ -45,6 +60,7 @@ public class ServiceTimetable {
 		}else{
 			Account account = new Account(username, password, email, visibility);
 			ObjectRepo.getInstance().addAccount(account);
+			db.store(ObjectRepo.getInstance().accounts);
 			return true;
 		}
 	}
@@ -156,10 +172,10 @@ public class ServiceTimetable {
 		Account account = ObjectRepo.getInstance().getAccount(email);
 		Timeprofile timeprofile = ObjectRepo.getInstance().getTimeprofile(timeprofileName, email);
 		if (account != null && timeprofile != null && account.getMail().equals(email) && account.getPassword().equals(password)){
+			account.removeTimeprofile(timeprofile);
 			timeprofile.setName(newTimeprofileName);
 			timeprofile.setId(newTimeprofileName+email);
-			removeTimeprofile(timeprofileName, email, password);
-			createTimeprofile(email, password, newTimeprofileName);
+			account.addTimeprofile(timeprofile);
 			return true;
 		}else{
 			return false;
@@ -235,12 +251,12 @@ public class ServiceTimetable {
 		Timetable timetable = ObjectRepo.getInstance().getTimetable(timetableName, email);
 		Timeprofile timeprofile = ObjectRepo.getInstance().getTimeprofile(timeprofileName, email);
 		if (account != null && timetable != null && account.getMail().equals(email) && account.getPassword().equals(password)){
+			account.removeTimetable(timetable);
 			timetable.setTimetableName(timetableName);
 			editTimeprofile(email, password, newTimeprofileName, newTimetableName);
 			timetable.setTimeprofile(timeprofile);
 			timetable.setId(timetableName+email);
-			removeTimetable(timetableName, email, password);
-			createTimetable(email, password, newTimetableName, newTimeprofileName);
+			account.addTimetable(timetable);
 			return true;
 		}else{
 			return false;

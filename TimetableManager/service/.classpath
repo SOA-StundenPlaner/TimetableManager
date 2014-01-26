@@ -14,5 +14,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/home/e73/Downloads/db4o-8.0-java.zip"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

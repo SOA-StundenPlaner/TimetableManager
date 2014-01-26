@@ -107,3 +107,6 @@
 127.0.0.1 - - [26/Jan/2014:19:28:30 +0100] "POST /StundenPlaner/services/ServiceTimetable HTTP/1.1" 200 965
 127.0.0.1 - - [26/Jan/2014:19:29:27 +0100] "POST /StundenPlaner/services/ServiceTimetable HTTP/1.1" 200 406
 127.0.0.1 - - [26/Jan/2014:19:29:35 +0100] "POST /StundenPlaner/services/ServiceTimetable HTTP/1.1" 200 1276
+127.0.0.1 - - [26/Jan/2014:20:04:00 +0100] "GET / HTTP/1.1" 404 955
+127.0.0.1 - - [26/Jan/2014:20:04:02 +0100] "POST /StundenPlaner/services/AdminService HTTP/1.0" 200 291
+127.0.0.1 - - [26/Jan/2014:20:04:02 +0100] "POST /StundenPlaner/services/AdminService HTTP/1.0" 200 21290
