@@ -51,6 +51,12 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="connectToDB">
+    <complexType/>
+   </element>
+   <element name="connectToDBResponse">
+    <complexType/>
+   </element>
    <element name="createTimeprofile">
     <complexType>
      <sequence>
@@ -572,17 +578,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getCommentHeaderDataResponse">
+   <wsdl:message name="getVisitedCourseDataResponse">
 
-      <wsdl:part element="impl:getCommentHeaderDataResponse" name="parameters">
+      <wsdl:part element="impl:getVisitedCourseDataResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="getVisitedCourseDataResponse">
+   <wsdl:message name="getCommentHeaderDataResponse">
 
-      <wsdl:part element="impl:getVisitedCourseDataResponse" name="parameters">
+      <wsdl:part element="impl:getCommentHeaderDataResponse" name="parameters">
 
       </wsdl:part>
 
@@ -615,6 +621,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="createHourRequest">
 
       <wsdl:part element="impl:createHour" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="connectToDBResponse">
+
+      <wsdl:part element="impl:connectToDBResponse" name="parameters">
 
       </wsdl:part>
 
@@ -740,17 +754,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="editTimetableResponse">
+   <wsdl:message name="loginRequest">
 
-      <wsdl:part element="impl:editTimetableResponse" name="parameters">
+      <wsdl:part element="impl:login" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="loginRequest">
+   <wsdl:message name="editTimetableResponse">
 
-      <wsdl:part element="impl:login" name="parameters">
+      <wsdl:part element="impl:editTimetableResponse" name="parameters">
 
       </wsdl:part>
 
@@ -980,17 +994,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createTimetableRequest">
+   <wsdl:message name="getVisitedCourseDataRequest">
 
-      <wsdl:part element="impl:createTimetable" name="parameters">
+      <wsdl:part element="impl:getVisitedCourseData" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="getVisitedCourseDataRequest">
+   <wsdl:message name="createTimetableRequest">
 
-      <wsdl:part element="impl:getVisitedCourseData" name="parameters">
+      <wsdl:part element="impl:createTimetable" name="parameters">
 
       </wsdl:part>
 
@@ -1055,6 +1069,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="getAccountDataResponse">
 
       <wsdl:part element="impl:getAccountDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="connectToDBRequest">
+
+      <wsdl:part element="impl:connectToDB" name="parameters">
 
       </wsdl:part>
 
@@ -1141,6 +1163,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:createCommentResponse" name="createCommentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="connectToDB">
+
+         <wsdl:input message="impl:connectToDBRequest" name="connectToDBRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:connectToDBResponse" name="connectToDBResponse">
 
        </wsdl:output>
 
@@ -1571,6 +1605,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="createCommentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="connectToDB">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="connectToDBRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="connectToDBResponse">
 
             <wsdlsoap:body use="literal"/>
 

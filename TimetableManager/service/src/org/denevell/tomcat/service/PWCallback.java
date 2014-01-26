@@ -1,10 +1,13 @@
 package org.denevell.tomcat.service;
 
 import java.io.IOException;
+
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
+
 import org.apache.ws.security.WSPasswordCallback;
+import org.denevell.tomcat.entities.write.ObjectRepo;
 
 public class PWCallback implements CallbackHandler {
 
@@ -12,10 +15,8 @@ public class PWCallback implements CallbackHandler {
         for (int i = 0; i < callbacks.length; i++) {
             if (callbacks[i] instanceof WSPasswordCallback) {
                 WSPasswordCallback pc = (WSPasswordCallback)callbacks[i];
-                // set the password given a username
-                if ("wss4j".equals(pc.getIdentifier())) {
-                    pc.setPassword("security");
-                }
+                // set the password given a email
+                pc.setPassword(ObjectRepo.getInstance().getAccount(pc.getIdentifier()).getPassword());
             } else {
                 throw new UnsupportedCallbackException(callbacks[i], "Unrecognized Callback");
             }

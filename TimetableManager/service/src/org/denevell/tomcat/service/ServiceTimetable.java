@@ -28,7 +28,17 @@ import com.google.gson.Gson;
 public class ServiceTimetable {	
 	
 	final static String file = System.getProperty("user.home") + "/timetableManager.db4o";
-	ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), file);
+
+	public void connectToDB(){
+		ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), file);
+		try {
+		    // do something with db4o
+			
+		} finally {
+		    db.close();
+		}	
+	}
+
 	
 	@SuppressWarnings("deprecation")
 	public String dateToString(Date date){
@@ -60,7 +70,6 @@ public class ServiceTimetable {
 		}else{
 			Account account = new Account(username, password, email, visibility);
 			ObjectRepo.getInstance().addAccount(account);
-			db.store(ObjectRepo.getInstance().accounts);
 			return true;
 		}
 	}

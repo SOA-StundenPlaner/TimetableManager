@@ -24,6 +24,8 @@
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:courseName" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:courseDescription" type="tns:string"/>
       </operation>
+      <operation xmlns:operNS="http://service.tomcat.denevell.org" name="connectToDB" qname="operNS:connectToDB" soapAction="">
+      </operation>
       <operation xmlns:operNS="http://service.tomcat.denevell.org" xmlns:retNS="http://service.tomcat.denevell.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createTimeprofile" qname="operNS:createTimeprofile" returnQName="retNS:createTimeprofileReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
@@ -199,7 +201,7 @@
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
         <parameter xmlns:pns="http://service.tomcat.denevell.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:visibility" type="tns:int"/>
       </operation>
-      <parameter name="allowedMethods" value="getCommentHeaderData createCourse getCourseData editAccountUsername removeTimeprofile dateToString getTimeprofileData getAllCourses editTimeprofile getVisitedCourseData login editAccountVisibility createHour getParticipantsOfCourse getAccountData removeComment editAccountEmail createTimetable editAccountPassword createTimeprofile removeAccount createComment editAccount getAllTimetablesOfUser getVisitedCoursesOfTimetable editTimetable createAccount removeTimetable getTimetableData getCommentData createVisitedCourse getAllAccounts getHourData removeVisitedCourse"/>
+      <parameter name="allowedMethods" value="getCommentHeaderData createCourse getCourseData editAccountUsername removeTimeprofile dateToString getTimeprofileData getAllCourses getVisitedCourseData editTimeprofile login editAccountVisibility connectToDB createHour getParticipantsOfCourse getAccountData removeComment editAccountEmail createTimetable editAccountPassword createTimeprofile removeAccount createComment editAccount getAllTimetablesOfUser getVisitedCoursesOfTimetable editTimetable createAccount removeTimetable getTimetableData getCommentData createVisitedCourse getAllAccounts getHourData removeVisitedCourse"/>
 
   </service>
 </deployment>
