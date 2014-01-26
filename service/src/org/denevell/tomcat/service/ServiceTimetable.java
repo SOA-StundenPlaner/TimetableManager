@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.cxf.annotations.Policies;
+import org.apache.cxf.annotations.Policy;
 import org.denevell.tomcat.entities.write.Account;
 import org.denevell.tomcat.entities.write.Comment;
 import org.denevell.tomcat.entities.write.Course;
@@ -20,6 +22,7 @@ import com.google.gson.Gson;
  * Klasse, die den Service implementiert.
  * @author Nicole Hein
  */
+@Policies({ @Policy(uri = "securepolicy.xml") })
 public class ServiceTimetable {	
 	
 	@SuppressWarnings("deprecation")
