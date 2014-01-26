@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+/home/e73/Dokumente/workspace/SOA/TimetableManager/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2213558683.index
+4004916094.index
+2373397553.index
+43326251.index
+965077567.index
+3649118567.index

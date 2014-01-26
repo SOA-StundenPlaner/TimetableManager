@@ -1,0 +1,5 @@
+package org.denevell.tomcat.service;
+
+public class PWCallback {
+
+}

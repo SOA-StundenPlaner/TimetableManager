@@ -1,0 +1,2090 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.tomcat.denevell.org" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.tomcat.denevell.org" xmlns:intf="http://service.tomcat.denevell.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.tomcat.denevell.org" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="dateToString">
+    <complexType>
+     <sequence>
+      <element name="date" type="xsd:dateTime"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="dateToStringResponse">
+    <complexType>
+     <sequence>
+      <element name="dateToStringReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createComment">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="c" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+      <element name="courseDescription" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCommentResponse">
+    <complexType>
+     <sequence>
+      <element name="createCommentReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAccount">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="visibility" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="createAccountReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountPassword">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="newPassword" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountPasswordResponse">
+    <complexType>
+     <sequence>
+      <element name="editAccountPasswordReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountEmail">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="newEmail" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="editAccountEmailReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountVisibility">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="newVisibility" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountVisibilityResponse">
+    <complexType>
+     <sequence>
+      <element name="editAccountVisibilityReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeAccount">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="removeAccountReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAccountData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAccountDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getAccountDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllAccounts">
+    <complexType/>
+   </element>
+   <element name="getAllAccountsResponse">
+    <complexType>
+     <sequence>
+      <element name="getAllAccountsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimeprofileReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+      <element name="newTimeprofileName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="editTimeprofileReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="timeprofileName" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="removeTimeprofileReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTimeprofileData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTimeprofileDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getTimeprofileDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createHour">
+    <complexType>
+     <sequence>
+      <element name="start" type="xsd:string"/>
+      <element name="end" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="hourIndex" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createHourResponse">
+    <complexType>
+     <sequence>
+      <element name="createHourReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getHourData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getHourDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getHourDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimetable">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timetableName" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimetableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editTimetable">
+    <complexType>
+     <sequence>
+      <element name="timetableName" type="xsd:string"/>
+      <element name="newTimetableName" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+      <element name="newTimeprofileName" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="editTimetableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTimetable">
+    <complexType>
+     <sequence>
+      <element name="timetableName" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="removeTimetableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTimetableData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timetableName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTimetableDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getTimetableDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllTimetablesOfUser">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllTimetablesOfUserResponse">
+    <complexType>
+     <sequence>
+      <element name="getAllTimetablesOfUserReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCourse">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="shortname" type="xsd:string"/>
+      <element name="teacher" type="xsd:string"/>
+      <element name="description" type="xsd:string"/>
+      <element name="room" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="createCourseReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCourseData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+      <element name="description" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCourseDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getCourseDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllCourses">
+    <complexType/>
+   </element>
+   <element name="getAllCoursesResponse">
+    <complexType>
+     <sequence>
+      <element name="getAllCoursesReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccount">
+    <complexType>
+     <sequence>
+      <element name="newUsername" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="newEmail" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="newPassword" type="xsd:string"/>
+      <element name="newVisibility" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="editAccountReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountUsername">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="newUsername" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountUsernameResponse">
+    <complexType>
+     <sequence>
+      <element name="editAccountUsernameReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCommentHeaderData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+      <element name="courseDescription" type="xsd:string"/>
+      <element name="comment" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCommentHeaderDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getCommentHeaderDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeComment">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+      <element name="courseDescription" type="xsd:string"/>
+      <element name="comment" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeCommentResponse">
+    <complexType>
+     <sequence>
+      <element name="removeCommentReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCommentData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+      <element name="courseDescription" type="xsd:string"/>
+      <element name="comment" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCommentDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getCommentDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createVisitedCourse">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timetableName" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+      <element name="courseName" type="xsd:string"/>
+      <element name="courseDescription" type="xsd:string"/>
+      <element name="day" type="xsd:int"/>
+      <element name="hourIndex" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createVisitedCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="createVisitedCourseReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeVisitedCourse">
+    <complexType>
+     <sequence>
+      <element name="courseName" type="xsd:string"/>
+      <element name="courseDescription" type="xsd:string"/>
+      <element name="visistedCourseDay" type="xsd:int"/>
+      <element name="visitedCourseHour" type="xsd:int"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timetableName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeVisitedCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="removeVisitedCourseReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getVisitedCourseData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getVisitedCourseDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getVisitedCourseDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getParticipantsOfCourse">
+    <complexType>
+     <sequence>
+      <element name="visitedCourse" type="xsd:string"/>
+      <element name="courseDay" type="xsd:int"/>
+      <element name="hourIndex" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getParticipantsOfCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="getParticipantsOfCourseReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getVisitedCoursesOfTimetable">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timetableName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getVisitedCoursesOfTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="getVisitedCoursesOfTimetableReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="dateToStringResponse">
+
+      <wsdl:part element="impl:dateToStringResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getVisitedCourseDataResponse">
+
+      <wsdl:part element="impl:getVisitedCourseDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCommentHeaderDataResponse">
+
+      <wsdl:part element="impl:getCommentHeaderDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountEmailRequest">
+
+      <wsdl:part element="impl:editAccountEmail" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountEmailResponse">
+
+      <wsdl:part element="impl:editAccountEmailResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTimeprofileDataRequest">
+
+      <wsdl:part element="impl:getTimeprofileData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createHourRequest">
+
+      <wsdl:part element="impl:createHour" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeCommentRequest">
+
+      <wsdl:part element="impl:removeComment" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeTimeprofileRequest">
+
+      <wsdl:part element="impl:removeTimeprofile" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountRequest">
+
+      <wsdl:part element="impl:editAccount" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeVisitedCourseRequest">
+
+      <wsdl:part element="impl:removeVisitedCourse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="dateToStringRequest">
+
+      <wsdl:part element="impl:dateToString" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTimetableDataResponse">
+
+      <wsdl:part element="impl:getTimetableDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getHourDataRequest">
+
+      <wsdl:part element="impl:getHourData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCourseDataResponse">
+
+      <wsdl:part element="impl:getCourseDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountPasswordRequest">
+
+      <wsdl:part element="impl:editAccountPassword" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createVisitedCourseRequest">
+
+      <wsdl:part element="impl:createVisitedCourse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimetableResponse">
+
+      <wsdl:part element="impl:createTimetableResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllCoursesResponse">
+
+      <wsdl:part element="impl:getAllCoursesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createCourseRequest">
+
+      <wsdl:part element="impl:createCourse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllAccountsRequest">
+
+      <wsdl:part element="impl:getAllAccounts" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCommentHeaderDataRequest">
+
+      <wsdl:part element="impl:getCommentHeaderData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editTimetableResponse">
+
+      <wsdl:part element="impl:editTimetableResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getParticipantsOfCourseResponse">
+
+      <wsdl:part element="impl:getParticipantsOfCourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createCommentResponse">
+
+      <wsdl:part element="impl:createCommentResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createAccountResponse">
+
+      <wsdl:part element="impl:createAccountResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeAccountRequest">
+
+      <wsdl:part element="impl:removeAccount" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountVisibilityRequest">
+
+      <wsdl:part element="impl:editAccountVisibility" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createHourResponse">
+
+      <wsdl:part element="impl:createHourResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getVisitedCoursesOfTimetableRequest">
+
+      <wsdl:part element="impl:getVisitedCoursesOfTimetable" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllAccountsResponse">
+
+      <wsdl:part element="impl:getAllAccountsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTimeprofileDataResponse">
+
+      <wsdl:part element="impl:getTimeprofileDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getTimetableDataRequest">
+
+      <wsdl:part element="impl:getTimetableData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createCommentRequest">
+
+      <wsdl:part element="impl:createComment" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountUsernameResponse">
+
+      <wsdl:part element="impl:editAccountUsernameResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCourseDataRequest">
+
+      <wsdl:part element="impl:getCourseData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getVisitedCoursesOfTimetableResponse">
+
+      <wsdl:part element="impl:getVisitedCoursesOfTimetableResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllTimetablesOfUserRequest">
+
+      <wsdl:part element="impl:getAllTimetablesOfUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeTimeprofileResponse">
+
+      <wsdl:part element="impl:removeTimeprofileResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAccountDataRequest">
+
+      <wsdl:part element="impl:getAccountData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getParticipantsOfCourseRequest">
+
+      <wsdl:part element="impl:getParticipantsOfCourse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountPasswordResponse">
+
+      <wsdl:part element="impl:editAccountPasswordResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllCoursesRequest">
+
+      <wsdl:part element="impl:getAllCourses" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCommentDataRequest">
+
+      <wsdl:part element="impl:getCommentData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createVisitedCourseResponse">
+
+      <wsdl:part element="impl:createVisitedCourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeCommentResponse">
+
+      <wsdl:part element="impl:removeCommentResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeVisitedCourseResponse">
+
+      <wsdl:part element="impl:removeVisitedCourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editTimetableRequest">
+
+      <wsdl:part element="impl:editTimetable" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllTimetablesOfUserResponse">
+
+      <wsdl:part element="impl:getAllTimetablesOfUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeTimetableRequest">
+
+      <wsdl:part element="impl:removeTimetable" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getVisitedCourseDataRequest">
+
+      <wsdl:part element="impl:getVisitedCourseData" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimetableRequest">
+
+      <wsdl:part element="impl:createTimetable" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editTimeprofileRequest">
+
+      <wsdl:part element="impl:editTimeprofile" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createAccountRequest">
+
+      <wsdl:part element="impl:createAccount" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountUsernameRequest">
+
+      <wsdl:part element="impl:editAccountUsername" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimeprofileRequest">
+
+      <wsdl:part element="impl:createTimeprofile" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeTimetableResponse">
+
+      <wsdl:part element="impl:removeTimetableResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createTimeprofileResponse">
+
+      <wsdl:part element="impl:createTimeprofileResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createCourseResponse">
+
+      <wsdl:part element="impl:createCourseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAccountDataResponse">
+
+      <wsdl:part element="impl:getAccountDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editTimeprofileResponse">
+
+      <wsdl:part element="impl:editTimeprofileResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountResponse">
+
+      <wsdl:part element="impl:editAccountResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCommentDataResponse">
+
+      <wsdl:part element="impl:getCommentDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeAccountResponse">
+
+      <wsdl:part element="impl:removeAccountResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="editAccountVisibilityResponse">
+
+      <wsdl:part element="impl:editAccountVisibilityResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getHourDataResponse">
+
+      <wsdl:part element="impl:getHourDataResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ServiceTimetable">
+
+      <wsdl:operation name="dateToString">
+
+         <wsdl:input message="impl:dateToStringRequest" name="dateToStringRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:dateToStringResponse" name="dateToStringResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createComment">
+
+         <wsdl:input message="impl:createCommentRequest" name="createCommentRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createCommentResponse" name="createCommentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createAccount">
+
+         <wsdl:input message="impl:createAccountRequest" name="createAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createAccountResponse" name="createAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccountPassword">
+
+         <wsdl:input message="impl:editAccountPasswordRequest" name="editAccountPasswordRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editAccountPasswordResponse" name="editAccountPasswordResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccountEmail">
+
+         <wsdl:input message="impl:editAccountEmailRequest" name="editAccountEmailRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editAccountEmailResponse" name="editAccountEmailResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccountVisibility">
+
+         <wsdl:input message="impl:editAccountVisibilityRequest" name="editAccountVisibilityRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editAccountVisibilityResponse" name="editAccountVisibilityResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeAccount">
+
+         <wsdl:input message="impl:removeAccountRequest" name="removeAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeAccountResponse" name="removeAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAccountData">
+
+         <wsdl:input message="impl:getAccountDataRequest" name="getAccountDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAccountDataResponse" name="getAccountDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllAccounts">
+
+         <wsdl:input message="impl:getAllAccountsRequest" name="getAllAccountsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllAccountsResponse" name="getAllAccountsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdl:input message="impl:createTimeprofileRequest" name="createTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimeprofileResponse" name="createTimeprofileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editTimeprofile">
+
+         <wsdl:input message="impl:editTimeprofileRequest" name="editTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editTimeprofileResponse" name="editTimeprofileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTimeprofile">
+
+         <wsdl:input message="impl:removeTimeprofileRequest" name="removeTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeTimeprofileResponse" name="removeTimeprofileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTimeprofileData">
+
+         <wsdl:input message="impl:getTimeprofileDataRequest" name="getTimeprofileDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTimeprofileDataResponse" name="getTimeprofileDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createHour">
+
+         <wsdl:input message="impl:createHourRequest" name="createHourRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createHourResponse" name="createHourResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getHourData">
+
+         <wsdl:input message="impl:getHourDataRequest" name="getHourDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getHourDataResponse" name="getHourDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimetable">
+
+         <wsdl:input message="impl:createTimetableRequest" name="createTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimetableResponse" name="createTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editTimetable">
+
+         <wsdl:input message="impl:editTimetableRequest" name="editTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editTimetableResponse" name="editTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTimetable">
+
+         <wsdl:input message="impl:removeTimetableRequest" name="removeTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeTimetableResponse" name="removeTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTimetableData">
+
+         <wsdl:input message="impl:getTimetableDataRequest" name="getTimetableDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTimetableDataResponse" name="getTimetableDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllTimetablesOfUser">
+
+         <wsdl:input message="impl:getAllTimetablesOfUserRequest" name="getAllTimetablesOfUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllTimetablesOfUserResponse" name="getAllTimetablesOfUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createCourse">
+
+         <wsdl:input message="impl:createCourseRequest" name="createCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createCourseResponse" name="createCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCourseData">
+
+         <wsdl:input message="impl:getCourseDataRequest" name="getCourseDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCourseDataResponse" name="getCourseDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllCourses">
+
+         <wsdl:input message="impl:getAllCoursesRequest" name="getAllCoursesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllCoursesResponse" name="getAllCoursesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccount">
+
+         <wsdl:input message="impl:editAccountRequest" name="editAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editAccountResponse" name="editAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccountUsername">
+
+         <wsdl:input message="impl:editAccountUsernameRequest" name="editAccountUsernameRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editAccountUsernameResponse" name="editAccountUsernameResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCommentHeaderData">
+
+         <wsdl:input message="impl:getCommentHeaderDataRequest" name="getCommentHeaderDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCommentHeaderDataResponse" name="getCommentHeaderDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeComment">
+
+         <wsdl:input message="impl:removeCommentRequest" name="removeCommentRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeCommentResponse" name="removeCommentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCommentData">
+
+         <wsdl:input message="impl:getCommentDataRequest" name="getCommentDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getCommentDataResponse" name="getCommentDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createVisitedCourse">
+
+         <wsdl:input message="impl:createVisitedCourseRequest" name="createVisitedCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createVisitedCourseResponse" name="createVisitedCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeVisitedCourse">
+
+         <wsdl:input message="impl:removeVisitedCourseRequest" name="removeVisitedCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeVisitedCourseResponse" name="removeVisitedCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getVisitedCourseData">
+
+         <wsdl:input message="impl:getVisitedCourseDataRequest" name="getVisitedCourseDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getVisitedCourseDataResponse" name="getVisitedCourseDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getParticipantsOfCourse">
+
+         <wsdl:input message="impl:getParticipantsOfCourseRequest" name="getParticipantsOfCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getParticipantsOfCourseResponse" name="getParticipantsOfCourseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getVisitedCoursesOfTimetable">
+
+         <wsdl:input message="impl:getVisitedCoursesOfTimetableRequest" name="getVisitedCoursesOfTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getVisitedCoursesOfTimetableResponse" name="getVisitedCoursesOfTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ServiceTimetableSoapBinding" type="impl:ServiceTimetable">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="dateToString">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="dateToStringRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="dateToStringResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createComment">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createCommentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createCommentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccountPassword">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editAccountPasswordRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editAccountPasswordResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccountEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editAccountEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editAccountEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccountVisibility">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editAccountVisibilityRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editAccountVisibilityResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAccountData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAccountDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAccountDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllAccounts">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllAccountsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllAccountsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimeprofileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editTimeprofileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeTimeprofileResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTimeprofileData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTimeprofileDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTimeprofileDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createHour">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createHourRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createHourResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getHourData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getHourDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getHourDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTimetableData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTimetableDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTimetableDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllTimetablesOfUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllTimetablesOfUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllTimetablesOfUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCourseData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCourseDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCourseDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllCourses">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllCoursesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllCoursesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editAccountUsername">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editAccountUsernameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editAccountUsernameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCommentHeaderData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCommentHeaderDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCommentHeaderDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeComment">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeCommentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeCommentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCommentData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCommentDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCommentDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createVisitedCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createVisitedCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createVisitedCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeVisitedCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeVisitedCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeVisitedCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getVisitedCourseData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getVisitedCourseDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getVisitedCourseDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getParticipantsOfCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getParticipantsOfCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getParticipantsOfCourseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getVisitedCoursesOfTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getVisitedCoursesOfTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getVisitedCoursesOfTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ServiceTimetableService">
+
+      <wsdl:port binding="impl:ServiceTimetableSoapBinding" name="ServiceTimetable">
+
+         <wsdlsoap:address location="http://localhost:8080/StundenPlaner/services/ServiceTimetable"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,4 @@
+TimetableManager
+================
+
+Manager for timetables

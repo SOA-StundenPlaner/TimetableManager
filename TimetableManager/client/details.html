@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html><head>
+<title>Timetable Managing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/sha512.js"></script> 
+<script type="text/javascript" src="js/script.js"></script>                                  
+<link rel="stylesheet" type="text/css" href="css/main.css" media="all" />                     
+<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+</head><body onload="getCourseData();">
+	<header>
+		<div class="head">
+			<a href="index.html">Stunden<span class="bluegreen">Planer</span></a>
+			<div class="loggedin"></div>
+		</div>
+		<div class="menu">
+			<div class="menuul">
+				<ul>
+					<li class="menupart left menuactive"><a href="index.html"><img src="img/spreadsheet.png" alt="spreadsheet" class="leftbild"></a></li>
+					<li class="menupart mid"><a href="createTimetable.html">Neuer Stundenplan</a></li>
+					<li class="menupart mid"><a href="createCourse.html">Neuer Kurs</a></li>
+					<li class="menupart mid"><a href="account.html">Account</a></li>
+					<li class="menupart right"><a href="#"><img src="img/fragezeichen.png" alt="fragezeichen" class="rightbild" onclick="showHelp();"></a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+		<div class="wrapped">			
+			<div class="wrapper">
+				<div class="detailsabove">
+					<div class="details-right">
+						
+					</div>	
+					<div class="details-left">
+						<span class="light members-heading">Teilnehmer:</span>
+						<div class="members">
+
+						</div>
+					</div>				
+				</div><div class="clear"></div>
+				<hr>
+				<div class="detailsbelow">
+					<span class="detailsheading">Kommentare</span>
+					<div class="comwrap">
+						<div id="comments">
+							
+						</div>
+						<p class="addcomment"><a href="#com" onClick="showhideAddComment();">Kommentar schreiben</a></p>
+						<div id="writecomment">
+							<form name="commentform">
+								<a name="details.html#com"><textarea name="writtencomment" cols="50" rows="4"></textarea></a>
+								</br>
+								<button id="publishcomment">Ver&ouml;ffentlichen</button>
+							</form>
+						</div>
+					</div><div class="clear"></div>
+				
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	<div class="overlay"></div>
+	<div class="help"></div>
+	<div class="noti"></div>
+	<div id="popup"></div>
+
+	<script type="text/javascript">
+			init();
+	</script>
+</body></html>
