@@ -1,44 +1,58 @@
 package org.denevell.tomcat.entities.write;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Klasse, die einen Kommentar implementiert.
  * 
  * @author Nicole Hein
  */
-@DatabaseTable(tableName = "comment")
 public class Comment {
 
         /** Kommentar **/
-        @DatabaseField(canBeNull = false)
         private String comment;
 
         /** Autor des Kommentars **/
-        @DatabaseField(canBeNull = false)
         private String author;
-
-        /** Veranstaltungs-ID, zu der der Kommentar gehört **/
-        @DatabaseField(canBeNull = false, id = true)
-        private String courseID;
-
-        /** Kurs, zu dem der Kommentar erstellt werden soll **/
-        @DatabaseField(foreign = true)
-        private Course course;
         
         /** Name des Kurses **/
-        @DatabaseField(canBeNull = false)
         private String courseName;
+        
+        /** e-Mail **/
+        private String email;
+        
+        /** Zeit **/
+        private String timestamp;
         
         /**
          * Konstruktor der Klasse Comment.
          */
-        public Comment(){
-        	
+        public Comment(String author, String comment, String courseName, String timestamp){
+        	this.author = author;
+        	this.comment = comment;
+        	this.courseName = courseName;
+        	this.timestamp = timestamp;
+        	setHeader(author, timestamp);
         }
         
         
+        public void setEmail(String email){
+        	this.email = email;
+        }
+        
+        public String getEmail(){
+        	return email;
+        }
+        
+        public void setTimestamp(String timestamp){
+        	this.timestamp = timestamp;
+        }
+        
+        public String getTimestamp(){
+        	return timestamp;
+        }
         
 
         /**
@@ -57,14 +71,6 @@ public class Comment {
                 return comment;
         }
 
-        /**
-         * Setter, der den Autor des Kommentars setzt.
-         * @param author zu setzender Kommentarautor
-         */
-        public void setAuthor(String author) {
-        	courseID = author+courseName+comment;
-        	this.author = author;
-        }
 
         /**
          * Getter, der den Autor des Kommentars zurück gibt.
@@ -90,5 +96,15 @@ public class Comment {
          */
         public String getCourseName(){
         	return courseName;
+        }
+        
+        
+        Map<String, String> header = new HashMap<String, String>();
+        public void setHeader(String email, String timestamp){
+        	header.put(email, timestamp);
+        }
+        
+        public Map<String, String> getHeader(){
+        	return header;
         }
 }

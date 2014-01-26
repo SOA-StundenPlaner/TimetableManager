@@ -1,38 +1,41 @@
 package org.denevell.tomcat.entities.write;
 
-import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-import com.j256.ormlite.table.DatabaseTable;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 /**
  * Klasse, die einen Stundenplan implementiert.
  * @author Nicole Hein
  */
-@DatabaseTable(tableName = "timetable")
 public class Timetable {
 	
 	/** Erzeugt ein neues Zeitprofil **/
-	@DatabaseField(canBeNull = false, foreign = true)
 	private Timeprofile timeprofile;
-	
-	/** Liste der besuchten Kurse **/
-	@ForeignCollectionField
-	private ForeignCollection<VisitedCourse> visitedCourses;
-	
+			
 	/** Name des Stundenplans **/
-	@DatabaseField(canBeNull = false, id = true)
 	private String name;
+	
+	/** ID des Stundenplans **/
+	private String id;
+	
+	/** Liste der besuchten Kurses **/
+	private List<VisitedCourse> visitedCourses = new ArrayList<VisitedCourse>();
 	
 	
 	/**
-	 * Konstruktor der Klasse Timetable.
+	 * Konstruktor
+	 * @param id
+	 * @param name
+	 * @param timeprofile
 	 */
-	public Timetable(){
-		
+	public Timetable(String id, String name, Timeprofile timeprofile){
+		this.id = id;
+		this.name = name;
+		this.timeprofile = timeprofile;
 	}
-	
-	
+		
 	/**
 	 * Getter, der ein Zeitprofil zurück gibt.
 	 * @return Zeitprofil
@@ -48,20 +51,12 @@ public class Timetable {
 	public void setTimeprofile(Timeprofile timeprofile) {
 		this.timeprofile = timeprofile;
 	}
-
-	/**
-	 * Getter, der die Liste der besuchten Kurse zurück gibt.
-	 * @return besuchte Kurse
-	 */
-	public ForeignCollection<VisitedCourse> getCourses() {
-		return visitedCourses;
-	}
 	
 	/**
 	 * Setter, der den Namen des Stundenplans zurück gibt.
 	 * @return Name des Stundenplans
 	 */
-	public String getName() {
+	public String getTimetableName() {
 		return name;
 	}
 	
@@ -69,31 +64,44 @@ public class Timetable {
 	 * Setter, der den Namen des Stundenplans setzt.
 	 * @param name Name des Stundenplans
 	 */
-	public void setName(String name) {
+	public void setTimetableName(String name) {
 		this.name = name;
 	}
 	
+	
 	/**
-	 * Methode, die einen Kurs zur Liste der besuchten Kurse hinzufügt.
-	 * @param vc zu besuchender Kurs
+	 * Setter, der die ID des Stundenplans setzt.
+	 * @param id ID
 	 */
-	public void addVisitedCourse(VisitedCourse vc){
-		visitedCourses.add(vc);
+	public void setId(String id){
+		this.id = id;
 	}
 	
 	
 	/**
-	 * Methode, die einen besuchten Kurs von der Liste der besuchten Kurse löscht.
-	 * @param vc zu löschender Kurs
-	 * @return Gibt wahr zurück, wenn der Kurs erfolgreich gelöscht werden konnte. Gibt falsch zurück, wenn der Kurs nicht gefunden werden konnte.
+	 * Getter, der die ID des Stundenplans zurück gibt.
+	 * @return ID
 	 */
-	public boolean removeVisitedCourse(VisitedCourse vc){
-		if (visitedCourses.contains(vc)){
-			visitedCourses.add(vc);
+	public String getId(){
+		return id;
+	}
+	
+	
+	public void addVisitedCourse(VisitedCourse visitedCourse){
+		visitedCourses.add(visitedCourse);
+	}
+	
+	public boolean removeVisitedCourse(VisitedCourse visitedCourse){
+		if (visitedCourses.contains(visitedCourse)){
+			visitedCourses.remove(visitedCourse);
 			return true;
 		}else{
 			return false;
 		}
+	}
+	
+	public List<VisitedCourse> getVisitedCourses(){
+		return visitedCourses;
 	}
 
 }

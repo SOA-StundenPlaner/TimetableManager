@@ -1,33 +1,29 @@
 package org.denevell.tomcat.entities.write;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Klasse, die ein Zeitprofil implementiert.
  * @author Nicole Hein
  */
-@DatabaseTable(tableName = "timeprofile")
 public class Timeprofile {
 		
 	/** Liste der Stunden **/
-	@ForeignCollectionField
-	private ForeignCollection<Hour> hours;
+	private List<Hour> hours = new ArrayList<Hour>();
 	
 	/** Name des Zeitprofils **/
-	@DatabaseField(canBeNull = false, id = true)
 	private String name;
 	
-	
+	/** ID **/
+	private String id;
+		
 	/**
 	 * Konstruktor der Klasse Timeprofile.
 	 */
-	public Timeprofile(){
-		
+	public Timeprofile(String id, String name){
+		this.id = id;
+		this.name = name;
 	}
 
 	
@@ -35,24 +31,8 @@ public class Timeprofile {
 	 * Getter, der die Liste der Stunden zurück gibt.
 	 * @return Liste der Stunden
 	 */
-	public ForeignCollection<Hour> getHours() {
+	public List<Hour> getHours() {
 		return hours;
-	}
-	
-	
-	/**
-	 * Methode, die prüft, ob eine Stunde mit entsprechendem Index vorhanden ist.
-	 * @param hourIndex Index der Stunde
-	 * @param hourList Liste aller Stunden
-	 * @return Stunde
-	 */
-	public Hour getHourByIndex(int hourIndex, List<Hour> hourList){
-		for (int i=0; i<hourList.size(); i++){
-			if (hourList.get(i).getHourIndex() == hourIndex){
-				return hourList.get(i);
-			}
-		}
-		return null;
 	}
 	
 
@@ -71,6 +51,25 @@ public class Timeprofile {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
+	/**
+	 * Setter, der die ID des Zeitprofils setzt.
+	 * @param id ID
+	 */
+	public void setId(String id){
+		this.id = id;
+	}
+	
+	
+	/**
+	 * Getter, der die ID des Zeitprofils zurück gibt.
+	 * @return ID
+	 */
+	public String getId(){
+		return id;
+	}
+		
 	
 	/**
 	 * Methode, die eine Stunde zur Liste der Stunden hinzufügt.

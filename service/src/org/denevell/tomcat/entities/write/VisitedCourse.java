@@ -1,102 +1,129 @@
 package org.denevell.tomcat.entities.write;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
 /**
- * Klasse, die einen besuchten Kurs implementiert.
+ * public Map<String, VisitedCourse> getVisitedCourses(){
+ * 
+ * } Klasse, die einen besuchten Kurs implementiert.
+ * //			vc.addParticipant(account);
+
  * @author Nicole Hein
  */
-@DatabaseTable(tableName = "visitedCourse")
 public class VisitedCourse {
+
+	/** e-Mail-Adresse des Accounts **/
+	private String email;
+
+	/** Name des besuchten Kurses **/
+	private String name;
+
+	/** Raum **/
+	private String room;
 	
-	/** ID **/
-	@DatabaseField(canBeNull = false)	
-	private int id;
-	
-	/** Kurs **/
-	@DatabaseField(foreign = true, canBeNull = false)
-	public Course course;
-	
-	/** Name des Kurses **/
-	@DatabaseField(canBeNull = false, id = true)
-	public String courseName;
-	
-	/** Stunde **/
-	@DatabaseField(foreign = true, canBeNull = false)
-	public Hour hour;
-	
+	/** Lehrer **/
+	private String teacher;
+
+	/** Index der Stunde **/
+	private int hourIndex;
+
 	/** Wochentag **/
-	@DatabaseField(canBeNull = false)
-	public int day;
-	
+	private int day;
+
 	/** Stundenplan **/
-	@DatabaseField(foreign = true)
-	private Timetable timetable;
-	
+	private String timetable;
+
 	/**
 	 * Konstruktor der Klasse VisitedCourse.
 	 */
-	public VisitedCourse(){
+	public VisitedCourse(String email, String name, String room, String teacher,
+			String timetable, int day, int hourIndex) {
+		this.email = email;
+		this.room = room;
+		this.teacher = teacher;
+		this.timetable = timetable;
+		this.day = day;
+		this.hourIndex = hourIndex;
+		this.name = name;
+	}
 
+	
+	public void setName(String name){
+		this.name = name;
 	}
 	
 	
-	/**
-	 * Getter, der die ID zurück gibt.
-	 * @return ID
-	 */
-	public int getId(){
-		return id;
+	public void setRoom(String room){
+		this.room = room;
 	}
 	
-	
-	/**
-	 * Getter, der einen Kurs zurück gibt.
-	 * @return Kurs
-	 */
-	public Course getCourse() {
-		return course;
+	public String getRoom(){
+		return room;
 	}
 	
-	/**
-	 * Setter, der einen Kurs setzt.
-	 * @param course Kurs
-	 */
-	public void setCourse(Course course) {
-		courseName = course.getName();
-		this.course = course;
+	public void setTeacher(String teacher){
+		this.teacher = teacher;
 	}
 	
-	/**
-	 * Getter, der eine Stunde zurück gibt.
-	 * @return Stunde
-	 */
-	public Hour getHour() {
-		return hour;
+	public String getTeacher(){
+		return teacher;
 	}
-	
-	/**
-	 * Setter, der eine Stunde setzt.
-	 * @param hour Stunde
-	 */
-	public void setHour(Hour hour) {
-		this.hour = hour;
-	}
-	
+
+
 	/**
 	 * Getter, der den Wochentag zurück gibt.
+	 * 
 	 * @return Wochentag
 	 */
 	public int getDay() {
 		return day;
 	}
-	
+
 	/**
 	 * Setter, der einen Wochentag setzt.
-	 * @param day Wochentag
+	 * 
+	 * @param day
+	 *            Wochentag
 	 */
 	public void setDay(int day) {
 		this.day = day;
 	}
+	
+	
+	public void setHourIndex(int hourIndex){
+		this.hourIndex = hourIndex;
+	}
+	
+	public int getHourIndex(){
+		return hourIndex;
+	}
+
+	/**
+	 * Getter, der die e-Mail-Adresse des Accounts zurück gibt.
+	 * 
+	 * @return e-Mail-Adresse
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getTimetable() {
+		return timetable;
+	}
+
+	/**
+	 * Setter, der den Stundenplan setzt.
+	 * 
+	 * @param timetable
+	 *            Stundenplan
+	 */
+	public void setTimetable(String timetable) {
+		this.timetable = timetable;
+	}
+
+
+
 }

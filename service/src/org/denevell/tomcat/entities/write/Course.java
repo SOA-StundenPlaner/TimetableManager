@@ -1,49 +1,47 @@
 package org.denevell.tomcat.entities.write;
 
-import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-import com.j256.ormlite.table.DatabaseTable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Klasse, die einen Kurs implementiert.
  * @author Nicole Hein
  */
-@DatabaseTable(tableName = "course")
 public class Course {
         
         /** Name des Kurses **/
-        @DatabaseField(canBeNull = false, id = true)
         private String name;
         
         /** Abkürzung des Namens des Kurses **/
-        @DatabaseField(canBeNull = true)
         private String shortname;
         
         /** Name des Lehrenden **/
-        @DatabaseField(canBeNull = false)
         private String teacher;
         
         /**Beschreibung des Kurses**/
-        @DatabaseField(canBeNull = false)
         private String description;
         
         /** Raum des Kurses **/
-        @DatabaseField(canBeNull = true)
         private String room;
         
-        /** Liste von Kommentaren **/
-        @ForeignCollectionField
-        private ForeignCollection<Comment> comments;
+        /** Map von Kommentaren **/
+        private Map<String, Comment> comments = new HashMap<String, Comment>();
         
-        @DatabaseField(foreign = true)
-        private ObjectRepo or;
+        /** Liste der Teilnehmer des Kurses **/
+        private List<Account> participants = new ArrayList<Account>();
+        
         
         /**
          * Konstruktor der Klasse Course.
          */
-        public Course(){
-                
+        public Course(String name, String shortname, String room, String teacher, String description){
+        	this.name = name;
+        	this.shortname = shortname;
+        	this.room = room;
+        	this.teacher = teacher;
+        	this.description = description;
         }
         
         
@@ -131,13 +129,8 @@ public class Course {
          * Methode, die einen Kommentar in die Liste der Kommentare hinzufügt.
          * @param comment hinzuzufügender Kommentar
          */
-        public boolean addComment(Comment comment){
-        	if (comments.contains(comment)){
-        		return false;
-        	}else{
-            	comments.add(comment);
-            	return true;
-        	}
+        public void addComment(Comment comment){
+           	comments.put(comment.getAuthor()+comment.getComment()+name+description, comment);
         }
         
         
@@ -147,11 +140,38 @@ public class Course {
          * @return Gibt wahr zurück, wenn der Kommentar erfolgreich gelöscht wurde. Gibt falsch zurück, wenn der Kommentar nicht gefunden werden konnte.
          */
         public boolean removeComment(Comment comment){
-                if (comments.contains(comment)){
-                        comments.remove(comment);
-                        return true;
-                }else{
-                        return false;
-                }
+        	if (comments.containsKey(comment.getAuthor()+comment.getComment()+name+description)){
+        		comments.remove(comment.getAuthor()+comment.getComment()+name+description);
+                	return true;
+            }else{
+              	return false;
+            }
+        }
+        
+        
+        
+        /**
+         * Methode, die die Liste der Kommentare des Kurses zurück gibt.
+         * @return
+         */
+        public Map<String, Comment> getCommentsOfCourse(){
+        	return comments;
+        }
+        
+        public void addParticipant(Account account){
+        	participants.add(account);
+        }
+        
+        public boolean removeParticipant(Account account){
+        	if (participants.contains(account)){
+        		participants.remove(account);
+        		return true;
+        	}else{
+        		return false;
+        	}
+        }
+        
+        public List<Account> getParticipants(){
+        	return participants;
         }
 }
