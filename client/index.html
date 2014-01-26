@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript" src="js/hashit.js"></script>      
+<script type="text/javascript" src="js/sha512.js"></script>      
 <script type="text/javascript" src="js/script.js"></script>                                  
 <link rel="stylesheet" type="text/css" href="css/main.css" media="all" />                    
 <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
@@ -58,15 +58,17 @@
 		<p class="detailsheadingpopup">Kurs hinzuf&uuml;gen</p>	
 		<form name="addviscourseform">
 			<p>zum aktuell ausgew&auml;hlten Stundenplan</p>
-			<select name="courseselect" id="courselist"><option>Kurs w&auml;hlen</option>
+			<select name="courseselect" id="courselist">
 			</select>
 			</br>
 			<p>Kurs nicht dabei? Erstelle einen neuen Kurs: <a href="createCourse.html">Kurs erstellen</a></p>
 			<p>Wann findet der Kurs statt?</p>
 			<select name="dayselect"><option>Tag w&auml;hlen</option><option value="1">Montag</option><option value="2">Dienstag</option><option value="3">Mittwoch</option><option value="4">Donnerstag</option><option value="5">Freitag</option><option value="6">Samstag</option></select>
-			<select name="hourselect"><option>Stunde w&auml;hlen</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+			<select name="hourselect" id="hourlist"></select>
 			</br>
 			<button class="close" id="addviscoursebutton">Hinzuf&uuml;gen</button><button class="close" onClick="closeAddCoursePopup();">Schlie&szlig;en</button>
+			</br>
+			<p id="errornoti"></p>
 		</form>		
 	</div>
 	
@@ -76,6 +78,8 @@
 			<input type="text" name="newttname">
 			</br>
 			<button class="close" id="changettname">&Auml;ndern</button><button class="close" onClick="closeChangeTTPopup();">Schlie&szlig;en</button>
+			</br>
+			<p id="errornotit"></p>
 		</form>		
 	</div>
 	

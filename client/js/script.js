@@ -28,7 +28,9 @@ $(document).ready(
 					$("#errornoti").html("Passw&ouml;rter stimmen nicht &uuml;berein.");
 					return false;
 				}else{
-					var pw = MD5(password);
+					//var pw = MD5(password);
+					var shaObj = new jsSHA(password, "TEXT");
+					var pw = shaObj.getHash("SHA-512", "HEX");
 					window.localStorage.setItem("email", em);
 					window.localStorage.setItem("password", pw);
 					window.localStorage.setItem("username", un);
@@ -39,7 +41,7 @@ $(document).ready(
 			        xmlhttp.open('POST', _this.url+'/createAccount', false);
 
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:createAccount><q0:username>' + un + '</q0:username><q0:password>' + pw + '</q0:password><q0:email>' + em + '</q0:email><q0:visibility>' + vis + '</q0:visibility></q0:createAccount>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(em, pw,'<q0:createAccount><q0:username>' + un + '</q0:username><q0:password>' + pw + '</q0:password><q0:email>' + em + '</q0:email><q0:visibility>' + vis + '</q0:visibility></q0:createAccount>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -60,6 +62,8 @@ $(document).ready(
 			            },
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                $("#errornoti").html("Fehler: Angaben bitte &uuml;berpr&uuml;fen.");
+							return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -74,7 +78,9 @@ $(document).ready(
 					$("#errornoti").html("Bitte alle Textfelder ausf&uuml;llen.");
 					return false;
 				}else{
-					var pww = MD5(pw);
+					//var pww = MD5(pw);
+					var shaObj = new jsSHA(pw, "TEXT");
+					var pww = shaObj.getHash("SHA-512", "HEX");
 					window.localStorage.setItem("email", em);
 					window.localStorage.setItem("password", pww);
 					window.location.href= "./index.html";
@@ -95,7 +101,7 @@ $(document).ready(
 				    xmlhttp.open('POST', _this.url+'/createTimeprofile', false);
 
 				    // build SOAP request
-				    var xml = buildSOAPEnvelope('<q0:createTimeprofile><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timeprofileName>' + tpname + '</q0:timeprofileName></q0:createTimeprofile>', 'q0', 'http://service.tomcat.denevell.org');
+				    var xml = buildSOAPEnvelope(email, pw, '<q0:createTimeprofile><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timeprofileName>' + tpname + '</q0:timeprofileName></q0:createTimeprofile>', 'q0', 'http://service.tomcat.denevell.org');
 				   	var bool = false;
 				   	var courses = document.getElementsByClassName('course');
 					var courses2 = document.getElementsByClassName('course1');
@@ -137,6 +143,8 @@ $(document).ready(
 				        },
 				        error : function (xhr, status, errorThrown) {
 				            console.log("error: "+errorThrown);
+				            $('#errornoti').html("Fehler: Angaben bitte &uuml;berpr&uuml;fen.");
+				            return false;
 				        }
 				    });			    
 				    
@@ -155,6 +163,8 @@ $(document).ready(
 				var teacher = document.forms["createCourseForm"].elements["courseteacher"].value;
 				var descr = document.forms["createCourseForm"].elements["coursedescr"].value;
 				var room = document.forms["createCourseForm"].elements["courseroom"].value;
+				var email = window.localStorage.getItem("email");
+				var pw = window.localStorage.getItem("password");
 				
 				if(name == "" || name == null || shortname == "" || shortname == null || teacher == "" || teacher == null || descr == "" || descr == null || room == "" || room == null){
 					console.log("Alle Textfelder m&uuml;ssen ausgef&uuml;llt werden.");
@@ -165,7 +175,7 @@ $(document).ready(
 			        xmlhttp.open('POST', _this.url+'/createCourse', false);
 
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:createCourse><q0:name>' + name + '</q0:name><q0:shortname>' + shortname + '</q0:shortname><q0:teacher>' + teacher + '</q0:teacher><q0:description>' + descr + '</q0:description><q0:room>' + room + '</q0:room></q0:createCourse>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(email, pw, '<q0:createCourse><q0:name>' + name + '</q0:name><q0:shortname>' + shortname + '</q0:shortname><q0:teacher>' + teacher + '</q0:teacher><q0:description>' + descr + '</q0:description><q0:room>' + room + '</q0:room></q0:createCourse>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -183,13 +193,15 @@ $(document).ready(
 							console.log("Kurs erfolgreich erstellt: "+bool);
 							if(bool){
 								_this.showNotification("Kurs "+name+" erstellt.");
+								document.forms["createCourseForm"].reset();
 							}else{
-								_this.showNotification("Fehler: Kurs nicht erstellt.", true);
+								_this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
 							}
-							
 			            },
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                $("#errornoti").html("Fehler: Angaben bitte &uuml;berpr&uuml;fen.");
+			                return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -205,7 +217,7 @@ $(document).ready(
 		        xmlhttp.open('POST', _this.url+'/removeAccount', false);
 
 		        // build SOAP request
-		        var xml = buildSOAPEnvelope('<q0:removeAccount><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:removeAccount>', 'q0', 'http://service.tomcat.denevell.org');
+		        var xml = buildSOAPEnvelope(email, pw, '<q0:removeAccount><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:removeAccount>', 'q0', 'http://service.tomcat.denevell.org');
 		        jQuery.support.cors = true;
 		        jQuery.ajax({
 		            type : "POST",
@@ -225,6 +237,8 @@ $(document).ready(
 		            },
 		            error : function (xhr, status, errorThrown) {
 		                console.log("error: "+errorThrown);
+		                _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+		                return false;
 		            }
 		        });
 		        e.preventDefault();
@@ -248,7 +262,7 @@ $(document).ready(
 			        xmlhttp.open('POST', _this.url+'/editAccount', false);
 
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:editAccount><q0:newUsername>' + username + '</q0:newUsername><q0:email>' + email + '</q0:email><q0:newEmail>' + email + '</q0:newEmail><q0:password>' + pw + '</q0:password><q0:newPassword>' + pw + '</q0:newPassword><q0:newVisibility>' + visi + '</q0:newVisibility></q0:editAccount>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(email, pw, '<q0:editAccount><q0:newUsername>' + username + '</q0:newUsername><q0:email>' + email + '</q0:email><q0:newEmail>' + email + '</q0:newEmail><q0:password>' + pw + '</q0:password><q0:newPassword>' + pw + '</q0:newPassword><q0:newVisibility>' + visi + '</q0:newVisibility></q0:editAccount>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -269,6 +283,8 @@ $(document).ready(
 			            },
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+			                return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -306,7 +322,7 @@ $(document).ready(
 			        xmlhttp.open('POST', _this.url+'/editAccount', false);
 
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:editAccount><q0:newUsername>' + username + '</q0:newUsername><q0:email>' + email + '</q0:email><q0:newEmail>' + newemail + '</q0:newEmail><q0:password>' + pw + '</q0:password><q0:newPassword>' + pw + '</q0:newPassword><q0:newVisibility>' + visi + '</q0:newVisibility></q0:editAccount>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(email, pw, '<q0:editAccount><q0:newUsername>' + username + '</q0:newUsername><q0:email>' + email + '</q0:email><q0:newEmail>' + newemail + '</q0:newEmail><q0:password>' + pw + '</q0:password><q0:newPassword>' + pw + '</q0:newPassword><q0:newVisibility>' + visi + '</q0:newVisibility></q0:editAccount>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -328,6 +344,8 @@ $(document).ready(
 			            },
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+			                return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -339,28 +357,33 @@ $(document).ready(
 				var email = window.localStorage.getItem("email");
 				var vpw = window.localStorage.getItem("password");
 				var pww = $('input:password[name="oldpw"]').val();
-				var pw = MD5(pww);
+				//var pw = MD5(pww);
+				var shaObj = new jsSHA(pww, "TEXT");
+				var pw = shaObj.getHash("SHA-512", "HEX");
 				var newpww = $('input:password[name="newpw"]').val();
 				var newpw2 = $('input:password[name="newpw2"]').val();;
-				console.log(pw);
-				console.log(newpww);
-				console.log(newpw2);
 				
 				var username = $('#aun').html();
 				var visi = window.localStorage.getItem("vis");
+				console.log(pw);
+				console.log(vpw);
 				if(pww == null || pww == '' || newpww == null || newpww == '' || newpw2 == null || newpw2 == ''){
 					$("#errornoti").html("Bitte alle Textfelder ausf&uuml;llen.");
 					return false;	
-				}else if(pw != vpw || newpww != newpw2){
+				}else if(newpww != newpw2){
 					$("#errornoti").html("Neue Passw&ouml;rter stimmen nicht &uuml;berein.");
+					return false;					
+				}else if(pw != vpw){
+					$("#errornoti").html("Passwort nicht korrekt.");
 					return false;					
 				}else{					
 					var xmlhttp = new XMLHttpRequest();
 			        xmlhttp.open('POST', _this.url+'/editAccount', false);
-			        var newpw = MD5(newpww);
-
+			        //var newpw = MD5(newpww);
+			        var shaObj = new jsSHA(newpww, "TEXT");
+					var newpw = shaObj.getHash("SHA-512", "HEX");
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:editAccount><q0:newUsername>' + username + '</q0:newUsername><q0:email>' + email + '</q0:email><q0:newEmail>' + email + '</q0:newEmail><q0:password>' + pw + '</q0:password><q0:newPassword>' + newpw + '</q0:newPassword><q0:newVisibility>' + visi + '</q0:newVisibility></q0:editAccount>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(email, vpw, '<q0:editAccount><q0:newUsername>' + username + '</q0:newUsername><q0:email>' + email + '</q0:email><q0:newEmail>' + email + '</q0:newEmail><q0:password>' + pw + '</q0:password><q0:newPassword>' + newpw + '</q0:newPassword><q0:newVisibility>' + visi + '</q0:newVisibility></q0:editAccount>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -377,16 +400,19 @@ $(document).ready(
 			            	var bool = respxml.getElementsByTagName("editAccountReturn")[0].childNodes[0].nodeValue;
 							console.log("Ändern erfolgreich: "+bool);
 							window.localStorage.setItem("password", newpw);
-							window.location.href = './account.html';
+							//window.location.href = './account.html';
 							if(bool){
 								_this.showNotification("Passwort ge&auml;ndert.");
+								_this.closeChangePW();
 							}else{
-								_this.showNotification("Falsches Passwort.");
-							}
-												
+								_this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.");
+							}	
+							return false;
 			            },
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                $("#errornoti").html("Fehler: Angaben bitte &uuml;berpr&uuml;fen.");
+			                return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -409,7 +435,7 @@ $(document).ready(
 		        xmlhttp.open('POST', _this.url+'/editAccount', false);
 
 		        // build SOAP request
-		        var xml = buildSOAPEnvelope('<q0:editAccount><q0:newUsername>' + username + '</q0:newUsername><q0:email>' + email + '</q0:email><q0:newEmail>' + email + '</q0:newEmail><q0:password>' + pw + '</q0:password><q0:newPassword>' + pw + '</q0:newPassword><q0:newVisibility>' + visi + '</q0:newVisibility></q0:editAccount>', 'q0', 'http://service.tomcat.denevell.org');
+		        var xml = buildSOAPEnvelope(email, pw, '<q0:editAccount><q0:newUsername>' + username + '</q0:newUsername><q0:email>' + email + '</q0:email><q0:newEmail>' + email + '</q0:newEmail><q0:password>' + pw + '</q0:password><q0:newPassword>' + pw + '</q0:newPassword><q0:newVisibility>' + visi + '</q0:newVisibility></q0:editAccount>', 'q0', 'http://service.tomcat.denevell.org');
 		        jQuery.support.cors = true;
 		        jQuery.ajax({
 		            type : "POST",
@@ -431,11 +457,13 @@ $(document).ready(
 							_this.showNotification("Sichtbarkeit ge&auml;ndert.");					
 						}else{
 							_this.showNotification("Fehler: Sichtbarkeit nicht ge&auml;ndert.", true);	
-						}						
+						}		
+						return false;
 		            },
 		            error : function (xhr, status, errorThrown) {
 		                console.log("error: "+errorThrown);
 		                _this.showNotification("Serverfehler.", true);
+		                return false;
 		            }
 		        });
 		        e.preventDefault();
@@ -473,7 +501,7 @@ $(document).ready(
 			        xmlhttp.open('POST', _this.url+'/createVisitedCourse', false);
 
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:createVisitedCourse><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName><q0:timeprofileName>' + tpname + '</q0:timeprofileName><q0:courseName>' + course + '</q0:courseName><q0:courseDescription>' + coursedescr + '</q0:courseDescription><q0:day>' + day + '</q0:day><q0:hourIndex>' + index + '</q0:hourIndex></q0:createVisitedCourse>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(email, pw, '<q0:createVisitedCourse><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName><q0:timeprofileName>' + tpname + '</q0:timeprofileName><q0:courseName>' + course + '</q0:courseName><q0:courseDescription>' + coursedescr + '</q0:courseDescription><q0:day>' + day + '</q0:day><q0:hourIndex>' + index + '</q0:hourIndex></q0:createVisitedCourse>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -488,18 +516,19 @@ $(document).ready(
 			            },
 			            success : function (respxml) {
 			            	var bool = respxml.getElementsByTagName("createVisitedCourseReturn")[0].childNodes[0].nodeValue;
-							console.log("Besuchter Kurs erfolgreich erstellt: "+bool);
-							//_this.showPopup2(bool);	
-							//window.location.href = 'http://localhost:8080/timetableClient/index.html';
+							console.log("Besuchter Kurs erfolgreich erstellt: "+bool);							
 							if(bool){
-								_this.showNotification("Kurs "+course+" hinzugef&uuml;gt.");
+								//_this.showNotification("Kurs "+course+" hinzugef&uuml;gt.");
+								window.location.href = './index.html';
 							}else{
 								_this.showNotification("Fehler: Kurs nicht hinzugef&uuml;gt.");
 							}
-							
+							return false;
 			            },
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                $("#errornoti").html("Fehler: &Uuml;berpr&uuml;fe, ob alle Angaben gemacht wurden. Alles muss ausgew&auml;hlt sein.");
+			                return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -523,7 +552,7 @@ $(document).ready(
 		        xmlhttp.open('POST', _this.url+'/removeVisitedCourse', false);
 
 		        // build SOAP request
-		        var xml = buildSOAPEnvelope('<q0:removeVisitedCourse><q0:courseName>' + courname + '</q0:courseName><q0:courseDescription>' + courdescr + '</q0:courseDescription><q0:visistedCourseDay>' + courday + '</q0:visistedCourseDay><q0:visitedCourseHour>' + courhour + '</q0:visitedCourseHour><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + courttname + '</q0:timetableName></q0:removeVisitedCourse>', 'q0', 'http://service.tomcat.denevell.org');
+		        var xml = buildSOAPEnvelope(email, pw, '<q0:removeVisitedCourse><q0:courseName>' + courname + '</q0:courseName><q0:courseDescription>' + courdescr + '</q0:courseDescription><q0:visistedCourseDay>' + courday + '</q0:visistedCourseDay><q0:visitedCourseHour>' + courhour + '</q0:visitedCourseHour><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + courttname + '</q0:timetableName></q0:removeVisitedCourse>', 'q0', 'http://service.tomcat.denevell.org');
 		        jQuery.support.cors = true;
 		        jQuery.ajax({
 		            type : "POST",
@@ -545,11 +574,12 @@ $(document).ready(
 						}else{
 							_this.showNotification("Fehler: Kurs nicht hinzugef&uuml;gt.");
 						}
-						
+						return false;
 		            },
 		            error : function (xhr, status, errorThrown) {
 		                console.log("error: "+errorThrown);
 		                _this.showNotification("Serverfehler.", true);
+		                return false;
 		            }
 		        });
 		        e.preventDefault();
@@ -572,7 +602,7 @@ $(document).ready(
 			        xmlhttp.open('POST', _this.url+'/removeTimetable', false);
 
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:removeTimetable><q0:timetableName>' + ttname + '</q0:timetableName><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:removeTimetable>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(email, pw, '<q0:removeTimetable><q0:timetableName>' + ttname + '</q0:timetableName><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:removeTimetable>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -595,6 +625,8 @@ $(document).ready(
 						},
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+			                return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -603,24 +635,24 @@ $(document).ready(
 			});
 			//################# change timetable name #################
 			$("#changettname").click(function(e){
-				var newname = document.forms["changettnameform"].elements["newttname"].value;
-				console.log("name: "+newname);								
+				var newname = document.forms["changettnameform"].elements["newttname"].value;								
 				var selektiert = document.forms["formtt"].elements["timetables"].selectedIndex;
 				var wert = document.forms["formtt"].elements["timetables"].options[selektiert].value;
 				var ttname = document.forms["formtt"].elements["timetables"].options[selektiert].text;
-				var tpname = ttname;
 								
 				var email = window.localStorage.getItem("email");
 				var pw = window.localStorage.getItem("password");
 				
-				if(ttname == "" || ttname == null){
-					console.log("Textfeld darf nicht leer sein.");					
+				if(newname == "" || newname == null){
+					console.log("Textfeld darf nicht leer sein.");		
+					$("#errornotit").html("Textfeld darf nicht leer sein.");
+					return false;
 				}else{					
 					var xmlhttp = new XMLHttpRequest();
 			        xmlhttp.open('POST', _this.url+'/editTimetable', false);
 
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:editTimetable><q0:timetableName>' + ttname + '</q0:timetableName><q0:newTimetableName>' + newname + '</q0:newTimetableName><q0:timeprofileName>' + tpname + '</q0:timeprofileName><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:editTimetable>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(email, pw, '<q0:editTimetable><q0:timetableName>' + ttname + '</q0:timetableName><q0:newTimetableName>' + newname + '</q0:newTimetableName><q0:timeprofileName>' + ttname + '</q0:timeprofileName><q0:newTimeprofileName>' + newname + '</q0:newTimeprofileName><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:editTimetable>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -636,15 +668,17 @@ $(document).ready(
 			            success : function (respxml) {
 			            	var bool = respxml.getElementsByTagName("editTimetableReturn")[0].childNodes[0].nodeValue;
 							console.log("Timetable erfolgreich bearbeitet: "+bool);
-							if(bool){
+							/*if(bool){
 								_this.showNotification("Name ge&auml;ndert.");
 							}else{
 								_this.showNotification("Fehler: Name nicht ge&auml;ndert.");
-							}	
+							}*/	
 							window.location.href = "./index.html";
 			            },
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                $("#errornotit").html("Fehler: Angaben bitte &uuml;berpr&uuml;fen.");
+			                return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -668,7 +702,7 @@ $(document).ready(
 			        xmlhttp.open('POST', _this.url+'/createComment', false);
 
 			        // build SOAP request
-			        var xml = buildSOAPEnvelope('<q0:createComment><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:c>' + comment + '</q0:c><q0:courseName>' + coursename + '</q0:courseName><q0:courseDescription>' + coursedescr + '</q0:courseDescription></q0:createComment>', 'q0', 'http://service.tomcat.denevell.org');
+			        var xml = buildSOAPEnvelope(email, pw, '<q0:createComment><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:c>' + comment + '</q0:c><q0:courseName>' + coursename + '</q0:courseName><q0:courseDescription>' + coursedescr + '</q0:courseDescription></q0:createComment>', 'q0', 'http://service.tomcat.denevell.org');
 			        jQuery.support.cors = true;
 			        jQuery.ajax({
 			            type : "POST",
@@ -683,12 +717,13 @@ $(document).ready(
 			            },
 			            success : function (respxml) {
 			            	var bool = respxml.getElementsByTagName("createCommentReturn")[0].childNodes[0].nodeValue;
-							console.log("Kommentar erfolgreich erstellt: "+bool);
-							
+							console.log("Kommentar erfolgreich erstellt: "+bool);							
 							window.location.href = "./details.html";
 			            },
 			            error : function (xhr, status, errorThrown) {
 			                console.log("error: "+errorThrown);
+			                _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+			                return false;
 			            }
 			        });
 			        e.preventDefault();
@@ -717,6 +752,7 @@ function logout() {
 
 function showAddCourse(){
 	this.getAllCourses();
+	this.getHours();
 	var selektiert = document.forms["formtt"].elements["timetables"].selectedIndex;
 	var wert = document.forms["formtt"].elements["timetables"].options[selektiert].value;
 	var text = document.forms["formtt"].elements["timetables"].options[selektiert].text;
@@ -801,7 +837,7 @@ function showNotification(infotext, bad){
 	$("#noti").animate({opacity: 1});
 	$("#noti").css('z-index', '3');
 	$("#noti").css('pointer-events', 'auto');
-	$("#noti").animate({opacity: 1.0}, 10000).fadeOut('slow');
+	$("#noti").animate({opacity: 1.0}, 7000).fadeOut('slow');
 }
 
 
@@ -995,26 +1031,7 @@ function showhideAddComment(){
 	}
 }
 
-function addComment(){
-	var text = document.forms["commentform"].elements["writtencomment"].value;
-	console.log(text);
-	var jetzt = new Date();
-	$('#comments').append('<div class="comment"><p><span class="bluegreen">');
-	$('#comments').append('Tester Test, '+jetzt);
-	$('#comments').append('</span></p><p>');
-	$('#comments').append(text);
-	$('#comments').append('</p></div>');
-}
-
 //################## account functions ####################
-
-function openAccountForm() {
-	var username = document.getElementById("accountusername").innerHTML;
-	var email = document.getElementById("accountemail");
-	$('#usernameaccount').val(username);
-	window.location.href = './changeAccount.html';
-	
-}
 
 function editAccount() {
 	window.location.href = './account.html';
@@ -1028,7 +1045,7 @@ function getAccountInfos(){
     xmlhttp.open('POST', _this.url+'/getAccountData', false);
 
     // build SOAP request
-    var xml = buildSOAPEnvelope('<q0:getAccountData><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:getAccountData>', 'q0', 'http://service.tomcat.denevell.org');
+    var xml = buildSOAPEnvelope(email, pw, '<q0:getAccountData><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:getAccountData>', 'q0', 'http://service.tomcat.denevell.org');
     jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
@@ -1062,6 +1079,8 @@ function getAccountInfos(){
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
         }
     });
     //e.preventDefault();
@@ -1085,7 +1104,7 @@ function getTimetable(){
 	    xmlhttp.open('POST', _this.url+'/getTimetableData', false);
 	
 	    // build SOAP request
-	    var xml = buildSOAPEnvelope('<q0:getTimetableData><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName></q0:getTimetableData>', 'q0', 'http://service.tomcat.denevell.org');
+	    var xml = buildSOAPEnvelope(email, pw, '<q0:getTimetableData><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName></q0:getTimetableData>', 'q0', 'http://service.tomcat.denevell.org');
 	    jQuery.support.cors = true;
 	    jQuery.ajax({
 	        type : "POST",
@@ -1126,14 +1145,13 @@ function getTimetable(){
 				$('#timewrapper').append('</table>');
 				
 				//add visited courses
-				var bla = "'blub'";
 				for(var i = 0; i < viscourses.length; i++){
 					var kursname = "'"+viscourses[i].name+"'";
-					var kursdescr = "'blub'";//"'"+viscourses[i].description+"'";
+					var kursdescr = "'"+viscourses[i].courseDescription+"'";
 					var kursday = "'"+viscourses[i].day+"'";
 					var kurshour = "'"+viscourses[i].hourIndex+"'";
 					var kurstt = "'"+ttname+"'";
-					$('#kasten'+viscourses[i].hourIndex + viscourses[i].day).append('<span class="light">'+viscourses[i].name+'</span> </br>'+viscourses[i].room+'</br><img src="img/eye.png" alt="view" class="showdetails" onclick="gotoDetails('+kursname+', '+bla+');"><img src="img/trash_can.png" alt="delete" class="deletecourse" onclick="openDeleteCourse('+kursname+', '+kursdescr+', '+kursday+', '+kurshour+', '+kurstt+');">');
+					$('#kasten'+viscourses[i].hourIndex + viscourses[i].day).append('<span class="light">'+viscourses[i].shortname+'</span> </br>'+viscourses[i].room+'</br><img src="img/eye.png" alt="view" class="showdetails" onclick="gotoDetails('+kursname+', '+kursdescr+');"><img src="img/trash_can.png" alt="delete" class="deletecourse" onclick="openDeleteCourse('+kursname+', '+kursdescr+', '+kursday+', '+kurshour+', '+kurstt+');">');
 				}
 				
 				var jetzt = new Date();
@@ -1147,6 +1165,8 @@ function getTimetable(){
 	        },
 	        error : function (xhr, status, errorThrown) {
 	            console.log("error: "+errorThrown);
+	            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+	            return false;
 	        }
 	    });
 	    //e.preventDefault();
@@ -1161,7 +1181,7 @@ function timetablesoap(email, pw, ttname, tpname, e){
     xmlhttp.open('POST', _this.url+'/createTimetable', false);
 
     // build SOAP request
-    var xml = buildSOAPEnvelope('<q0:createTimetable><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName><q0:timeprofileName>' + tpname + '</q0:timeprofileName></q0:createTimetable>', 'q0', 'http://service.tomcat.denevell.org');
+    var xml = buildSOAPEnvelope(email, pw, '<q0:createTimetable><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName><q0:timeprofileName>' + tpname + '</q0:timeprofileName></q0:createTimetable>', 'q0', 'http://service.tomcat.denevell.org');
    	
     jQuery.support.cors = true;
     jQuery.ajax({
@@ -1184,6 +1204,8 @@ function timetablesoap(email, pw, ttname, tpname, e){
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
         }
     });
     e.preventDefault();
@@ -1196,7 +1218,7 @@ function coursesoap(start, end, tpname, ttname, email, pw, index, e, i, length){
     xmlhttp.open('POST', _this.url+'/createHour', false);
 
     // build SOAP request
-    var xml = buildSOAPEnvelope('<q0:createHour><q0:start>' + start + '</q0:start><q0:end>' + end + '</q0:end><q0:timeprofileName>' + tpname + '</q0:timeprofileName><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:hourIndex>' + index + '</q0:hourIndex></q0:createHour>', 'q0', 'http://service.tomcat.denevell.org');
+    var xml = buildSOAPEnvelope(email, pw, '<q0:createHour><q0:start>' + start + '</q0:start><q0:end>' + end + '</q0:end><q0:timeprofileName>' + tpname + '</q0:timeprofileName><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:hourIndex>' + index + '</q0:hourIndex></q0:createHour>', 'q0', 'http://service.tomcat.denevell.org');
    	
     jQuery.support.cors = true;
     jQuery.ajax({
@@ -1217,84 +1239,16 @@ function coursesoap(start, end, tpname, ttname, email, pw, index, e, i, length){
 			if(i == length-1){
 				timetablesoap(email, pw, ttname, tpname, e);
 			}
-			//_this.showPopup2(bool);		
-			//return bool;
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
         }
     });
     e.preventDefault();
     return false;
 
-}
-
-//##################### add visited Course #####################
-
-function addVisCourse(){
-	var selektiertc = document.forms["addviscourseform"].elements["courseselect"].selectedIndex;
-	var wertc = document.forms["addviscourseform"].elements["courseselect"].options[selektiert].value;
-	var course = document.forms["addviscourseform"].elements["courseselect"].options[selektiert].text;
-	var coursedescr = document.forms["addviscourseform"].elements["hiddensoursedescr"].options[selektiert].value;
-	
-	var selektiertd = document.forms["addviscourseform"].elements["dayselect"].selectedIndex;
-	var wertd = document.forms["addviscourseform"].elements["dayselect"].options[selektiert].value;
-	var day = document.forms["addviscourseform"].elements["dayselect"].options[selektiert].text;
-	
-	var selektierti = document.forms["addviscourseform"].elements["hourselect"].selectedIndex;
-	var werti = document.forms["addviscourseform"].elements["hourselect"].options[selektiert].value;
-	var index = document.forms["addviscourseform"].elements["hourselect"].options[selektiert].text;
-	
-	console.log("course: "+course);
-	
-	var selektiert = document.forms["formtt"].elements["timetables"].selectedIndex;
-	var wert = document.forms["formtt"].elements["timetables"].options[selektiert].value;
-	var ttname = document.forms["formtt"].elements["timetables"].options[selektiert].text;
-	var tpname = ttname;
-	
-	var email = window.localStorage.getItem("email");
-	var pw = window.localStorage.getItem("password");
-	
-	//if(name == "" || name == null || shortname == "" || shortname == null || teacher == "" || teacher == null || descr == "" || descr == null || room == "" || room == null){
-	//	console.log("Alle Textfelder m&uuml;ssen zum Registrieren ausgefüllt werden.");
-		//popup mit Fehlermeldung
-	//}else{					
-		var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('POST', _this.url+'/createVisitedCourse', false);
-
-        // build SOAP request
-        var xml = buildSOAPEnvelope('<q0:createVisitedCours><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName><q0:timeprofileName>' + tpname + '</q0:timeprofileName><q0:courseName>' + course + '</q0:courseName><q0:courseDescription>' + coursedescr + '</q0:courseDescription><q0:day>' + day + '</q0:day><q0:hourIndex>' + index + '</q0:hourIndex></q0:createVisitedCours>', 'q0', 'http://service.tomcat.denevell.org');
-        jQuery.support.cors = true;
-        jQuery.ajax({
-            type : "POST",
-            url : _this.url+"/createVisitedCourse",
-            data : xml,
-            contentType : "text/xml; charset=utf-8",
-            dataType : "text xml",
-            cache: false,
-            beforeSend: function (xmlhttp) {
-            	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
-                xmlhttp.setRequestHeader('SOAPAction', _this.url+'/createVisitedCours');
-            },
-            success : function (respxml) {
-            	var bool = respxml.getElementsByTagName("createVisitedCourseReturn")[0].childNodes[0].nodeValue;
-				console.log("besuchter Kurs erfolgreich erstellt: "+bool);
-				//_this.showPopup2(bool);	
-				//window.location.href = 'http://localhost:8080/timetableClient/index.html';
-				if(bool){
-					_this.showNotification("Kurs "+course+" hinzugef&uuml;gt.");
-				}else{
-					_this.showNotification("Kurs nicht hinzugef&uuml;gt.");
-				}
-				
-            },
-            error : function (xhr, status, errorThrown) {
-                console.log("error: "+errorThrown);
-            }
-        });
-        e.preventDefault();
-        return false;
-	//}
 }
 
 //##################### details #####################
@@ -1315,7 +1269,7 @@ function getCourseData(){
     xmlhttp.open('POST', _this.url+'/getCourseData', false);
 
     // build SOAP request
-    var xml = buildSOAPEnvelope('<q0:getCourseData><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:courseName>' + coursename + '</q0:courseName><q0:description>' + coursedescr + '</q0:description></q0:getCourseData>', 'q0', 'http://service.tomcat.denevell.org');
+    var xml = buildSOAPEnvelope(email, pw, '<q0:getCourseData><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:courseName>' + coursename + '</q0:courseName><q0:description>' + coursedescr + '</q0:description></q0:getCourseData>', 'q0', 'http://service.tomcat.denevell.org');
     jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
@@ -1349,15 +1303,13 @@ function getCourseData(){
 			$('.details-right').append('<p><label class="formlabel">Beschreibung:</label> '+descr+'</p>');
 			
 			//member
-			
 			for(var i = 0; i < mems.length; i++){
 				if(mems[i].visibility == 1){
 					$('.members').append('<p>');
 					$('.members').append(mems[i].username+" <span class='mememail'>("+mems[i].email+")</span>");
 					$('.members').append('</p>');
 				}				
-			}
-			
+			}			
 			
 			//comments
 			for(var key in comments){
@@ -1366,11 +1318,12 @@ function getCourseData(){
 				$('#comments').append('<p>'+comments[key].comment+'</p>');
 				$('#comments').append('</div>');
 				$('#comments').append('</br>');
-			}	
-			
+			}			
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
         }
     });
     //e.preventDefault();
@@ -1387,7 +1340,7 @@ function deleteCourse(cname, day){
     xmlhttp.open('POST', _this.url+'/removeVisitedCourse', false);
 
     // build SOAP request
-    var xml = buildSOAPEnvelope('<q0:removeVisitedCourse><q0:courseName>' + cname + '</q0:courseName><q0:visistedCourseDay>' + day + '</q0:visistedCourseDay><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName></q0:removeVisitedCourse>', 'q0', 'http://service.tomcat.denevell.org');
+    var xml = buildSOAPEnvelope(email, pw, '<q0:removeVisitedCourse><q0:courseName>' + cname + '</q0:courseName><q0:visistedCourseDay>' + day + '</q0:visistedCourseDay><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName></q0:removeVisitedCourse>', 'q0', 'http://service.tomcat.denevell.org');
     jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
@@ -1407,6 +1360,8 @@ function deleteCourse(cname, day){
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
         }
     });
     //e.preventDefault();
@@ -1421,7 +1376,7 @@ function deleteTimeprofile(tpname){
     xmlhttp.open('POST', _this.url+'/removeTimeprofile', false);
 
     // build SOAP request
-    var xml = buildSOAPEnvelope('<q0:removeTimeprofile><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:removeTimeprofile>', 'q0', 'http://service.tomcat.denevell.org');
+    var xml = buildSOAPEnvelope(email, pw, '<q0:removeTimeprofile><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:removeTimeprofile>', 'q0', 'http://service.tomcat.denevell.org');
     jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
@@ -1441,6 +1396,8 @@ function deleteTimeprofile(tpname){
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
         }
     });
     //e.preventDefault();
@@ -1455,7 +1412,7 @@ function getTimetableList(){
     xmlhttp.open('POST', _this.url+'/getAllTimetablesOfUser', false);
 
     // build SOAP request
-    var xml = buildSOAPEnvelope('<q0:getAllTimetablesOfUser><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:getAllTimetablesOfUser>', 'q0', 'http://service.tomcat.denevell.org');
+    var xml = buildSOAPEnvelope(email, pw, '<q0:getAllTimetablesOfUser><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password></q0:getAllTimetablesOfUser>', 'q0', 'http://service.tomcat.denevell.org');
     jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
@@ -1493,6 +1450,8 @@ function getTimetableList(){
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
         }
     });
     //e.preventDefault();
@@ -1507,7 +1466,7 @@ function getAllCourses(){
     xmlhttp.open('POST', _this.url+'/getAllCourses', false);
 
     // build SOAP request
-    var xml = buildSOAPEnvelope('<q0:getAllCourses></q0:getAllCourses>', 'q0', 'http://service.tomcat.denevell.org');
+    var xml = buildSOAPEnvelope(email, pw, '<q0:getAllCourses></q0:getAllCourses>', 'q0', 'http://service.tomcat.denevell.org');
     jQuery.support.cors = true;
     jQuery.ajax({
         type : "POST",
@@ -1526,6 +1485,11 @@ function getAllCourses(){
 			var json = JSON.parse(jsonpure);
 			//visualize course list
 			var select = document.getElementById('courselist');
+			select.options.length = 0;
+			var opt = document.createElement('option');
+			opt.value = "Kurs w&auml;hlen";
+			opt.innerHTML = "Kurs w&auml;hlen";
+			select.appendChild(opt);
 			if(json != null && jsonpure != '{}'){				
 				for(var key in json){
 					var opt = document.createElement('option');
@@ -1544,6 +1508,70 @@ function getAllCourses(){
         },
         error : function (xhr, status, errorThrown) {
             console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
+        }
+    });
+    //e.preventDefault();
+    return false;
+}
+
+function getHours(){
+	var email = window.localStorage.getItem("email");
+	var pw = window.localStorage.getItem("password");
+	
+	var selektiert = document.forms["formtt"].elements["timetables"].selectedIndex;
+	var wert = document.forms["formtt"].elements["timetables"].options[selektiert].value;
+	var ttname = document.forms["formtt"].elements["timetables"].options[selektiert].text;
+						
+	var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open('POST', _this.url+'/getHourData', false);
+
+    // build SOAP request
+    var xml = buildSOAPEnvelope(email, pw, '<q0:getHourData><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timeprofileName>' + ttname + '</q0:timeprofileName></q0:getHourData>', 'q0', 'http://service.tomcat.denevell.org');
+    jQuery.support.cors = true;
+    jQuery.ajax({
+        type : "POST",
+        url : _this.url+"/getHourData",
+        data : xml,
+        contentType : "text/xml; charset=utf-8",
+        dataType : "text xml",
+        cache: false,
+        beforeSend: function (xmlhttp) {
+        	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+            xmlhttp.setRequestHeader('SOAPAction', _this.url+'/getHourData');
+        },
+        success : function (respxml) {
+        	var jsonpure = respxml.getElementsByTagName("getHourDataReturn")[0].childNodes[0].nodeValue;
+        	console.log("stundenliste: "+jsonpure);
+			var json = JSON.parse(jsonpure);
+			//visualize hour list
+			var select = document.getElementById('hourlist');
+			select.options.length = 0;
+			if(json != null && jsonpure != '{}'){	
+				var opt = document.createElement('option');
+				opt.value = 'Stunde w&auml;hlen';
+				opt.innerHTML = 'Stunde w&auml;hlen';
+				select.appendChild(opt);
+				for(var i = 1; i <= json.length; i++){
+					var opt = document.createElement('option');
+					opt.value = i;
+					opt.innerHTML = i;
+					select.appendChild(opt);
+				}	
+				getTimetable();
+			}else{
+				var opt = document.createElement('option');
+				opt.value = 'keine Stunde';
+				opt.innerHTML = 'keine Stunde';
+				select.appendChild(opt);
+			}		
+			
+        },
+        error : function (xhr, status, errorThrown) {
+            console.log("error: "+errorThrown);
+            _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+            return false;
         }
     });
     //e.preventDefault();
@@ -1580,7 +1608,7 @@ function addVisitedCourse(){
         xmlhttp.open('POST', _this.url+'/createVisitedCourse', false);
 
         // build SOAP request
-        var xml = buildSOAPEnvelope('<q0:createVisitedCourse><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName><q0:timeprofileName>' + tpname + '</q0:timeprofileName><q0:courseName>' + course + '</q0:courseName><q0:courseDescription>' + coursedescr + '</q0:courseDescription><q0:day>' + day + '</q0:day><q0:hourIndex>' + index + '</q0:hourIndex></q0:createVisitedCourse>', 'q0', 'http://service.tomcat.denevell.org');
+        var xml = buildSOAPEnvelope(email, pw, '<q0:createVisitedCourse><q0:email>' + email + '</q0:email><q0:password>' + pw + '</q0:password><q0:timetableName>' + ttname + '</q0:timetableName><q0:timeprofileName>' + tpname + '</q0:timeprofileName><q0:courseName>' + course + '</q0:courseName><q0:courseDescription>' + coursedescr + '</q0:courseDescription><q0:day>' + day + '</q0:day><q0:hourIndex>' + index + '</q0:hourIndex></q0:createVisitedCourse>', 'q0', 'http://service.tomcat.denevell.org');
         jQuery.support.cors = true;
         jQuery.ajax({
             type : "POST",
@@ -1608,6 +1636,8 @@ function addVisitedCourse(){
             },
             error : function (xhr, status, errorThrown) {
                 console.log("error: "+errorThrown);
+                _this.showNotification("Fehler: Angaben bitte &uuml;berpr&uuml;fen.", true);
+                return false;
             }
         });
         return false;
@@ -1615,20 +1645,20 @@ function addVisitedCourse(){
 
 //###################### soap functions ##########################
 
-function buildSOAPEnvelope(payload, target_prefix, target_ns){
+function buildSOAPEnvelope(username, password, payload, target_prefix, target_ns){
 	return '<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://www.w3.org/2003/05/soap-envelope" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:'
 			+(target_prefix || 'q0')
 			+'="'
 			+(target_ns || this.ns)
 			+'">'
-			//+'<soapenv:Header>'
-			//+'<wsse:Security>'
-			//+'<wsse:UsernameToken>'
-			//+'<wsse:Username>'+username+'</wsse:Username>'
-			//+'<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">'+password+'</wsse:Password>'
-			//+'</wsse:UsernameToken>'
-			//+'</wsse:Security>'
-			//+'</soapenv:Header>'
+			+'<soapenv:Header>'
+			+'<wsse:Security>'
+			+'<wsse:UsernameToken>'
+			+'<wsse:Username>'+username+'</wsse:Username>'
+			+'<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">'+password+'</wsse:Password>'
+			+'</wsse:UsernameToken>'
+			+'</wsse:Security>'
+			+'</soapenv:Header>'
 			+'<soapenv:Body>'+payload+'</soapenv:Body></soapenv:Envelope>';
 }
 

@@ -275,12 +275,12 @@ header{
 }
 
 .details-right {
-	width: 700px;
+	width: 650px;
 	float: left;
 }
 
 .details-left {
-	width: 300px;
+	width: 350px;
 	float: right;
 }
 
@@ -297,7 +297,7 @@ header{
 }
 
 .members {
-	width: 320px;
+	width: 350px;
 	height: 300px;
 	background-color: white;
 	overflow: auto;
@@ -628,7 +628,7 @@ header{
 
 /* ########## notification ############## */
 #noti {
-	height: 50px;
+	height: 62px;
 	width: 340px;
 	text-align: center;
 	position: fixed;
@@ -756,7 +756,7 @@ header{
 }
 
 #changeShowMemberButton {
-	margin-left: 75px;
+	margin-left: 25px;
 }
 
 /*hoverdiv */
@@ -808,6 +808,10 @@ header{
 }
 
 #errornotiu {
+	color: #D75050 ;
+	font-size: 12pt;
+}
+#errornotit {
 	color: #D75050 ;
 	font-size: 12pt;
 }
