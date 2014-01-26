@@ -364,7 +364,7 @@ public class ServiceTimetable {
 		Course course = ObjectRepo.getInstance().getCourse(courseName+courseDescription);
 		Timetable timetable = ObjectRepo.getInstance().getTimetable(timetableName, email);
 		if (account != null && account.getPassword().equals(password) && account.getMail().equals(email) && timetable != null && course != null){
-			VisitedCourse vc = new VisitedCourse(email, course.getName(), course.getRoom(), course.getTeacher(), timetableName, day, hourIndex);
+			VisitedCourse vc = new VisitedCourse(email, course.getName(), course.getRoom(), course.getTeacher(), timetableName, day, hourIndex, course.getDesciption(), course.getShortname());
 			account.addVisitedCourse(vc);
 			timetable.addVisitedCourse(vc);
 			ObjectRepo.getInstance().visitedCourses.put(courseName+day+hourIndex, vc);

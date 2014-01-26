@@ -4,6 +4,20 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://service.tomcat.denevell.org" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="dateToString">
+    <complexType>
+     <sequence>
+      <element name="date" type="xsd:dateTime"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="dateToStringResponse">
+    <complexType>
+     <sequence>
+      <element name="dateToStringReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="createComment">
     <complexType>
      <sequence>
@@ -19,6 +33,32 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="createCommentReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllAccounts">
+    <complexType/>
+   </element>
+   <element name="getAllAccountsResponse">
+    <complexType>
+     <sequence>
+      <element name="getAllAccountsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofile">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimeprofileResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimeprofileReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -87,142 +127,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexType>
      <sequence>
       <element name="createHourReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createTimetable">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="timetableName" type="xsd:string"/>
-      <element name="timeprofileName" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createTimetableResponse">
-    <complexType>
-     <sequence>
-      <element name="createTimetableReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editAccount">
-    <complexType>
-     <sequence>
-      <element name="newUsername" type="xsd:string"/>
-      <element name="email" type="xsd:string"/>
-      <element name="newEmail" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="newPassword" type="xsd:string"/>
-      <element name="newVisibility" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editAccountResponse">
-    <complexType>
-     <sequence>
-      <element name="editAccountReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getHourData">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="timeprofileName" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getHourDataResponse">
-    <complexType>
-     <sequence>
-      <element name="getHourDataReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editTimetable">
-    <complexType>
-     <sequence>
-      <element name="timetableName" type="xsd:string"/>
-      <element name="newTimetableName" type="xsd:string"/>
-      <element name="timeprofileName" type="xsd:string"/>
-      <element name="newTimeprofileName" type="xsd:string"/>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editTimetableResponse">
-    <complexType>
-     <sequence>
-      <element name="editTimetableReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeTimetable">
-    <complexType>
-     <sequence>
-      <element name="timetableName" type="xsd:string"/>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="removeTimetableResponse">
-    <complexType>
-     <sequence>
-      <element name="removeTimetableReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getTimetableData">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="timetableName" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getTimetableDataResponse">
-    <complexType>
-     <sequence>
-      <element name="getTimetableDataReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getAllTimetablesOfUser">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getAllTimetablesOfUserResponse">
-    <complexType>
-     <sequence>
-      <element name="getAllTimetablesOfUserReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createCourse">
-    <complexType>
-     <sequence>
-      <element name="name" type="xsd:string"/>
-      <element name="shortname" type="xsd:string"/>
-      <element name="teacher" type="xsd:string"/>
-      <element name="description" type="xsd:string"/>
-      <element name="room" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createCourseResponse">
-    <complexType>
-     <sequence>
-      <element name="createCourseReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -395,6 +299,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="editAccount">
+    <complexType>
+     <sequence>
+      <element name="newUsername" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="newEmail" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="newPassword" type="xsd:string"/>
+      <element name="newVisibility" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountResponse">
+    <complexType>
+     <sequence>
+      <element name="editAccountReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="editAccountUsername">
     <complexType>
      <sequence>
@@ -443,6 +366,22 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="editAccountVisibility">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="newVisibility" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editAccountVisibilityResponse">
+    <complexType>
+     <sequence>
+      <element name="editAccountVisibilityReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="removeAccount">
     <complexType>
      <sequence>
@@ -458,17 +397,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="dateToString">
+   <element name="getAccountData">
     <complexType>
      <sequence>
-      <element name="date" type="xsd:dateTime"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="dateToStringResponse">
+   <element name="getAccountDataResponse">
     <complexType>
      <sequence>
-      <element name="dateToStringReturn" type="xsd:string"/>
+      <element name="getAccountDataReturn" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
@@ -489,48 +429,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="editAccountVisibility">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-      <element name="newVisibility" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="editAccountVisibilityResponse">
-    <complexType>
-     <sequence>
-      <element name="editAccountVisibilityReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getAccountData">
-    <complexType>
-     <sequence>
-      <element name="email" type="xsd:string"/>
-      <element name="password" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getAccountDataResponse">
-    <complexType>
-     <sequence>
-      <element name="getAccountDataReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getAllAccounts">
-    <complexType/>
-   </element>
-   <element name="getAllAccountsResponse">
-    <complexType>
-     <sequence>
-      <element name="getAllAccountsReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createTimeprofile">
+   <element name="getHourData">
     <complexType>
      <sequence>
       <element name="email" type="xsd:string"/>
@@ -539,10 +438,111 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="createTimeprofileResponse">
+   <element name="getHourDataResponse">
     <complexType>
      <sequence>
-      <element name="createTimeprofileReturn" type="xsd:boolean"/>
+      <element name="getHourDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimetable">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timetableName" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="createTimetableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editTimetable">
+    <complexType>
+     <sequence>
+      <element name="timetableName" type="xsd:string"/>
+      <element name="newTimetableName" type="xsd:string"/>
+      <element name="timeprofileName" type="xsd:string"/>
+      <element name="newTimeprofileName" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="editTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="editTimetableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTimetable">
+    <complexType>
+     <sequence>
+      <element name="timetableName" type="xsd:string"/>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeTimetableResponse">
+    <complexType>
+     <sequence>
+      <element name="removeTimetableReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTimetableData">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="timetableName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getTimetableDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getTimetableDataReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllTimetablesOfUser">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllTimetablesOfUserResponse">
+    <complexType>
+     <sequence>
+      <element name="getAllTimetablesOfUserReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCourse">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="shortname" type="xsd:string"/>
+      <element name="teacher" type="xsd:string"/>
+      <element name="description" type="xsd:string"/>
+      <element name="room" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createCourseResponse">
+    <complexType>
+     <sequence>
+      <element name="createCourseReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
    </element>
@@ -573,9 +573,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="editAccountEmailResponse">
+   <wsdl:message name="getTimeprofileDataRequest">
 
-      <wsdl:part element="impl:editAccountEmailResponse" name="parameters">
+      <wsdl:part element="impl:getTimeprofileData" name="parameters">
 
       </wsdl:part>
 
@@ -589,9 +589,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getTimeprofileDataRequest">
+   <wsdl:message name="editAccountEmailResponse">
 
-      <wsdl:part element="impl:getTimeprofileData" name="parameters">
+      <wsdl:part element="impl:editAccountEmailResponse" name="parameters">
 
       </wsdl:part>
 
@@ -613,17 +613,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="editAccountRequest">
+   <wsdl:message name="removeTimeprofileRequest">
 
-      <wsdl:part element="impl:editAccount" name="parameters">
+      <wsdl:part element="impl:removeTimeprofile" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="removeTimeprofileRequest">
+   <wsdl:message name="editAccountRequest">
 
-      <wsdl:part element="impl:removeTimeprofile" name="parameters">
+      <wsdl:part element="impl:editAccount" name="parameters">
 
       </wsdl:part>
 
@@ -757,6 +757,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="createHourResponse">
+
+      <wsdl:part element="impl:createHourResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="editAccountVisibilityRequest">
 
       <wsdl:part element="impl:editAccountVisibility" name="parameters">
@@ -768,14 +776,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="removeAccountRequest">
 
       <wsdl:part element="impl:removeAccount" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="createHourResponse">
-
-      <wsdl:part element="impl:createHourResponse" name="parameters">
 
       </wsdl:part>
 
@@ -1005,17 +1005,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="createTimeprofileResponse">
+   <wsdl:message name="createCourseResponse">
 
-      <wsdl:part element="impl:createTimeprofileResponse" name="parameters">
+      <wsdl:part element="impl:createCourseResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="createCourseResponse">
+   <wsdl:message name="createTimeprofileResponse">
 
-      <wsdl:part element="impl:createCourseResponse" name="parameters">
+      <wsdl:part element="impl:createTimeprofileResponse" name="parameters">
 
       </wsdl:part>
 
@@ -1079,6 +1079,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="ServiceTimetable">
 
+      <wsdl:operation name="dateToString">
+
+         <wsdl:input message="impl:dateToStringRequest" name="dateToStringRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:dateToStringResponse" name="dateToStringResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="createComment">
 
          <wsdl:input message="impl:createCommentRequest" name="createCommentRequest">
@@ -1086,6 +1098,30 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:createCommentResponse" name="createCommentResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllAccounts">
+
+         <wsdl:input message="impl:getAllAccountsRequest" name="getAllAccountsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllAccountsResponse" name="getAllAccountsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdl:input message="impl:createTimeprofileRequest" name="createTimeprofileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimeprofileResponse" name="createTimeprofileResponse">
 
        </wsdl:output>
 
@@ -1134,102 +1170,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:createHourResponse" name="createHourResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createTimetable">
-
-         <wsdl:input message="impl:createTimetableRequest" name="createTimetableRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createTimetableResponse" name="createTimetableResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="editAccount">
-
-         <wsdl:input message="impl:editAccountRequest" name="editAccountRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:editAccountResponse" name="editAccountResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getHourData">
-
-         <wsdl:input message="impl:getHourDataRequest" name="getHourDataRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getHourDataResponse" name="getHourDataResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="editTimetable">
-
-         <wsdl:input message="impl:editTimetableRequest" name="editTimetableRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:editTimetableResponse" name="editTimetableResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="removeTimetable">
-
-         <wsdl:input message="impl:removeTimetableRequest" name="removeTimetableRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:removeTimetableResponse" name="removeTimetableResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getTimetableData">
-
-         <wsdl:input message="impl:getTimetableDataRequest" name="getTimetableDataRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getTimetableDataResponse" name="getTimetableDataResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getAllTimetablesOfUser">
-
-         <wsdl:input message="impl:getAllTimetablesOfUserRequest" name="getAllTimetablesOfUserRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getAllTimetablesOfUserResponse" name="getAllTimetablesOfUserResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createCourse">
-
-         <wsdl:input message="impl:createCourseRequest" name="createCourseRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createCourseResponse" name="createCourseResponse">
 
        </wsdl:output>
 
@@ -1355,6 +1295,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="editAccount">
+
+         <wsdl:input message="impl:editAccountRequest" name="editAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editAccountResponse" name="editAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="editAccountUsername">
 
          <wsdl:input message="impl:editAccountUsernameRequest" name="editAccountUsernameRequest">
@@ -1391,42 +1343,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="removeAccount">
-
-         <wsdl:input message="impl:removeAccountRequest" name="removeAccountRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:removeAccountResponse" name="removeAccountResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="dateToString">
-
-         <wsdl:input message="impl:dateToStringRequest" name="dateToStringRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:dateToStringResponse" name="dateToStringResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createAccount">
-
-         <wsdl:input message="impl:createAccountRequest" name="createAccountRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:createAccountResponse" name="createAccountResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="editAccountVisibility">
 
          <wsdl:input message="impl:editAccountVisibilityRequest" name="editAccountVisibilityRequest">
@@ -1434,6 +1350,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:editAccountVisibilityResponse" name="editAccountVisibilityResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeAccount">
+
+         <wsdl:input message="impl:removeAccountRequest" name="removeAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeAccountResponse" name="removeAccountResponse">
 
        </wsdl:output>
 
@@ -1451,25 +1379,97 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getAllAccounts">
+      <wsdl:operation name="createAccount">
 
-         <wsdl:input message="impl:getAllAccountsRequest" name="getAllAccountsRequest">
+         <wsdl:input message="impl:createAccountRequest" name="createAccountRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getAllAccountsResponse" name="getAllAccountsResponse">
+         <wsdl:output message="impl:createAccountResponse" name="createAccountResponse">
 
        </wsdl:output>
 
       </wsdl:operation>
 
-      <wsdl:operation name="createTimeprofile">
+      <wsdl:operation name="getHourData">
 
-         <wsdl:input message="impl:createTimeprofileRequest" name="createTimeprofileRequest">
+         <wsdl:input message="impl:getHourDataRequest" name="getHourDataRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:createTimeprofileResponse" name="createTimeprofileResponse">
+         <wsdl:output message="impl:getHourDataResponse" name="getHourDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimetable">
+
+         <wsdl:input message="impl:createTimetableRequest" name="createTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createTimetableResponse" name="createTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editTimetable">
+
+         <wsdl:input message="impl:editTimetableRequest" name="editTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:editTimetableResponse" name="editTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTimetable">
+
+         <wsdl:input message="impl:removeTimetableRequest" name="removeTimetableRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeTimetableResponse" name="removeTimetableResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTimetableData">
+
+         <wsdl:input message="impl:getTimetableDataRequest" name="getTimetableDataRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getTimetableDataResponse" name="getTimetableDataResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllTimetablesOfUser">
+
+         <wsdl:input message="impl:getAllTimetablesOfUserRequest" name="getAllTimetablesOfUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllTimetablesOfUserResponse" name="getAllTimetablesOfUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createCourse">
+
+         <wsdl:input message="impl:createCourseRequest" name="createCourseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createCourseResponse" name="createCourseResponse">
 
        </wsdl:output>
 
@@ -1480,6 +1480,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:binding name="ServiceTimetableSoapBinding" type="impl:ServiceTimetable">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="dateToString">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="dateToStringRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="dateToStringResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="createComment">
 
@@ -1492,6 +1510,42 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="createCommentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllAccounts">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllAccountsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllAccountsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimeprofile">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimeprofileRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimeprofileResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -1564,150 +1618,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="createHourResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createTimetable">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createTimetableRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createTimetableResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="editAccount">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="editAccountRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="editAccountResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getHourData">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getHourDataRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getHourDataResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="editTimetable">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="editTimetableRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="editTimetableResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="removeTimetable">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="removeTimetableRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="removeTimetableResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getTimetableData">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getTimetableDataRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getTimetableDataResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getAllTimetablesOfUser">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getAllTimetablesOfUserRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getAllTimetablesOfUserResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createCourse">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createCourseRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createCourseResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -1895,6 +1805,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="editAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="editAccountUsername">
 
          <wsdlsoap:operation soapAction=""/>
@@ -1949,60 +1877,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="removeAccount">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="removeAccountRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="removeAccountResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="dateToString">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="dateToStringRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="dateToStringResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="createAccount">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="createAccountRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="createAccountResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="editAccountVisibility">
 
          <wsdlsoap:operation soapAction=""/>
@@ -2014,6 +1888,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="editAccountVisibilityResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeAccountResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -2039,17 +1931,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getAllAccounts">
+      <wsdl:operation name="createAccount">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getAllAccountsRequest">
+         <wsdl:input name="createAccountRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getAllAccountsResponse">
+         <wsdl:output name="createAccountResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -2057,17 +1949,125 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createTimeprofile">
+      <wsdl:operation name="getHourData">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="createTimeprofileRequest">
+         <wsdl:input name="getHourDataRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="createTimeprofileResponse">
+         <wsdl:output name="getHourDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="editTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="editTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="editTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeTimetable">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeTimetableRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeTimetableResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getTimetableData">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getTimetableDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getTimetableDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllTimetablesOfUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllTimetablesOfUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllTimetablesOfUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createCourse">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createCourseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createCourseResponse">
 
             <wsdlsoap:body use="literal"/>
 

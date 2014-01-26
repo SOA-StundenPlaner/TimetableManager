@@ -31,12 +31,18 @@ public class VisitedCourse {
 
 	/** Stundenplan **/
 	private String timetable;
+	
+	/** Beschreibung **/
+	private String courseDescription;
+	
+	/** Abkürzung **/
+	private String shortname;
 
 	/**
 	 * Konstruktor der Klasse VisitedCourse.
 	 */
 	public VisitedCourse(String email, String name, String room, String teacher,
-			String timetable, int day, int hourIndex) {
+			String timetable, int day, int hourIndex, String courseDescription, String shortname) {
 		this.email = email;
 		this.room = room;
 		this.teacher = teacher;
@@ -44,6 +50,8 @@ public class VisitedCourse {
 		this.day = day;
 		this.hourIndex = hourIndex;
 		this.name = name;
+		this.courseDescription = courseDescription;
+		this.shortname = shortname;
 	}
 
 	
@@ -66,6 +74,22 @@ public class VisitedCourse {
 	
 	public String getTeacher(){
 		return teacher;
+	}
+	
+	public void setCourseDescription(String courseDescription){
+		this.courseDescription = courseDescription;
+	}
+	
+	public String getCourseDescription(){
+		return courseDescription;
+	}
+	
+	public void setShortname(String shortname){
+		this.shortname = shortname;
+	}
+	
+	public String getShortname(){
+		return shortname;
 	}
 
 
