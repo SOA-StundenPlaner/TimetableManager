@@ -1,6 +1,5 @@
 package org.denevell.tomcat.service;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,28 +15,16 @@ import org.denevell.tomcat.entities.write.Timeprofile;
 import org.denevell.tomcat.entities.write.Timetable;
 import org.denevell.tomcat.entities.write.VisitedCourse;
 
-import com.db4o.Db4oEmbedded;
-import com.db4o.ObjectContainer;
 import com.google.gson.Gson;
-
 /**
  * Klasse, die den Service implementiert.
  * @author Nicole Hein
  */
 @Policies({ @Policy(uri = "securepolicy.xml") })
 public class ServiceTimetable {	
-	
-	final static String file = System.getProperty("user.home") + "/timetableManager.db4o";
+	 
 
-	public void connectToDB(){
-		ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), file);
-		try {
-		    // do something with db4o
-			
-		} finally {
-		    db.close();
-		}	
-	}
+	
 
 	
 	@SuppressWarnings("deprecation")
